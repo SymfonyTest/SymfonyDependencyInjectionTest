@@ -1,0 +1,23 @@
+{
+    "name": "matthiasnoback/symfony-dependency-injection-test",
+    "type": "library",
+    "description": "Library for testing user classes related to the Symfony Dependency Injection Component",
+    "keywords": ["symfony2", "dependency injection", "phpunit"],
+    "homepage": "http://github.com/matthiasnoback/SymfonyDependencyInjectionTest",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "symfony/dependency-injection": "2.*",
+        "symfony/config": "2.*"
+    },
+    "target-dir": "Matthias/SymfonyDependencyInjectionTest",
+    "autoload": {
+        "psr-0" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" }
+    }
+}

@@ -1,0 +1,56 @@
+<?php
+
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
+
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasAliasConstraint;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+class ContainerBuilderHasAliasConstraintTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @test
+     * @dataProvider containerBuilderProvider
+     */
+    public function match(ContainerBuilder $containerBuilder, $alias, $expectedServiceId, $shouldMatch)
+    {
+        $constraint = new ContainerBuilderHasAliasConstraint($alias, $expectedServiceId);
+
+        $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, null, true));
+    }
+
+    public function containerBuilderProvider()
+    {
+        $emptyContainerBuilder = new ContainerBuilder();
+
+        $aliasId = 'alias';
+
+        $rightServiceId = 'some_service_id';
+        $builderWithAlias = new ContainerBuilder();
+        $builderWithAlias->setAlias($aliasId, $rightServiceId);
+
+        $wrongServiceId = 'other_service_id';
+
+        return array(
+            // the container does not have the alias
+            array($emptyContainerBuilder, $aliasId, $rightServiceId, false),
+            // the container has the alias, but for another service
+            array($emptyContainerBuilder, $aliasId, $wrongServiceId, false),
+            // the container has the alias for the right service id
+            array($builderWithAlias, $aliasId, $rightServiceId, true)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_a_string_representation()
+    {
+        $aliasId = 'alias_id';
+        $serviceId = 'service_id';
+        $constraint = new ContainerBuilderHasAliasConstraint($aliasId, $serviceId);
+        $this->assertSame(
+            'has an alias "' . $aliasId . '" for service "' . $serviceId . '"',
+            $constraint->toString()
+        );
+    }
+}
