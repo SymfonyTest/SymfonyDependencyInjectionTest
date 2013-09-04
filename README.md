@@ -4,9 +4,10 @@ By Matthias Noback
 
 [![Build Status](https://secure.travis-ci.org/matthiasnoback/SymfonyDependencyInjectionTest.png)](http://travis-ci.org/matthiasnoback/SymfonyDependencyInjectionTest)
 
-This library contains several base PHPUnit test case classes and many semantic [assertions](#assertions) which you can
-use to functionally test your container extensions (or "bundle extensions") and compiler passes. It will also help you
-you to adopt a TDD approach for developing these classes.
+This library contains several base PHPUnit test case classes and many semantic [assertions](#list-of-assertions) which
+you can use to functionally test your [container extensions](#testing-a-container-extension) (or "bundle extensions")
+and [compiler passes](#testing-a-compiler-pass). It will also help you to adopt a TDD approach for developing these
+classes.
 
 ## Installation
 
@@ -42,17 +43,15 @@ Basically you will be testing your extension's load method, which will look some
 
 ```php
 <?php
+
 class MyExtension extends Extension
 {
     public function load(array $config, ContainerBuilder $container)
     {
-        // things you usually do in the load() method:
-
-        // load service definitions from a file
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__));
         $loader->load('services.xml');
 
-        // maybe process configuration
+        // maybe process the configuration values in $config, then:
 
         $container->setParameter('parameter_name', 'some value');
     }
@@ -90,7 +89,7 @@ class MyExtensionTest extends AbstractExtensionTestCase
      */
     public function after_loading_the_correct_parameter_has_been_set()
     {
-        $this->load(array('my_bundle' => array('enabled' => 'false'));
+        $this->load(array('my' => array('enabled' => 'false'));
 
         ...
     }
@@ -100,7 +99,7 @@ class MyExtensionTest extends AbstractExtensionTestCase
 To prevent duplication of required configuration values, you can provide some minimal configuration, by overriding
 the ``getMinimalConfiguration()`` method of the test case.
 
-## Testing compiler passes
+## Testing a compiler pass
 
 To test a compiler pass, create a test class and extend from
 ``Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase``. Then implement the ``registerCompilerPass()`` method:
@@ -208,23 +207,21 @@ class MyCompilerPass implements CompilerPassInterface
 > ``hasDefinition()`` and ``getDefinition()`` you may consider using ``has()`` and ``findDefinition()``. These methods
 > recognize both aliases and definitions.
 
-## List of assertions {#assertions}
+## List of assertions
 
 These are the available semantic assertions for each of the test cases shown above:
 
-``assertContainerBuilderHasService($serviceId, $expectedClass)``
-: Assert that the ContainerBuilder for this test has a service definition with the given id and class.
-
-``assertContainerBuilderHasAlias($aliasId, $expectedServiceId)``
-: Assert that the ContainerBuilder for this test has an alias and that it is an alias for the given service id.
-
-``assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)``
-: Assert that the ContainerBuilder for this test has a parameter and that its value is the given value.
-
-``assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex, $expectedValue)``
-: Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument at
-the given index, and its value is the given value.
-
-``assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments)``
-: Assert that the ContainerBuilder for this test has a service definition with the given id, which has a method call to
-the given method with the given arguments.
+<dl>
+<dt>``assertContainerBuilderHasService($serviceId, $expectedClass)``</dt>
+<dd>Assert that the ContainerBuilder for this test has a service definition with the given id and class.</dd>
+<dt>``assertContainerBuilderHasAlias($aliasId, $expectedServiceId)``</dt>
+<dd>Assert that the ContainerBuilder for this test has an alias and that it is an alias for the given service id.</dd>
+<dt>``assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)``</dt>
+<dd>Assert that the ContainerBuilder for this test has a parameter and that its value is the given value.</dd>
+<dt>``assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex, $expectedValue)``</dt>
+<dd>Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument at
+the given index, and its value is the given value.</dd>
+<dt>``assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments)``</dt>
+<dd>Assert that the ContainerBuilder for this test has a service definition with the given id, which has a method call to
+the given method with the given arguments.</dd>
+</dl>

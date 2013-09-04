@@ -43,19 +43,6 @@ abstract class AbstractExtensionTestCase extends ContainerBuilderTestCase
     }
 
     /**
-     * Inside each test case, you can modify the ContainerBuilder ($this->container), then call $this->load() to load
-     * the container extension(s) you are testing. After each test the container will be compiled. This will cause
-     * exceptions in the case of problems with any container extension.
-     */
-    protected function tearDown()
-    {
-        // this will trigger any errors that are likely to occur at compile time in the real application
-        $this->compile();
-
-        parent::tearDown();
-    }
-
-    /**
      * Call this method from within your test after you have (optionally) modified the ContainerBuilder for this test
      * ($this->container).
      *
