@@ -17,7 +17,7 @@ Using Composer:
 
 ## Usage
 
-### Testing a container extension class
+### Testing a container extension
 
 To test your own container extension class ``MyExtension`` create a class and extend from
 ``Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase``. Then implement the
@@ -212,16 +212,16 @@ class MyCompilerPass implements CompilerPassInterface
 These are the available semantic assertions for each of the test cases shown above:
 
 <dl>
-<dt>``assertContainerBuilderHasService($serviceId, $expectedClass)``</dt>
-<dd>Assert that the ContainerBuilder for this test has a service definition with the given id and class.</dd>
-<dt>``assertContainerBuilderHasAlias($aliasId, $expectedServiceId)``</dt>
-<dd>Assert that the ContainerBuilder for this test has an alias and that it is an alias for the given service id.</dd>
-<dt>``assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)``</dt>
-<dd>Assert that the ContainerBuilder for this test has a parameter and that its value is the given value.</dd>
-<dt>``assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex, $expectedValue)``</dt>
-<dd>Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument at
+<dt><code>assertContainerBuilderHasService($serviceId, $expectedClass)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id and class.</dd>
+<dt><code>assertContainerBuilderHasAlias($aliasId, $expectedServiceId)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has an alias and that it is an alias for the given service id.</dd>
+<dt><code>assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter and that its value is the given value.</dd>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex, $expectedValue)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument at
 the given index, and its value is the given value.</dd>
-<dt>``assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments)``</dt>
-<dd>Assert that the ContainerBuilder for this test has a service definition with the given id, which has a method call to
+<dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has a method call to
 the given method with the given arguments.</dd>
 </dl>
