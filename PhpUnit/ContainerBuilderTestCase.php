@@ -5,7 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class ContainerBuilderTestCase extends \PHPUnit_Framework_TestCase
+abstract class ContainerBuilderTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ContainerBuilder
