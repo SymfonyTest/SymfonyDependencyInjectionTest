@@ -144,4 +144,60 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('child_service_id', 1, 'wrong value');
     }
+
+    /**
+     * @test
+     */
+    public function if_definition_is_decorated_but_by_the_wrong_parent_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'parent_service_id');
+
+        $this->assertContainerBuilderHasServiceDefinitionWithParent('child_service_id', 'wrong_parent_service_id');
+    }
+
+    /**
+     * @test
+     */
+    public function if_definition_should_be_decorated_when_it_is_not_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'parent');
+
+        $this->assertContainerBuilderHasServiceDefinitionWithParent('parent_service_id', 'any_other_service_id');
+    }
+
+    /**
+     * @test
+     */
+    public function if_definition_should_have_a_method_call_and_it_has_not_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'wrongMethodName');
+
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
+            'service_with_method_calls_id',
+            'wrongMethodName',
+            array('some argument')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function if_definition_should_have_a_certain_arguments_for_a_method_call_and_it_has_not_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'theRightMethodName');
+
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
+            'service_with_method_calls_id',
+            'theRightMethodName',
+            array('a wrong argument')
+        );
+    }
 }

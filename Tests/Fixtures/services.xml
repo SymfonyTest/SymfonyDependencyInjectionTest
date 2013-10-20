@@ -16,5 +16,12 @@
             <argument>first argument</argument>
             <argument>second argument</argument>
         </service>
+
+        <service id="service_with_method_calls_id">
+            <call method="theRightMethodName">
+                <argument>first argument</argument>
+                <argument>second argument</argument>
+            </call>
+        </service>
     </services>
 </container>

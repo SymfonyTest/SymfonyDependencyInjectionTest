@@ -5,7 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-abstract class ContainerBuilderTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ContainerBuilder
@@ -138,5 +138,19 @@ abstract class ContainerBuilderTestCase extends \PHPUnit_Framework_TestCase
         $definition = $this->container->findDefinition($serviceId);
 
         self::assertThat($definition, new DefinitionHasMethodCallConstraint($method, $arguments));
+    }
+
+    /**
+     * Assert that the ContainerBuilder for this test has a service definition with the given id which is a decorated
+     * service and it has the given parent service.
+     *
+     * @param $serviceId
+     * @param $parentServiceId
+     */
+    protected function assertContainerBuilderHasServiceDefinitionWithParent($serviceId, $parentServiceId)
+    {
+        $definition = $this->container->findDefinition($serviceId);
+
+        self::assertThat($definition, new DefinitionIsChildOfConstraint($parentServiceId));
     }
 }

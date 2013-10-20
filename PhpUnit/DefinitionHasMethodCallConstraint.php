@@ -15,7 +15,7 @@ class DefinitionHasMethodCallConstraint extends \PHPUnit_Framework_Constraint
         $this->arguments = $arguments;
     }
 
-    protected function matches($other)
+    public function evaluate($other, $description = '', $returnResult = false)
     {
         if (!($other instanceof Definition)) {
             throw new \InvalidArgumentException(
@@ -33,6 +33,17 @@ class DefinitionHasMethodCallConstraint extends \PHPUnit_Framework_Constraint
             if ($this->equalArguments($this->arguments, $arguments)) {
                 return true;
             }
+        }
+
+        if (!$returnResult) {
+            $this->fail(
+                $other,
+                sprintf(
+                    'None of the method calls matched the expected method "%s" with arguments %s',
+                    $this->methodName,
+                    \PHPUnit_Util_Type::export($this->arguments)
+                )
+            );
         }
 
         return false;

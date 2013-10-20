@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-abstract class AbstractExtensionTestCase extends ContainerBuilderTestCase
+abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCase
 {
     /**
      * Return an array of container extensions you need to be registered for each test (usually just the container

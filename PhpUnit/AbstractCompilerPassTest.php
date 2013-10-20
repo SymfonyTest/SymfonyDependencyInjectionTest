@@ -4,7 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-abstract class AbstractCompilerPassTest extends ContainerBuilderTestCase
+abstract class AbstractCompilerPassTest extends AbstractContainerBuilderTestCase
 {
     /**
      * Register the compiler pass under test, just like you would do inside a bundle's load()
