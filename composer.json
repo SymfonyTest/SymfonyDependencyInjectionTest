@@ -14,7 +14,8 @@
     ],
     "require": {
         "symfony/dependency-injection": "2.*",
-        "symfony/config": "2.*"
+        "symfony/config": "2.*",
+        "phpunit/phpunit": "3.*"
     },
     "target-dir": "Matthias/SymfonyDependencyInjectionTest",
     "autoload": {
