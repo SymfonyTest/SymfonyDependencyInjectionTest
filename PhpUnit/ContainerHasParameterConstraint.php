@@ -64,13 +64,19 @@ class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
 
         $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedParameterValue);
 
-        return $constraint->evaluate(
-            $actualValue,
-            sprintf(
-                'The value of parameter "%s" does not match the expected value',
-                $this->parameterName
-            ),
-            $returnResult
-        );
+        if (!$constraint->evaluate($actualValue, '', true)) {
+            if ($returnResult) {
+                return false;
+            }
+
+            $this->fail($container, sprintf(
+                'The value of parameter "%s" (%s) does not match the expected value (%s)',
+                $this->parameterName,
+                \PHPUnit_Util_Type::export($this->expectedParameterValue),
+                \PHPUnit_Util_Type::export($actualValue)
+            ));
+        }
+
+        return true;
     }
 }

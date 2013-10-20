@@ -56,7 +56,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'stdClass');
 
         $this->assertContainerBuilderHasService('manual_service_id', 'SomeOtherClass');
     }
@@ -80,7 +80,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'service_id');
 
         $this->assertContainerBuilderHasAlias('manual_alias', 'wrong');
     }
@@ -92,7 +92,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'undefined');
 
         $this->assertContainerBuilderHasParameter('undefined', 'any value');
     }
@@ -104,7 +104,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'parameter value');
 
         $this->assertContainerBuilderHasParameter('manual_parameter', 'wrong');
     }
@@ -116,7 +116,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 10);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 10, 'any value');
     }
@@ -131,5 +131,17 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1, 'wrong value');
+    }
+
+    /**
+     * @test
+     */
+    public function if_definition_is_decorated_and_argument_has_wrong_value_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'second argument');
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('child_service_id', 1, 'wrong value');
     }
 }

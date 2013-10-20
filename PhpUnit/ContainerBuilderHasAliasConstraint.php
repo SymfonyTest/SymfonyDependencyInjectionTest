@@ -69,14 +69,19 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
         $actualServiceId = (string) $alias;
 
         $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedServiceId);
+        if (!$constraint->evaluate($actualServiceId, '', true)) {
+            if ($returnResult) {
+                return false;
+            }
 
-        return $constraint->evaluate(
-            $actualServiceId,
-            sprintf('"%s" is not an alias for "%s"',
+            $this->fail($containerBuilder, sprintf(
+                '"%s" is not an alias for "%s", but for "%s"',
                 $this->aliasId,
-                $this->expectedServiceId
-            ),
-            $returnResult
-        );
+                $this->expectedServiceId,
+                $actualServiceId
+            ));
+        }
+
+        return true;
     }
 }

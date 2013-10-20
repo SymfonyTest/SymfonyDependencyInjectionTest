@@ -66,15 +66,23 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
     {
         $definition = $containerBuilder->findDefinition($this->serviceId);
 
+        $actualClass = $definition->getClass();
+
         $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedClass);
 
-        return $constraint->evaluate(
-            $definition->getClass(),
-            sprintf(
-                'The class of the service definition of "%s" does not match the expected value',
-                $this->serviceId
-            ),
-            $returnResult
-        );
+        if (!$constraint->evaluate($actualClass, '', true)) {
+            if ($returnResult) {
+                return false;
+            }
+
+            $this->fail($containerBuilder, sprintf(
+                'The class of the service definition of "%s" (%s) does not match the expected value (%s)',
+                $this->serviceId,
+                \PHPUnit_Util_Type::export($actualClass),
+                \PHPUnit_Util_Type::export($this->expectedClass)
+            ));
+        }
+
+        return true;
     }
 }

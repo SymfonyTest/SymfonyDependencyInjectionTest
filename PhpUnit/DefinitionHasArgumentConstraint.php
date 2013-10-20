@@ -4,6 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
 class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
 {
@@ -45,9 +46,9 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
 
     private function evaluateArgumentIndex(Definition $definition, $returnResult)
     {
-        $arguments = $definition->getArguments();
-
-        if (!array_key_exists($this->argumentIndex, $arguments)) {
+        try {
+            $definition->getArgument($this->argumentIndex);
+        } catch (OutOfBoundsException $exception) {
             if ($returnResult) {
                 return false;
             }
@@ -66,17 +67,26 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
 
     private function evaluateArgumentValue(Definition $definition, $returnResult)
     {
-        $arguments = $definition->getArguments();
-        $actualValue = $arguments[$this->argumentIndex];
+        $actualValue = $definition->getArgument($this->argumentIndex);
 
         $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedValue);
 
-        return $constraint->evaluate(
-            $actualValue,
-            sprintf(
-                'The value of argument with index %d is not equal to the expected value',
-                $this->argumentIndex
-            )
-        );
+        if (!$constraint->evaluate($actualValue, '', true)) {
+            if ($returnResult) {
+                return false;
+            }
+
+            $this->fail(
+                $definition,
+                sprintf(
+                    'The value of argument with index %d (%s) is not equal to the expected value (%s)',
+                    $this->argumentIndex,
+                    \PHPUnit_Util_Type::export($actualValue),
+                    \PHPUnit_Util_Type::export($this->expectedValue)
+                )
+            );
+        }
+
+        return true;
     }
 }

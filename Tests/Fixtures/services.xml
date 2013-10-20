@@ -6,5 +6,15 @@
         <service id="loaded_service_id"
                  class="stdClass">
         </service>
+
+        <service id="parent_service_id"
+                 class="stdClass">
+        </service>
+
+        <service id="child_service_id"
+                 parent="parent_service_id">
+            <argument>first argument</argument>
+            <argument>second argument</argument>
+        </service>
     </services>
 </container>
