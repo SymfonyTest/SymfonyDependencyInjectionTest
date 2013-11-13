@@ -12,7 +12,8 @@
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
         }
     ],
-    "require": {
+    "require-dev": {
+        "matthiasnoback/symfony-config-test": "0.*",
         "symfony/dependency-injection": "2.*",
         "symfony/config": "2.*",
         "phpunit/phpunit": "3.*"

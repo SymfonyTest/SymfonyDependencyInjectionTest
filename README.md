@@ -6,8 +6,11 @@ By Matthias Noback
 
 This library contains several PHPUnit test case classes and many semantic [assertions](#list-of-assertions) which
 you can use to functionally test your [container extensions](#testing-a-container-extension) (or "bundle extensions")
-and [compiler passes](#testing-a-compiler-pass). It will also help you to adopt a TDD approach for developing these
-classes.
+and [compiler passes](#testing-a-compiler-pass). It also provides the tools to functionally test your container
+extension (or "bundle") configuration by verifying processed values from different types of configuration files.
+
+Besides verifying their correctness, this library will also help you to adopt a TDD approach when developing
+these classes.
 
 ## Installation
 
@@ -206,6 +209,79 @@ class MyCompilerPass implements CompilerPassInterface
 > You may not know in advance if a service id stands for a service definition, or for an alias. So instead of
 > ``hasDefinition()`` and ``getDefinition()`` you may consider using ``has()`` and ``findDefinition()``. These methods
 > recognize both aliases and definitions.
+
+### Test different configuration file formats
+
+The Symfony DependencyInjection component supports many different types of configuration loaders: Yaml, XML, and
+PHP files, but also closures. When you create a ``Configuration`` class for your bundle, you need to make sure that each
+of these formats is supported. Special attention needs to be given to XML files.
+
+In order to verify that any type of configuration file will be correctly loaded by your bundle, you can create a test
+class that extends from ``AbstractExtensionConfigurationTestCase``:
+
+```php
+<?php
+
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
+
+class ConfigurationTest extends AbstractExtensionConfigurationTestCase
+{
+    protected function getContainerExtension()
+    {
+        return new TwigExtension();
+    }
+
+    protected function getConfiguration()
+    {
+        return new Configuration();
+    }
+}
+```
+
+Now inside each test method you can use the ``assertProcessedConfigurationEquals($expectedConfiguration, $sources)``
+method to verify that after loading the given sources the processed configuration equals the expected array of values:
+
+```yaml
+# in Fixtures/config.yml
+twig:
+    extensions: ['twig.extension.foo']
+```
+
+```xml
+<!-- in Fixtures/config.xml -->
+<container>
+    <twig:config>
+        <twig:extension>twig.extension.bar</twig:extension>
+    </twig:config>
+</container>
+```
+
+```php
+<?php
+...
+
+class ConfigurationTest extends AbstractExtensionConfigurationTestCase
+{
+    ...
+
+    /**
+     * @test
+     */
+    public function it_converts_extension_elements_to_extensions()
+    {
+        $expectedConfiguration = array(
+            'extensions' => array('twig.extension.foo', 'twig.extension.bar')
+        );
+
+        $sources = array(
+            __DIR__ . '/Fixtures/config.yml',
+            __DIR__ . '/Fixtures/config.xml',
+        )
+
+        $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
+    }
+}
+```
 
 ## List of assertions
 

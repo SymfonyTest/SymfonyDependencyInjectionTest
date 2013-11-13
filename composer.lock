@@ -3,8 +3,58 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ff840475a13c6824d340bb58e16035f3",
+    "hash": "4e348338a03a06cde9cc9ab5690d6836",
     "packages": [
+
+    ],
+    "packages-dev": [
+        {
+            "name": "matthiasnoback/symfony-config-test",
+            "version": "v0.1.1",
+            "target-dir": "Matthias/SymfonyConfigTest",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matthiasnoback/SymfonyConfigTest.git",
+                "reference": "0a89a9d4aebf3bde3b6e8468828f1b146b49d4fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matthiasnoback/SymfonyConfigTest/zipball/0a89a9d4aebf3bde3b6e8468828f1b146b49d4fc",
+                "reference": "0a89a9d4aebf3bde3b6e8468828f1b146b49d4fc",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/config": "2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Matthias\\SymfonyConfigTest": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Noback",
+                    "email": "matthiasnoback@gmail.com",
+                    "homepage": "http://php-and-symfony.matthiasnoback.nl"
+                }
+            ],
+            "description": "Library for testing user classes related to the Symfony Config Component",
+            "homepage": "https://github.com/matthiasnoback/SymfonyConfigTest",
+            "keywords": [
+                "config",
+                "phpunit",
+                "symfony"
+            ],
+            "time": "2013-10-20 15:43:47"
+        },
         {
             "name": "phpunit/php-code-coverage",
             "version": "1.2.13",
@@ -570,9 +620,6 @@
             "homepage": "http://symfony.com",
             "time": "2013-09-22 18:04:39"
         }
-    ],
-    "packages-dev": [
-
     ],
     "aliases": [
 
