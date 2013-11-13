@@ -53,4 +53,22 @@ class ContainerBuilderHasAliasConstraintTest extends \PHPUnit_Framework_TestCase
             $constraint->toString()
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_expects_a_string_for_alias_id()
+    {
+        $this->setExpectedException('\InvalidArgumentException', 'string');
+        new ContainerBuilderHasAliasConstraint(new \stdClass(), 'service_id');
+    }
+
+    /**
+     * @test
+     */
+    public function it_expects_a_string_for_service_id()
+    {
+        $this->setExpectedException('\InvalidArgumentException', 'string');
+        new ContainerBuilderHasAliasConstraint('alias_id', new \stdClass());
+    }
 }

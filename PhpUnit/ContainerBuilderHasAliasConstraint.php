@@ -11,6 +11,14 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
 
     public function __construct($aliasId, $expectedServiceId)
     {
+        if (!is_string($aliasId)) {
+            throw new \InvalidArgumentException('The $aliasId argument should be a string');
+        }
+
+        if (!is_string($expectedServiceId)) {
+            throw new \InvalidArgumentException('The $expectedServiceId argument should be a string');
+        }
+
         $this->aliasId = $aliasId;
         $this->expectedServiceId = $expectedServiceId;
     }

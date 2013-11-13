@@ -63,4 +63,22 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends \PHPUnit_Framew
             $constraint->toString()
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_expects_a_string_for_service_id()
+    {
+        $this->setExpectedException('\InvalidArgumentException', 'string');
+        new ContainerBuilderHasServiceDefinitionConstraint(new \stdClass(), 'class');
+    }
+
+    /**
+     * @test
+     */
+    public function it_expects_a_string_for_class()
+    {
+        $this->setExpectedException('\InvalidArgumentException', 'string');
+        new ContainerBuilderHasServiceDefinitionConstraint('service_id', new \stdClass());
+    }
 }

@@ -11,6 +11,14 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
 
     public function __construct($serviceId, $expectedClass)
     {
+        if (!is_string($serviceId)) {
+            throw new \InvalidArgumentException('The $serviceId argument should be a string');
+        }
+
+        if (!is_string($expectedClass)) {
+            throw new \InvalidArgumentException('The $expectedClass argument should be a string');
+        }
+
         $this->serviceId = $serviceId;
         $this->expectedClass = $expectedClass;
     }
