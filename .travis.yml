@@ -3,8 +3,17 @@ language: php
 php:
   - 5.3
   - 5.4
+  - 5.5
 
-before_script: composer install --dev
+env:
+  - SYMFONY_VERSION=2.0.*
+  - SYMFONY_VERSION=2.1.*
+  - SYMFONY_VERSION=2.2.*
+  - SYMFONY_VERSION=2.3.*
+  - SYMFONY_VERSION=dev-master
+
+before_script:
+  - composer require --dev symfony/dependency-injection:${SYMFONY_VERSION}
 
 notifications:
   email: matthiasnoback@gmail.com

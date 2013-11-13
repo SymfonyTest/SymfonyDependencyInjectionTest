@@ -2,7 +2,6 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
@@ -48,7 +47,14 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
     {
         try {
             $definition->getArgument($this->argumentIndex);
-        } catch (OutOfBoundsException $exception) {
+        } catch (\Exception $exception) {
+            // Older versions of Symfony throw \OutOfBoundsException
+            // Newer versions throw Symfony\Component\DependencyInjection\Exception\OutOfBoundsException
+            if (!($exception instanceof \OutOfBoundsException || $exception instanceof OutOfBoundsException)) {
+                // this was not the expected exception
+                throw $exception;
+            }
+
             if ($returnResult) {
                 return false;
             }

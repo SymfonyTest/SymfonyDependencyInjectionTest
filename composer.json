@@ -12,9 +12,9 @@
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
         }
     ],
-    "require": {
-        "symfony/dependency-injection": "2.*",
-        "symfony/config": "2.*",
+    "require-dev": {
+        "matthiasnoback/symfony-config-test": "0.*",
+        "symfony/dependency-injection": "2.3.*",
         "phpunit/phpunit": "3.*"
     },
     "target-dir": "Matthias/SymfonyDependencyInjectionTest",
