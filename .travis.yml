@@ -13,8 +13,8 @@ env:
   - SYMFONY_VERSION=dev-master
 
 before_script:
-  - composer require symfony/dependency-injection:${SYMFONY_VERSION}
-  - composer require symfony/config:${SYMFONY_VERSION}
+  - composer require --dev symfony/dependency-injection:${SYMFONY_VERSION}
+  - composer require --dev symfony/config:${SYMFONY_VERSION}
 
 notifications:
   email: matthiasnoback@gmail.com
