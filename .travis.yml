@@ -14,7 +14,6 @@ env:
 
 before_script:
   - composer require --dev symfony/dependency-injection:${SYMFONY_VERSION}
-  - composer require --dev symfony/config:${SYMFONY_VERSION}
 
 notifications:
   email: matthiasnoback@gmail.com

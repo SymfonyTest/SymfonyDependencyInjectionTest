@@ -3,12 +3,12 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 
-class MatthiasDependencyInjectionTestExtension extends Extension
+class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 {
     public function load(array $config, ContainerBuilder $container)
     {
@@ -36,5 +36,13 @@ class MatthiasDependencyInjectionTestExtension extends Extension
     public function getAlias()
     {
         return 'matthias_dependency_injection_test';
+    }
+
+    public function getNamespace()
+    {
+    }
+
+    public function getXsdValidationBasePath()
+    {
     }
 }
