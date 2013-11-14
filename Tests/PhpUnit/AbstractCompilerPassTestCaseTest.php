@@ -2,14 +2,14 @@
 
 namespace Matthias\DependencyInjectionTests\Tests\PhpUnit;
 
-use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTest;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\CollectServicesAndAddThemWithMethodCallsCompilerPass;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\CollectServicesAndSetThemAsArgumentCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTest
+class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
 {
     protected function registerCompilerPass(ContainerBuilder $container)
     {
