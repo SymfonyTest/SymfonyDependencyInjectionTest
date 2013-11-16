@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.2.0
+## v0.3.0
+
+- Renamed ``AbstractCompilerPassTest`` to ``AbstractCompilerPassTestCase`` (contributed by @mbadolato).
+
+## v0.2.0
 
 - Added ``AbstractExtensionConfigurationTestCase`` for testing different types of configuration files.
 - Made the library compatible with Symfony versions 2.0 and up.
