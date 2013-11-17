@@ -16,7 +16,7 @@ these classes.
 
 Using Composer:
 
-    php composer.phar require matthiasnoback/symfony-dependency-injection-test 0.*
+    php composer.phar require --dev matthiasnoback/symfony-dependency-injection-test 0.*
 
 ## Usage
 
