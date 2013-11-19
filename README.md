@@ -216,8 +216,9 @@ The Symfony DependencyInjection component supports many different types of confi
 PHP files, but also closures. When you create a ``Configuration`` class for your bundle, you need to make sure that each
 of these formats is supported. Special attention needs to be given to XML files.
 
-In order to verify that any type of configuration file will be correctly loaded by your bundle, you can create a test
-class that extends from ``AbstractExtensionConfigurationTestCase``:
+In order to verify that any type of configuration file will be correctly loaded by your bundle, you must install the
+[SymfonyConfigTest](https://github.com/matthiasnoback/SymfonyConfigTest) library and create a test class that extends
+from ``AbstractExtensionConfigurationTestCase``:
 
 ```php
 <?php
