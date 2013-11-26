@@ -304,3 +304,17 @@ the given method with the given arguments.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithParent($serviceId, $parentServiceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id which is a decorated service and it has the given parent service.</dd>
 </dl>
+
+## Available methods to set up container
+
+In all test cases shown above, you have access to some methods to set up the
+container:
+
+<dl>
+<dt><code>setDefinition($serviceId, $definition)</code></dt>
+<dd>Set a definition. The second parameter is a <code>Definition</code> class</dd>
+<dt><code>registerDefinition($serviceId, $class)</code></dt>
+<dd>A shortcut for <code>setDefinition</code>. It returns a <code>Definition</code> object that can be modified if necessary.</dd>
+<dt><code>setParameter($parameterId, $parameterValue)</code></dt>
+<dd>Set a parameter.</dd>
+</dl>
