@@ -52,6 +52,17 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
     }
 
     /**
+     * Set a parameter.
+     *
+     * @param $parameterId
+     * @param $parameterValue
+     */
+    protected function setParameter($parameterId, $parameterValue)
+    {
+        $this->container->setParameter($parameterId, $parameterValue);
+    }
+
+    /**
      * Call this method to compile the ContainerBuilder, to test if any problems would occur at runtime.
      */
     protected function compile()
