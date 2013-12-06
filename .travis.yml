@@ -20,4 +20,4 @@ notifications:
 
 cache:
   directories:
-    - $HOME/.composer
+    - $COMPOSER_CACHE_DIR
