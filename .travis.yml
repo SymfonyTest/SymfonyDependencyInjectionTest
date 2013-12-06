@@ -17,3 +17,7 @@ before_script:
 
 notifications:
   email: matthiasnoback@gmail.com
+
+cache:
+  directories:
+    - $HOME/.composer
