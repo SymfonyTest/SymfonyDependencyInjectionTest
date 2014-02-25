@@ -72,9 +72,15 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
 
     private function evaluateClass(ContainerBuilder $containerBuilder, $returnResult)
     {
-        $definition = $containerBuilder->findDefinition($this->serviceId);
+        try {
+            $definition = $containerBuilder->findDefinition($this->serviceId);
+            $actualClass = $definition->getClass();
+        } catch (DiException\InvalidArgumentException $e) {
+            // synthetic service
+            $serviceReflection = new \ReflectionObject($containerBuilder->get($this->serviceId));
+            $actualClass = $serviceReflection->getName();
+        }
 
-        $actualClass = $definition->getClass();
 
         $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedClass);
 
