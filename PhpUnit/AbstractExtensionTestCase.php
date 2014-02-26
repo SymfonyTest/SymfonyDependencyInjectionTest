@@ -2,8 +2,6 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCase

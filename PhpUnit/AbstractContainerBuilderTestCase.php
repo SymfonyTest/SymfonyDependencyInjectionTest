@@ -85,6 +85,19 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
     }
 
     /**
+     * Assert that the ContainerBuilder for this test has a synthetic service with the given id.
+     *
+     * @param $serviceId
+     */
+    protected function assertContainerBuilderHasSyntheticService($serviceId)
+    {
+        self::assertThat(
+            $this->container,
+            new ContainerBuilderHasSyntheticServiceConstraint($serviceId)
+        );
+    }
+
+    /**
      * Assert that the ContainerBuilder for this test has an alias and that it is an alias for the given service id.
      *
      * @param $aliasId

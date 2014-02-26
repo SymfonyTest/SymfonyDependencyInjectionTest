@@ -24,6 +24,9 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         // defined in services.xml
         $this->assertContainerBuilderHasService('loaded_service_id', 'stdClass');
 
+        // defined in services.xml
+        $this->assertContainerBuilderHasSyntheticService('synthetic_service');
+
         // manually defined parameter
         $this->assertContainerBuilderHasParameter('manual_parameter', 'parameter value');
 
@@ -47,6 +50,30 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
 
         $this->assertContainerBuilderHasService('undefined', 'AnyClass');
+    }
+
+    /**
+     * @test
+     */
+    public function if_synthetic_service_is_undefined_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'no service');
+
+        $this->assertContainerBuilderHasSyntheticService('undefined');
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_is_defined_but_not_synthetic_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'synthetic');
+
+        $this->assertContainerBuilderHasSyntheticService('loaded_service_id');
     }
 
     /**

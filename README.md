@@ -291,6 +291,8 @@ These are the available semantic assertions for each of the test cases shown abo
 <dl>
 <dt><code>assertContainerBuilderHasService($serviceId, $expectedClass)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id and class.</dd>
+<dt><code>assertContainerBuilderHasSyntheticService($serviceId)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a synthetic service with the given id.</dd>
 <dt><code>assertContainerBuilderHasAlias($aliasId, $expectedServiceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has an alias and that it is an alias for the given service id.</dd>
 <dt><code>assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)</code></dt>

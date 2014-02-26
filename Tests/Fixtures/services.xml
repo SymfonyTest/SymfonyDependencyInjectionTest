@@ -23,5 +23,8 @@
                 <argument>second argument</argument>
             </call>
         </service>
+
+        <service id="synthetic_service" synthetic="true">
+        </service>
     </services>
 </container>
