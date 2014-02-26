@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.0
+
+- Automatically resolve a definition's class before comparing it to the expected class (in
+  ``ContainerBuilderHasServiceDefinitionConstraint``).
+
 ## v0.4.0
 
 - Added ``ContainerBuilderHasSyntheticServiceConstraint`` and corresponding assertion to

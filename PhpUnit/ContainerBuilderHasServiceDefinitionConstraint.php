@@ -74,7 +74,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
     {
         $definition = $containerBuilder->findDefinition($this->serviceId);
 
-        $actualClass = $definition->getClass();
+        $actualClass = $containerBuilder->getParameterBag()->resolveValue($definition->getClass());
 
         $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedClass);
 

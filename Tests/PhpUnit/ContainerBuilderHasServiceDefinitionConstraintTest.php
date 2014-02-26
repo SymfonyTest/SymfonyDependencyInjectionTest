@@ -34,6 +34,13 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends \PHPUnit_Framew
         $containerBuilderWithAlias->setDefinition($serviceId, $definition);
         $containerBuilderWithAlias->setAlias($aliasId, $serviceId);
 
+        $containerBuilderWithServiceDefinitionWithParameterClass = new ContainerBuilder();
+        $containerBuilderWithServiceDefinitionWithParameterClass->setParameter(
+            'service_id.class',
+            $rightClass
+        );
+        $containerBuilderWithServiceDefinitionWithParameterClass->setDefinition($serviceId, new Definition('%service_id.class%'));
+
         $wrongClass = 'TheWrongClass';
 
         return array(
@@ -43,6 +50,8 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends \PHPUnit_Framew
             array($containerBuilderWithServiceDefinition, $serviceId, $wrongClass, false),
             // the container has a service definition with the right class
             array($containerBuilderWithServiceDefinition, $serviceId, $rightClass, true),
+            // the container has a service definition with the right class, but it's a parameter
+            array($containerBuilderWithServiceDefinitionWithParameterClass, $serviceId, $rightClass, true),
             // the container has an alias, but with the wrong class
             array($containerBuilderWithAlias, $aliasId, $wrongClass, false),
             // the container has an alias with the right class
