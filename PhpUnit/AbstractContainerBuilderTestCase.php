@@ -157,7 +157,7 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
     protected function assertContainerBuilderHasServiceDefinitionWithMethodCall(
         $serviceId,
         $method,
-        array $arguments
+        array $arguments = array()
     ) {
         $definition = $this->container->findDefinition($serviceId);
 
