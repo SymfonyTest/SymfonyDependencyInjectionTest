@@ -8,7 +8,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends \PHPUnit_Framework_C
 {
     private $serviceId;
 
-    public function __construct($serviceId, $expectedClass = null)
+    public function __construct($serviceId)
     {
         if (!is_string($serviceId)) {
             throw new \InvalidArgumentException('The $serviceId argument should be a string');
@@ -66,7 +66,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends \PHPUnit_Framework_C
                 $this->fail(
                     $containerBuilder,
                     sprintf(
-                        'The container builder has a service "%s" but it is not synthetic',
+                        'The container builder has a service "%s", but it is not synthetic',
                         $this->serviceId
                     )
                 );
