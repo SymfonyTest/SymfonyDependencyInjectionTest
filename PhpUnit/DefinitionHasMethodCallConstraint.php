@@ -9,7 +9,7 @@ class DefinitionHasMethodCallConstraint extends \PHPUnit_Framework_Constraint
     private $methodName;
     private $arguments;
 
-    public function __construct($methodName, array $arguments)
+    public function __construct($methodName, array $arguments = array())
     {
         $this->methodName = $methodName;
         $this->arguments = $arguments;
