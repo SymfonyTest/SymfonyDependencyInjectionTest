@@ -300,7 +300,7 @@ These are the available semantic assertions for each of the test cases shown abo
 <dt><code>assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex, $expectedValue)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument at
 the given index, and its value is the given value.</dd>
-<dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments)</code></dt>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments = array())</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has a method call to
 the given method with the given arguments.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithParent($serviceId, $parentServiceId)</code></dt>
