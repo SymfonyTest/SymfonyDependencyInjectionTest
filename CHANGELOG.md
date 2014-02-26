@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0
+
+- Added ``ContainerBuilderHasSyntheticServiceConstraint`` and corresponding assertion to
+  ``AbstractContainerBuilderTestCase`` (as suggested by @WouterJ).
+
 ## v0.3.0
 
 - Renamed ``AbstractCompilerPassTest`` to ``AbstractCompilerPassTestCase`` (contributed by @mbadolato).
