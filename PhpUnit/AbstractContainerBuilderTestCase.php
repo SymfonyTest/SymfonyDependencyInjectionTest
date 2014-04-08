@@ -165,6 +165,24 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
     }
 
     /**
+     * Assert that the ContainerBuilder for this test has a service definition with the given id, which has a tag
+     * with the given attributes.
+     *
+     * @param string $serviceId
+     * @param string $tag
+     * @param array  $attributes
+     */
+    protected function assertContainerBuilderHasServiceDefinitionWithTag(
+        $serviceId,
+        $tag,
+        array $attributes = array()
+    ) {
+        $definition = $this->container->findDefinition($serviceId);
+
+        self::assertThat($definition, new DefinitionHasTagConstraint($tag, $attributes));
+    }
+
+    /**
      * Assert that the ContainerBuilder for this test has a service definition with the given id which is a decorated
      * service and it has the given parent service.
      *
