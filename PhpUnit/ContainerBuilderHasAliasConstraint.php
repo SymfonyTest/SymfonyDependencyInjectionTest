@@ -2,12 +2,14 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
 {
     private $aliasId;
     private $expectedServiceId;
+    protected $exporter;
 
     public function __construct($aliasId, $expectedServiceId)
     {
@@ -21,6 +23,7 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
 
         $this->aliasId = $aliasId;
         $this->expectedServiceId = $expectedServiceId;
+        $this->exporter = new Exporter;
     }
 
     public function toString()

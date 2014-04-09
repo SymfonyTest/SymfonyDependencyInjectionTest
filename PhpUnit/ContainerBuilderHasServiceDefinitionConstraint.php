@@ -2,12 +2,14 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_Constraint
 {
     private $serviceId;
     private $expectedClass;
+    protected $exporter;
 
     public function __construct($serviceId, $expectedClass)
     {
@@ -21,6 +23,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
 
         $this->serviceId = $serviceId;
         $this->expectedClass = $expectedClass;
+        $this->exporter = new Exporter;
     }
 
     public function toString()
@@ -86,8 +89,8 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
             $this->fail($containerBuilder, sprintf(
                 'The class of the service definition of "%s" (%s) does not match the expected value (%s)',
                 $this->serviceId,
-                \PHPUnit_Util_Type::export($actualClass),
-                \PHPUnit_Util_Type::export($this->expectedClass)
+                $this->exporter->export($actualClass),
+                $this->exporter->export($this->expectedClass)
             ));
         }
 
