@@ -2,6 +2,7 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
@@ -9,11 +10,13 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
 {
     private $argumentIndex;
     private $expectedValue;
+    protected $exporter;
 
     public function __construct($argumentIndex, $expectedValue)
     {
         $this->argumentIndex = (integer)$argumentIndex;
         $this->expectedValue = $expectedValue;
+        $this->exporter = new Exporter;
     }
 
     public function toString()
@@ -87,8 +90,8 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
                 sprintf(
                     'The value of argument with index %d (%s) is not equal to the expected value (%s)',
                     $this->argumentIndex,
-                    \PHPUnit_Util_Type::export($actualValue),
-                    \PHPUnit_Util_Type::export($this->expectedValue)
+                    $this->exporter->export($actualValue),
+                    $this->exporter->export($this->expectedValue)
                 )
             );
         }

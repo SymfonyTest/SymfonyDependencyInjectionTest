@@ -2,17 +2,20 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
 {
     private $parameterName;
     private $expectedParameterValue;
+    protected $exporter;
 
     public function __construct($parameterName, $expectedParameterValue)
     {
         $this->parameterName = $parameterName;
         $this->expectedParameterValue = $expectedParameterValue;
+        $this->exporter = new Exporter;
     }
 
     public function toString()
@@ -72,8 +75,8 @@ class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
             $this->fail($container, sprintf(
                 'The value of parameter "%s" (%s) does not match the expected value (%s)',
                 $this->parameterName,
-                \PHPUnit_Util_Type::export($this->expectedParameterValue),
-                \PHPUnit_Util_Type::export($actualValue)
+                $this->exporter->export($this->expectedParameterValue),
+                $this->exporter->export($actualValue)
             ));
         }
 
