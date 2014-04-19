@@ -6,19 +6,21 @@ php:
   - 5.5
 
 env:
-  - SYMFONY_VERSION=2.0.*
-  - SYMFONY_VERSION=2.1.*
-  - SYMFONY_VERSION=2.2.*
-  - SYMFONY_VERSION=2.3.*
-  - SYMFONY_VERSION=2.4.*
-  - SYMFONY_VERSION=dev-master
+  - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~3.7
+  - SYMFONY_VERSION=2.0.* PHPUNIT_VERSION=~4.0
+  - SYMFONY_VERSION=2.1.* PHPUNIT_VERSION=~4.0
+  - SYMFONY_VERSION=2.2.* PHPUNIT_VERSION=~4.0
+  - SYMFONY_VERSION=2.3.* PHPUNIT_VERSION=~4.0
+  - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~4.0
 
 before_script:
-  - composer require --dev symfony/dependency-injection:${SYMFONY_VERSION}
+  - composer require --no-update "symfony/dependency-injection:${SYMFONY_VERSION}"
+  - composer require --no-update "phpunit/phpunit:${PHPUNIT_VERSION}"
+  - composer update
 
 notifications:
   email: matthiasnoback@gmail.com
 
 cache:
   directories:
-    - /home/travis/.composer/cache
+    - $COMPOSER_CACHE_DIR

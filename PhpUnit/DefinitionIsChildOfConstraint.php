@@ -2,16 +2,19 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
 class DefinitionIsChildOfConstraint extends \PHPUnit_Framework_Constraint
 {
     private $expectedParentServiceId;
+    protected $exporter;
 
     public function __construct($expectedParentServiceId)
     {
         $this->expectedParentServiceId = $expectedParentServiceId;
+        $this->exporter = new Exporter;
     }
 
     public function evaluate($other, $description = '', $returnResult = false)

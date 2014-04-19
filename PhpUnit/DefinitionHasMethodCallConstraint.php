@@ -2,17 +2,20 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\Definition;
 
 class DefinitionHasMethodCallConstraint extends \PHPUnit_Framework_Constraint
 {
     private $methodName;
     private $arguments;
+    protected $exporter;
 
     public function __construct($methodName, array $arguments = array())
     {
         $this->methodName = $methodName;
         $this->arguments = $arguments;
+        $this->exporter = new Exporter;
     }
 
     public function evaluate($other, $description = '', $returnResult = false)
@@ -41,7 +44,7 @@ class DefinitionHasMethodCallConstraint extends \PHPUnit_Framework_Constraint
                 sprintf(
                     'None of the method calls matched the expected method "%s" with arguments %s',
                     $this->methodName,
-                    \PHPUnit_Util_Type::export($this->arguments)
+                    $this->exporter->export($this->arguments)
                 )
             );
         }
