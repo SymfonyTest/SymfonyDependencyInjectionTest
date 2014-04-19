@@ -10,12 +10,14 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
 {
     private $argumentIndex;
     private $expectedValue;
+    private $checkExpectedValue;
     protected $exporter;
 
-    public function __construct($argumentIndex, $expectedValue)
+    public function __construct($argumentIndex, $expectedValue, $checkExpectedValue = true)
     {
         $this->argumentIndex = (integer)$argumentIndex;
         $this->expectedValue = $expectedValue;
+        $this->checkExpectedValue = $checkExpectedValue;
         $this->exporter = new Exporter;
     }
 
@@ -39,7 +41,7 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
             return false;
         }
 
-        if (!$this->evaluateArgumentValue($other, $returnResult)) {
+        if ($this->checkExpectedValue && !$this->evaluateArgumentValue($other, $returnResult)) {
             return false;
         }
 

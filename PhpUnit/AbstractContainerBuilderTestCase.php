@@ -76,11 +76,13 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
      * @param $serviceId
      * @param $expectedClass
      */
-    protected function assertContainerBuilderHasService($serviceId, $expectedClass)
+    protected function assertContainerBuilderHasService($serviceId, $expectedClass = null)
     {
+        $checkExpectedClass = (func_num_args() > 1);
+
         self::assertThat(
             $this->container,
-            new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass)
+            new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass, $checkExpectedClass)
         );
     }
 
@@ -103,7 +105,7 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
      * @param $aliasId
      * @param $expectedServiceId
      */
-    protected function assertContainerBuilderHasAlias($aliasId, $expectedServiceId)
+    protected function assertContainerBuilderHasAlias($aliasId, $expectedServiceId = null)
     {
         self::assertThat(
             $this->container,
@@ -117,11 +119,13 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
      * @param $parameterName
      * @param $expectedParameterValue
      */
-    protected function assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)
+    protected function assertContainerBuilderHasParameter($parameterName, $expectedParameterValue = null)
     {
+        $checkParameterValue = (func_num_args() > 1);
+
         self::assertThat(
             $this->container,
-            new ContainerHasParameterConstraint($parameterName, $expectedParameterValue)
+            new ContainerHasParameterConstraint($parameterName, $expectedParameterValue, $checkParameterValue)
         );
     }
 
@@ -136,13 +140,14 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
     protected function assertContainerBuilderHasServiceDefinitionWithArgument(
         $serviceId,
         $argumentIndex,
-        $expectedValue
+        $expectedValue = null
     ) {
         $definition = $this->container->findDefinition($serviceId);
+        $checkValue = (func_num_args() > 2);
 
         self::assertThat(
             $definition,
-            new DefinitionHasArgumentConstraint($argumentIndex, $expectedValue)
+            new DefinitionHasArgumentConstraint($argumentIndex, $expectedValue, $checkValue)
         );
     }
 

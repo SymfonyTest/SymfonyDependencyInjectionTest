@@ -3,7 +3,6 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerHasParameterConstraint;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ContainerHasParameterConstraintTest extends \PHPUnit_Framework_TestCase
@@ -12,9 +11,14 @@ class ContainerHasParameterConstraintTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider containerBuilderProvider
      */
-    public function match(ContainerInterface $container, $parameterName, $parameterValue, $expectedToMatch)
-    {
-        $constraint = new ContainerHasParameterConstraint($parameterName, $parameterValue);
+    public function match(
+      ContainerInterface $container,
+      $parameterName,
+      $parameterValue,
+      $checkParameterValue,
+      $expectedToMatch
+    ) {
+        $constraint = new ContainerHasParameterConstraint($parameterName, $parameterValue, $checkParameterValue);
 
         $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));
     }
@@ -35,11 +39,13 @@ class ContainerHasParameterConstraintTest extends \PHPUnit_Framework_TestCase
 
         return array(
             // the container does not have the parameter
-            array($emptyContainer, $parameterName, $parameterValue, false),
+            array($emptyContainer, $parameterName, $parameterValue, true, false),
             // the container has the parameter but the values don't match
-            array($containerWithParameter, $parameterName, $wrongParameterValue, false),
+            array($containerWithParameter, $parameterName, $wrongParameterValue, true, false),
             // the container has the parameter and the value matches
-            array($containerWithParameter, $parameterName, $parameterValue, true),
+            array($containerWithParameter, $parameterName, $parameterValue, true, true),
+            // the container has the parameter and the value is optional
+            array($containerWithParameter, $parameterName, null, false, true),
         );
     }
 
