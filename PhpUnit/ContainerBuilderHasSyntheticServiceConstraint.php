@@ -2,11 +2,13 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ContainerBuilderHasSyntheticServiceConstraint extends \PHPUnit_Framework_Constraint
 {
     private $serviceId;
+    protected $exporter;
 
     public function __construct($serviceId)
     {
@@ -15,6 +17,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends \PHPUnit_Framework_C
         }
 
         $this->serviceId = $serviceId;
+        $this->exporter = new Exporter;
     }
 
     public function toString()
