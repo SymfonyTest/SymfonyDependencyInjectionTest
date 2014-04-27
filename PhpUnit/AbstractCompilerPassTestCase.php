@@ -23,6 +23,9 @@ abstract class AbstractCompilerPassTestCase extends AbstractContainerBuilderTest
     {
         try {
             $this->compile();
+
+            // Ensure assertion for strict mode
+            $this->assertFalse($this->container->has('no_service'));
         } catch (\Exception $e) {
             $this->fail('The compiler pass should not fail with an empty container.');
         }
