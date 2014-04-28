@@ -11,13 +11,13 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
     private $expectedServiceId;
     protected $exporter;
 
-    public function __construct($aliasId, $expectedServiceId)
+    public function __construct($aliasId, $expectedServiceId = null)
     {
         if (!is_string($aliasId)) {
             throw new \InvalidArgumentException('The $aliasId argument should be a string');
         }
 
-        if (!is_string($expectedServiceId)) {
+        if ($expectedServiceId !== null && !is_string($expectedServiceId)) {
             throw new \InvalidArgumentException('The $expectedServiceId argument should be a string');
         }
 
@@ -43,7 +43,7 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
             return false;
         }
 
-        if (!$this->evaluateServiceId($other, $returnResult)) {
+        if ($this->expectedServiceId !== null && !$this->evaluateServiceId($other, $returnResult)) {
             return false;
         }
 

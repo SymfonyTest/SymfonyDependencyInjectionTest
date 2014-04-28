@@ -9,12 +9,14 @@ class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
 {
     private $parameterName;
     private $expectedParameterValue;
+    private $checkParameterValue;
     protected $exporter;
 
-    public function __construct($parameterName, $expectedParameterValue)
+    public function __construct($parameterName, $expectedParameterValue = null, $checkParameterValue = false)
     {
         $this->parameterName = $parameterName;
         $this->expectedParameterValue = $expectedParameterValue;
+        $this->checkParameterValue = $checkParameterValue;
         $this->exporter = new Exporter;
     }
 
@@ -38,7 +40,7 @@ class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
             return false;
         }
 
-        if (!$this->evaluateParameterValue($other, $returnResult)) {
+        if ($this->checkParameterValue && !$this->evaluateParameterValue($other, $returnResult)) {
             return false;
         }
 

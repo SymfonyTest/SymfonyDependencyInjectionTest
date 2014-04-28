@@ -12,9 +12,14 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends \PHPUnit_Framew
      * @test
      * @dataProvider containerBuilderProvider
      */
-    public function match(ContainerBuilder $containerBuilder, $serviceId, $expectedClass, $shouldMatch)
-    {
-        $constraint = new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass);
+    public function match(
+      ContainerBuilder $containerBuilder,
+      $serviceId,
+      $expectedClass,
+      $checkExpectedClass,
+      $shouldMatch
+    ) {
+        $constraint = new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass, $checkExpectedClass);
 
         $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
     }
@@ -45,17 +50,19 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends \PHPUnit_Framew
 
         return array(
             // the container does not have the service definition
-            array($emptyContainerBuilder, $serviceId, $rightClass, false),
+            array($emptyContainerBuilder, $serviceId, $rightClass, true, false),
             // the container has a service definition, but with the wrong class
-            array($containerBuilderWithServiceDefinition, $serviceId, $wrongClass, false),
+            array($containerBuilderWithServiceDefinition, $serviceId, $wrongClass, true, false),
             // the container has a service definition with the right class
-            array($containerBuilderWithServiceDefinition, $serviceId, $rightClass, true),
+            array($containerBuilderWithServiceDefinition, $serviceId, $rightClass, true, true),
             // the container has a service definition with the right class, but it's a parameter
-            array($containerBuilderWithServiceDefinitionWithParameterClass, $serviceId, $rightClass, true),
+            array($containerBuilderWithServiceDefinitionWithParameterClass, $serviceId, $rightClass, true, true),
             // the container has an alias, but with the wrong class
-            array($containerBuilderWithAlias, $aliasId, $wrongClass, false),
+            array($containerBuilderWithAlias, $aliasId, $wrongClass, true, false),
             // the container has an alias with the right class
-            array($containerBuilderWithAlias, $aliasId, $rightClass, true)
+            array($containerBuilderWithAlias, $aliasId, $rightClass, true, true),
+            // giving a class is optional
+            array($containerBuilderWithAlias, $aliasId, null, false, true),
         );
     }
 

@@ -36,7 +36,9 @@ class ContainerBuilderHasAliasConstraintTest extends \PHPUnit_Framework_TestCase
             // the container has the alias, but for another service
             array($emptyContainerBuilder, $aliasId, $wrongServiceId, false),
             // the container has the alias for the right service id
-            array($builderWithAlias, $aliasId, $rightServiceId, true)
+            array($builderWithAlias, $aliasId, $rightServiceId, true),
+            // service id is optional
+            array($builderWithAlias, $aliasId, null, true),
         );
     }
 

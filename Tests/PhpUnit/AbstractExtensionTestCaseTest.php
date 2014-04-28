@@ -29,15 +29,25 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
 
         // manually defined parameter
         $this->assertContainerBuilderHasParameter('manual_parameter', 'parameter value');
+        // Just check parameter exists, value will not be checked.
+        $this->assertContainerBuilderHasParameter('manual_parameter');
 
         // manually defined service
         $this->assertContainerBuilderHasService('manual_service_id', 'stdClass');
+        // Just check service exists, class will not be checked.
+        $this->assertContainerBuilderHasService('manual_service_id');
 
         // manually created alias
         $this->assertContainerBuilderHasAlias('manual_alias', 'service_id');
+        // Just check alias exists, service_id will not be checked.
+        $this->assertContainerBuilderHasAlias('manual_alias');
 
-        //
+        // manually overwritten argument
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1, 'argument value');
+
+        // check for existence of manually created arguments, not checking values.
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 0);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1);
     }
 
     /**

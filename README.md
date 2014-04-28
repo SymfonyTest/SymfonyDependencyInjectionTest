@@ -289,14 +289,23 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 These are the available semantic assertions for each of the test cases shown above:
 
 <dl>
+<dt><code>assertContainerBuilderHasService($serviceId)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id.</dd>
 <dt><code>assertContainerBuilderHasService($serviceId, $expectedClass)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id and class.</dd>
 <dt><code>assertContainerBuilderHasSyntheticService($serviceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a synthetic service with the given id.</dd>
+<dt><code>assertContainerBuilderHasAlias($aliasId)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has an alias.</dd>
 <dt><code>assertContainerBuilderHasAlias($aliasId, $expectedServiceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has an alias and that it is an alias for the given service id.</dd>
+<dt><code>assertContainerBuilderHasParameter($parameterName)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter.</dd>
 <dt><code>assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter and that its value is the given value.</dd>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument at
+the given index.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex, $expectedValue)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument at
 the given index, and its value is the given value.</dd>

@@ -9,20 +9,22 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
 {
     private $serviceId;
     private $expectedClass;
+    private $checkExpectedClass;
     protected $exporter;
 
-    public function __construct($serviceId, $expectedClass)
+    public function __construct($serviceId, $expectedClass = null, $checkExpectedClass = true)
     {
         if (!is_string($serviceId)) {
             throw new \InvalidArgumentException('The $serviceId argument should be a string');
         }
 
-        if (!is_string($expectedClass)) {
+        if ($checkExpectedClass && !is_string($expectedClass)) {
             throw new \InvalidArgumentException('The $expectedClass argument should be a string');
         }
 
         $this->serviceId = $serviceId;
         $this->expectedClass = $expectedClass;
+        $this->checkExpectedClass = $checkExpectedClass;
         $this->exporter = new Exporter;
     }
 
@@ -47,7 +49,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
             return false;
         }
 
-        if (!$this->evaluateClass($other, $returnResult)) {
+        if ($this->checkExpectedClass && !$this->evaluateClass($other, $returnResult)) {
             return false;
         }
 
