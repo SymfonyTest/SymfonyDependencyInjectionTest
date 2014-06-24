@@ -237,4 +237,26 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
             array('a wrong argument')
         );
     }
+
+    /**
+     * @test
+     */
+    public function if_service_is_defined_it_fails()
+    {
+        $this->load();
+
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+
+        $this->assertContainerBuilderNotHasService('loaded_service_id');
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_is_not_defined_it_does_not_fail()
+    {
+        $this->load();
+
+        $this->assertContainerBuilderNotHasService('undefined');
+    }
 }
