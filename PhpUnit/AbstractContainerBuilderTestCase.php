@@ -87,6 +87,20 @@ abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestC
     }
 
     /**
+     * Assert that the ContainerBuilder for this test does not have a service definition with the given id.
+     *
+     * @param $serviceId
+     */
+    protected function assertContainerBuilderNotHasService($serviceId)
+    {
+        self::assertThat(
+            $this->container,
+            new \PHPUnit_Framework_Constraint_Not(new ContainerBuilderHasServiceDefinitionConstraint($serviceId, null, false))
+        );
+    }
+
+
+    /**
      * Assert that the ContainerBuilder for this test has a synthetic service with the given id.
      *
      * @param $serviceId
