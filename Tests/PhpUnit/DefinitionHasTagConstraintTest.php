@@ -18,6 +18,26 @@ class DefinitionHasTagConstraintTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($definition, '', true));
     }
 
+    /**
+     * @test
+     * @dataProvider definitionProvider
+     */
+    public function evaluateThrowsExceptionOnFailure(Definition $definition, $tag, $attributes, $expectedToMatch)
+    {
+        $constraint = new DefinitionHasTagConstraint($tag, $attributes);
+
+        if ($expectedToMatch) {
+            $this->assertTrue($constraint->evaluate($definition));
+        } else {
+            try {
+                $constraint->evaluate($definition);
+                $this->fail('DefinitionHasTagConstraint doesn\'t throw expected exception');
+            } catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+                $this->assertTrue(true, 'DefinitionHasTagConstraint throws expected exception');
+            }
+        }
+    }
+
     public function definitionProvider()
     {
         $definitionWithoutTags = new Definition();

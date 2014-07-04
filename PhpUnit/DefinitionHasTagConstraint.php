@@ -2,15 +2,18 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\Definition;
 
 class DefinitionHasTagConstraint extends \PHPUnit_Framework_Constraint
 {
+    protected $exporter;
     private $name;
     private $attributes;
 
     public function __construct($name, array $attributes = array())
     {
+        $this->exporter = new Exporter();
         $this->name = $name;
         $this->attributes = $attributes;
     }
@@ -40,12 +43,20 @@ class DefinitionHasTagConstraint extends \PHPUnit_Framework_Constraint
                     sprintf(
                         'None of the tags matched the expected name "%s" with attributes %s',
                         $this->name,
-                        \PHPUnit_Util_Type::export($this->attributes)
+                        $this->exporter->export($this->attributes)
                     )
                 );
             }
 
+            if (!$returnResult) {
+                $this->fail($other, $description);
+            }
+
             return false;
+        }
+
+        if (!$returnResult) {
+            $this->fail($other, $description);
         }
 
         return false;
