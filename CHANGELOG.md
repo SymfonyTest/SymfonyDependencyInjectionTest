@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.8.0
+## v0.7.1
 
 - Fixed a bug in `DefinitionHasTagConstraint`: it didn't throw an exception when a tag was missing, which resulted in
   false positives. Reported and fixed by Christian Flothmann (@xabbuh).
