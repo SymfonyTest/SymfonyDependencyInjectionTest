@@ -18,8 +18,7 @@
         "phpunit/phpunit": ">=3",
         "sebastian/exporter": "~1"
     },
-    "target-dir": "Matthias/SymfonyDependencyInjectionTest",
     "autoload": {
-        "psr-0" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" }
+        "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" }
     }
 }
