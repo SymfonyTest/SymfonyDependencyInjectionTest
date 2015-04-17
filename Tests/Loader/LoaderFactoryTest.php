@@ -44,6 +44,7 @@ class LoaderFactoryTest extends \PHPUnit_Framework_TestCase
         return $this
             ->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
             ->disableOriginalConstructor()
+            ->setMethods(null)
             ->getMock();
     }
 }
