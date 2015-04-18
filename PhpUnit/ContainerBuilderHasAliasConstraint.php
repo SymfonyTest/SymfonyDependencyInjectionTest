@@ -79,7 +79,7 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
          */
         $actualServiceId = (string) $alias;
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedServiceId);
+        $constraint = new \PHPUnit_Framework_Constraint_IsEqual(strtolower($this->expectedServiceId));
         if (!$constraint->evaluate($actualServiceId, '', true)) {
             if ($returnResult) {
                 return false;
