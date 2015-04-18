@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.2
+
+- Made alias/service id comparison case insensitive. Reported and fixed by Christian Flothmann (@xabbuh).
+
 ## v0.7.1
 
 - Fixed a bug in `DefinitionHasTagConstraint`: it didn't throw an exception when a tag was missing, which resulted in
