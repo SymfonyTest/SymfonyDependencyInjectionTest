@@ -1,3 +1,5 @@
+sudo: false
+
 language: php
 
 php:
@@ -5,31 +7,34 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - nightly
   - hhvm
 
 matrix:
+  fast_finish: true
   include:
     - php: 5.3
       env: deps="low"
+    - php: 5.6
+      env: SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~3.7
+    - php: 5.6
+      env: SYMFONY_VERSION=2.0.* PHPUNIT_VERSION=~4.0
+    - php: 5.6
+      env: SYMFONY_VERSION=2.1.* PHPUNIT_VERSION=~4.0
+    - php: 5.6
+      env: SYMFONY_VERSION=2.2.* PHPUNIT_VERSION=~4.0
+    - php: 5.6
+      env: SYMFONY_VERSION=2.3.* PHPUNIT_VERSION=~4.0
+    - php: 5.6
+      env: SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~4.0
   allow_failures:
     - php: hhvm
-
-env:
-  global:
-    - deps=""
-  matrix:
-    - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~3.7
-    - SYMFONY_VERSION=2.0.* PHPUNIT_VERSION=~4.0
-    - SYMFONY_VERSION=2.1.* PHPUNIT_VERSION=~4.0
-    - SYMFONY_VERSION=2.2.* PHPUNIT_VERSION=~4.0
-    - SYMFONY_VERSION=2.3.* PHPUNIT_VERSION=~4.0
-    - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~4.0
 
 before_script:
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update "symfony/dependency-injection:${SYMFONY_VERSION}"; fi
   - if [ "$PHPUNIT_VERSION" != "" ]; then composer require --no-update "phpunit/phpunit:${PHPUNIT_VERSION}"; fi
   - if [ "$deps" = "low" ]; then composer update --prefer-lowest; fi
-  - if [ "$deps" = "" ]; then composer update; fi
+  - if [ "$deps" = "" ]; then composer install; fi
 
 notifications:
   email: matthiasnoback@gmail.com
