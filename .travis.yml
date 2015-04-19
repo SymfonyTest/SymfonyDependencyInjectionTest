@@ -8,21 +8,28 @@ php:
   - hhvm
 
 matrix:
+  include:
+    - php: 5.3
+      env: deps="low"
   allow_failures:
     - php: hhvm
 
 env:
-  - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~3.7
-  - SYMFONY_VERSION=2.0.* PHPUNIT_VERSION=~4.0
-  - SYMFONY_VERSION=2.1.* PHPUNIT_VERSION=~4.0
-  - SYMFONY_VERSION=2.2.* PHPUNIT_VERSION=~4.0
-  - SYMFONY_VERSION=2.3.* PHPUNIT_VERSION=~4.0
-  - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~4.0
+  global:
+    - deps=""
+  matrix:
+    - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~3.7
+    - SYMFONY_VERSION=2.0.* PHPUNIT_VERSION=~4.0
+    - SYMFONY_VERSION=2.1.* PHPUNIT_VERSION=~4.0
+    - SYMFONY_VERSION=2.2.* PHPUNIT_VERSION=~4.0
+    - SYMFONY_VERSION=2.3.* PHPUNIT_VERSION=~4.0
+    - SYMFONY_VERSION=2.4.* PHPUNIT_VERSION=~4.0
 
 before_script:
-  - composer require --no-update "symfony/dependency-injection:${SYMFONY_VERSION}"
-  - composer require --no-update "phpunit/phpunit:${PHPUNIT_VERSION}"
-  - composer update
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update "symfony/dependency-injection:${SYMFONY_VERSION}"; fi
+  - if [ "$PHPUNIT_VERSION" != "" ]; then composer require --no-update "phpunit/phpunit:${PHPUNIT_VERSION}"; fi
+  - if [ "$deps" = "low" ]; then composer update --prefer-lowest; fi
+  - if [ "$deps" = "" ]; then composer update; fi
 
 notifications:
   email: matthiasnoback@gmail.com
