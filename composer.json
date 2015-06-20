@@ -16,8 +16,10 @@
         "matthiasnoback/symfony-config-test": "0.*|~1.0",
         "symfony/dependency-injection": "^2.0.5",
         "symfony/config": "^2.0.5",
-        "phpunit/phpunit": ">=3",
         "sebastian/exporter": "~1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=3"
     },
     "autoload": {
         "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" }
