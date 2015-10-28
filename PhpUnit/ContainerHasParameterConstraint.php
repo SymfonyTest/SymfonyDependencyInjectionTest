@@ -77,8 +77,8 @@ class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
             $this->fail($container, sprintf(
                 'The value of parameter "%s" (%s) does not match the expected value (%s)',
                 $this->parameterName,
-                $this->exporter->export($this->expectedParameterValue),
-                $this->exporter->export($actualValue)
+                $this->exporter->export($actualValue),
+                $this->exporter->export($this->expectedParameterValue)
             ));
         }
 
