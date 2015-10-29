@@ -40,6 +40,8 @@ before_script:
   - if [ "$deps" = "low" ]; then composer update --prefer-lowest; fi
   - if [ "$deps" = "" ]; then composer install; fi
 
+script: vendor/bin/phpunit
+
 notifications:
   email: matthiasnoback@gmail.com
 
