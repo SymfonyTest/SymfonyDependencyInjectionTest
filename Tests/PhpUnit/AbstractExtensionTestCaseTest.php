@@ -153,7 +153,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 10);
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', '10');
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 10, 'any value');
     }
