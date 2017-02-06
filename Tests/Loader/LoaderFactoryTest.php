@@ -3,8 +3,9 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Loader;
 
 use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
+use PHPUnit\Framework\TestCase;
 
-class LoaderFactoryTest extends \PHPUnit_Framework_TestCase
+class LoaderFactoryTest extends TestCase
 {
     /**
      * @test

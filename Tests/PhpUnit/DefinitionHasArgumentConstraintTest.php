@@ -3,10 +3,11 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasArgumentConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
-class DefinitionHasArgumentConstraintTest extends \PHPUnit_Framework_TestCase
+class DefinitionHasArgumentConstraintTest extends TestCase
 {
     /**
      * @test

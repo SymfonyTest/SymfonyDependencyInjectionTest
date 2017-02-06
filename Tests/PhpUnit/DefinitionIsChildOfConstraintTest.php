@@ -4,10 +4,11 @@
 namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionIsChildOfConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
-class DefinitionIsChildOfConstraintTest extends \PHPUnit_Framework_TestCase
+class DefinitionIsChildOfConstraintTest extends TestCase
 {
     /**
      * @test

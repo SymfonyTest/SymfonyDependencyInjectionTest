@@ -3,9 +3,10 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerHasParameterConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ContainerHasParameterConstraintTest extends \PHPUnit_Framework_TestCase
+class ContainerHasParameterConstraintTest extends TestCase
 {
     /**
      * @test

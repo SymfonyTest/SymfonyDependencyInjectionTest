@@ -3,10 +3,11 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasServiceDefinitionConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class ContainerBuilderHasServiceDefinitionConstraintTest extends \PHPUnit_Framework_TestCase
+class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
 {
     /**
      * @test

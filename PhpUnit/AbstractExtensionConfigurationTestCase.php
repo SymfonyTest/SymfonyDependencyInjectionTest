@@ -5,10 +5,11 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 use Matthias\SymfonyConfigTest\PhpUnit\ProcessedConfigurationEqualsConstraint;
 use Matthias\SymfonyDependencyInjectionTest\Loader\ExtensionConfigurationBuilder;
 use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-abstract class AbstractExtensionConfigurationTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractExtensionConfigurationTestCase extends TestCase
 {
     /**
      * Return an instance of the container extension that you are testing.

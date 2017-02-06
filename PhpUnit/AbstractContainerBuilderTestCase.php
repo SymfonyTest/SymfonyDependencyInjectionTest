@@ -2,10 +2,11 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-abstract class AbstractContainerBuilderTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractContainerBuilderTestCase extends TestCase
 {
     /**
      * @var ContainerBuilder
