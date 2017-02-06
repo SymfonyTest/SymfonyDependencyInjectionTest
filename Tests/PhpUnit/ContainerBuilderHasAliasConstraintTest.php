@@ -3,9 +3,10 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasAliasConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ContainerBuilderHasAliasConstraintTest extends \PHPUnit_Framework_TestCase
+class ContainerBuilderHasAliasConstraintTest extends TestCase
 {
     /**
      * @test

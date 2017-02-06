@@ -3,9 +3,10 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
 
-class DefinitionHasTagConstraintTest extends \PHPUnit_Framework_TestCase
+class DefinitionHasTagConstraintTest extends TestCase
 {
     /**
      * @test
