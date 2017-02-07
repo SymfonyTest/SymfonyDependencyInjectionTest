@@ -3,9 +3,10 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
 
-class DefinitionHasMethodCallConstraintTest extends \PHPUnit_Framework_TestCase
+class DefinitionHasMethodCallConstraintTest extends TestCase
 {
     /**
      * @test
