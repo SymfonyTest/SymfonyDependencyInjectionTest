@@ -86,7 +86,9 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
      */
     public function it_expects_a_string_for_service_id()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'string');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('string');
+
         new ContainerBuilderHasServiceDefinitionConstraint(new \stdClass(), 'class');
     }
 
@@ -95,7 +97,9 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
      */
     public function it_expects_a_string_for_class()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'string');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('string');
+        
         new ContainerBuilderHasServiceDefinitionConstraint('service_id', new \stdClass());
     }
 }

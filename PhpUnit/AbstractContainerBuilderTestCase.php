@@ -2,6 +2,7 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -96,7 +97,7 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     {
         self::assertThat(
             $this->container,
-            new \PHPUnit_Framework_Constraint_Not(new ContainerBuilderHasServiceDefinitionConstraint($serviceId, null, false))
+            new LogicalNot(new ContainerBuilderHasServiceDefinitionConstraint($serviceId, null, false))
         );
     }
 

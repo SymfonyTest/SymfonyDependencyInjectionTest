@@ -46,7 +46,7 @@ class ContainerHasParameterConstraintTest extends TestCase
 
     private function createMockContainerWithParameters(array $parameters)
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock(ContainerInterface::class);
 
         $container
             ->expects($this->any())

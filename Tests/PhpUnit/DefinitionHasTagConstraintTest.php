@@ -3,6 +3,7 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -33,7 +34,7 @@ class DefinitionHasTagConstraintTest extends TestCase
             try {
                 $constraint->evaluate($definition);
                 $this->fail('DefinitionHasTagConstraint doesn\'t throw expected exception');
-            } catch (\PHPUnit_Framework_ExpectationFailedException $e) {
+            } catch (ExpectationFailedException $e) {
                 $this->assertTrue(true, 'DefinitionHasTagConstraint throws expected exception');
             }
         }

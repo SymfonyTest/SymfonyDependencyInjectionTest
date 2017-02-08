@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.0
+
+- Only support PHPUnit 6
+- Only support Symfony 2.* and 3.* LTS versions
+- Require PHP ^7.0
+- Drop support for HHVM
+
 ## v0.7.2
 
 - Made alias/service id comparison case insensitive. Reported and fixed by Christian Flothmann (@xabbuh).
