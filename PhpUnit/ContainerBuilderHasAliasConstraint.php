@@ -2,17 +2,19 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
+class ContainerBuilderHasAliasConstraint extends Constraint
 {
     private $aliasId;
     private $expectedServiceId;
-    protected $exporter;
 
     public function __construct($aliasId, $expectedServiceId = null)
     {
+        parent::__construct();
+
         if (!is_string($aliasId)) {
             throw new \InvalidArgumentException('The $aliasId argument should be a string');
         }
@@ -23,7 +25,6 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
 
         $this->aliasId = $aliasId;
         $this->expectedServiceId = $expectedServiceId;
-        $this->exporter = new Exporter;
     }
 
     public function toString()
@@ -79,7 +80,7 @@ class ContainerBuilderHasAliasConstraint extends \PHPUnit_Framework_Constraint
          */
         $actualServiceId = (string) $alias;
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual(strtolower($this->expectedServiceId));
+        $constraint = new IsEqual(strtolower($this->expectedServiceId));
         if (!$constraint->evaluate($actualServiceId, '', true)) {
             if ($returnResult) {
                 return false;

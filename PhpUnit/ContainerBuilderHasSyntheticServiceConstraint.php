@@ -2,22 +2,22 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ContainerBuilderHasSyntheticServiceConstraint extends \PHPUnit_Framework_Constraint
+class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
 {
     private $serviceId;
-    protected $exporter;
 
     public function __construct($serviceId)
     {
+        parent::__construct();
+
         if (!is_string($serviceId)) {
             throw new \InvalidArgumentException('The $serviceId argument should be a string');
         }
 
         $this->serviceId = $serviceId;
-        $this->exporter = new Exporter;
     }
 
     public function toString()

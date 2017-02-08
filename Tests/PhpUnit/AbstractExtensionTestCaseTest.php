@@ -57,7 +57,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
 
         $this->assertContainerBuilderHasService('undefined', 'AnyClass');
     }
@@ -69,7 +69,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'no service');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('no service');
 
         $this->assertContainerBuilderHasSyntheticService('undefined');
     }
@@ -81,7 +82,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'synthetic');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('synthetic');
 
         $this->assertContainerBuilderHasSyntheticService('loaded_service_id');
     }
@@ -93,7 +95,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'stdClass');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('stdClass');
 
         $this->assertContainerBuilderHasService('manual_service_id', 'SomeOtherClass');
     }
@@ -105,7 +108,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
 
         $this->assertContainerBuilderHasAlias('undefined', 'any_service_id');
     }
@@ -117,7 +120,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'service_id');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('service_id');
 
         $this->assertContainerBuilderHasAlias('manual_alias', 'wrong');
     }
@@ -129,7 +133,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'undefined');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('undefined');
 
         $this->assertContainerBuilderHasParameter('undefined', 'any value');
     }
@@ -141,7 +146,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'parameter value');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('parameter value');
 
         $this->assertContainerBuilderHasParameter('manual_parameter', 'wrong');
     }
@@ -153,7 +159,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', '10');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('10');
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 10, 'any value');
     }
@@ -165,7 +172,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1, 'wrong value');
     }
@@ -177,7 +184,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'second argument');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('second argument');
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('child_service_id', 1, 'wrong value');
     }
@@ -189,7 +197,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'parent_service_id');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('parent_service_id');
 
         $this->assertContainerBuilderHasServiceDefinitionWithParent('child_service_id', 'wrong_parent_service_id');
     }
@@ -201,7 +210,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'parent');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('parent');
 
         $this->assertContainerBuilderHasServiceDefinitionWithParent('parent_service_id', 'any_other_service_id');
     }
@@ -213,7 +223,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'wrongMethodName');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('wrongMethodName');
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'service_with_method_calls_id',
@@ -229,7 +240,8 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'theRightMethodName');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessage('theRightMethodName');
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'service_with_method_calls_id',
@@ -245,7 +257,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException');
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
 
         $this->assertContainerBuilderNotHasService('loaded_service_id');
     }

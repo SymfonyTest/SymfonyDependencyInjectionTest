@@ -3,6 +3,7 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasSyntheticServiceConstraint;
+use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -64,12 +65,12 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
         return $syntheticDefinition;
     }
 
-    private function assertConstraintFails(\PHPUnit_Framework_Constraint $constraint)
+    private function assertConstraintFails(Constraint $constraint)
     {
         $this->assertFalse($constraint->evaluate($this->containerBuilder, '', true));
     }
 
-    private function assertConstraintPasses(\PHPUnit_Framework_Constraint $constraint)
+    private function assertConstraintPasses(Constraint $constraint)
     {
         $this->assertTrue($constraint->evaluate($this->containerBuilder, '', true));
     }

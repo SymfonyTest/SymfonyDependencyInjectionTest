@@ -2,18 +2,18 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\Definition;
 
-class DefinitionHasTagConstraint extends \PHPUnit_Framework_Constraint
+class DefinitionHasTagConstraint extends Constraint
 {
-    protected $exporter;
     private $name;
     private $attributes;
 
     public function __construct($name, array $attributes = array())
     {
-        $this->exporter = new Exporter();
+        parent::__construct();
         $this->name = $name;
         $this->attributes = $attributes;
     }
@@ -72,7 +72,7 @@ class DefinitionHasTagConstraint extends \PHPUnit_Framework_Constraint
 
     private function equalAttributes($expectedAttributes, $actualAttributes)
     {
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual(
+        $constraint = new IsEqual(
             $expectedAttributes
         );
 

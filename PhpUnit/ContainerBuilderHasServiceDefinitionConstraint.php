@@ -2,18 +2,20 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_Constraint
+class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
 {
     private $serviceId;
     private $expectedClass;
     private $checkExpectedClass;
-    protected $exporter;
 
     public function __construct($serviceId, $expectedClass = null, $checkExpectedClass = true)
     {
+        parent::__construct();
+
         if (!is_string($serviceId)) {
             throw new \InvalidArgumentException('The $serviceId argument should be a string');
         }
@@ -25,7 +27,6 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
         $this->serviceId = $serviceId;
         $this->expectedClass = $expectedClass;
         $this->checkExpectedClass = $checkExpectedClass;
-        $this->exporter = new Exporter;
     }
 
     public function toString()
@@ -81,7 +82,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends \PHPUnit_Framework_
 
         $actualClass = $containerBuilder->getParameterBag()->resolveValue($definition->getClass());
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedClass);
+        $constraint = new IsEqual($this->expectedClass);
 
         if (!$constraint->evaluate($actualClass, '', true)) {
             if ($returnResult) {

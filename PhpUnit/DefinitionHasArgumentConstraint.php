@@ -2,23 +2,24 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
-class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
+class DefinitionHasArgumentConstraint extends Constraint
 {
     private $argumentIndex;
     private $expectedValue;
     private $checkExpectedValue;
-    protected $exporter;
 
     public function __construct($argumentIndex, $expectedValue, $checkExpectedValue = true)
     {
+        parent::__construct();
+
         $this->argumentIndex = (integer)$argumentIndex;
         $this->expectedValue = $expectedValue;
         $this->checkExpectedValue = $checkExpectedValue;
-        $this->exporter = new Exporter;
     }
 
     public function toString()
@@ -80,7 +81,7 @@ class DefinitionHasArgumentConstraint extends \PHPUnit_Framework_Constraint
     {
         $actualValue = $definition->getArgument($this->argumentIndex);
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedValue);
+        $constraint = new IsEqual($this->expectedValue);
 
         if (!$constraint->evaluate($actualValue, '', true)) {
             if ($returnResult) {

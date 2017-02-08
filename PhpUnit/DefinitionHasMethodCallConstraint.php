@@ -2,20 +2,21 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\Definition;
 
-class DefinitionHasMethodCallConstraint extends \PHPUnit_Framework_Constraint
+class DefinitionHasMethodCallConstraint extends Constraint
 {
     private $methodName;
     private $arguments;
-    protected $exporter;
 
     public function __construct($methodName, array $arguments = array())
     {
+        parent::__construct();
+
         $this->methodName = $methodName;
         $this->arguments = $arguments;
-        $this->exporter = new Exporter;
     }
 
     public function evaluate($other, $description = '', $returnResult = false)
@@ -62,7 +63,7 @@ class DefinitionHasMethodCallConstraint extends \PHPUnit_Framework_Constraint
 
     private function equalArguments($expectedArguments, $actualArguments)
     {
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual(
+        $constraint = new IsEqual(
             $expectedArguments
         );
 

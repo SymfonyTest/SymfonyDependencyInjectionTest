@@ -2,22 +2,23 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
+class ContainerHasParameterConstraint extends Constraint
 {
     private $parameterName;
     private $expectedParameterValue;
     private $checkParameterValue;
-    protected $exporter;
 
     public function __construct($parameterName, $expectedParameterValue = null, $checkParameterValue = false)
     {
+        parent::__construct();
+
         $this->parameterName = $parameterName;
         $this->expectedParameterValue = $expectedParameterValue;
         $this->checkParameterValue = $checkParameterValue;
-        $this->exporter = new Exporter;
     }
 
     public function toString()
@@ -67,7 +68,7 @@ class ContainerHasParameterConstraint extends \PHPUnit_Framework_Constraint
     {
         $actualValue = $container->getParameter($this->parameterName);
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($this->expectedParameterValue);
+        $constraint = new IsEqual($this->expectedParameterValue);
 
         if (!$constraint->evaluate($actualValue, '', true)) {
             if ($returnResult) {
