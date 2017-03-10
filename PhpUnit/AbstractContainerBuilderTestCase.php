@@ -174,15 +174,17 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
      * @param string $serviceId
      * @param string $method
      * @param array $arguments
+     * @param int|null $index
      */
     protected function assertContainerBuilderHasServiceDefinitionWithMethodCall(
         $serviceId,
         $method,
-        array $arguments = array()
+        array $arguments = array(),
+        $index = null
     ) {
         $definition = $this->container->findDefinition($serviceId);
 
-        self::assertThat($definition, new DefinitionHasMethodCallConstraint($method, $arguments));
+        self::assertThat($definition, new DefinitionHasMethodCallConstraint($method, $arguments, $index));
     }
 
     /**

@@ -12,9 +12,9 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
      * @test
      * @dataProvider definitionProvider
      */
-    public function match(Definition $definition, $method, $arguments, $expectedToMatch)
+    public function match(Definition $definition, $method, $arguments, $index, $expectedToMatch)
     {
-        $constraint = new DefinitionHasMethodCallConstraint($method, $arguments);
+        $constraint = new DefinitionHasMethodCallConstraint($method, $arguments, $index);
 
         $this->assertSame($expectedToMatch, $constraint->evaluate($definition, '', true));
     }
@@ -25,25 +25,25 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
 
         $definitionWithTwoMethodCalls = new Definition();
 
-        $method = 'add';
-
         $argumentsOfFirstCall = array('argument of first call');
-        $definitionWithTwoMethodCalls->addMethodCall($method, $argumentsOfFirstCall);
+        $definitionWithTwoMethodCalls->addMethodCall('methodCallOne', $argumentsOfFirstCall);
 
         $argumentsOfSecondCall = array('argument of second call');
-        $definitionWithTwoMethodCalls->addMethodCall($method, $argumentsOfSecondCall);
+        $definitionWithTwoMethodCalls->addMethodCall('methodCallTwo', $argumentsOfSecondCall);
 
         $otherArguments = array('some other argument');
 
         return array(
             // the definition has no method call
-            array($definitionWithNoMethodCalls, $method, array(), false),
-            // the definition has a call to this method, arguments match with the first call
-            array($definitionWithTwoMethodCalls, $method, $argumentsOfFirstCall, true),
-            // the definition has a call to this method, arguments match with the second call
-            array($definitionWithTwoMethodCalls, $method, $argumentsOfSecondCall, true),
+            array($definitionWithNoMethodCalls, 'noMethodCall', array(), null, false),
+            // the definition has a call to this method on any invocation index, arguments match with the first call
+            array($definitionWithTwoMethodCalls, 'methodCallOne', $argumentsOfFirstCall, null, true),
+            // the definition has a call to this method on first invocation index, arguments match with the second call
+            array($definitionWithTwoMethodCalls, 'methodCallTwo', $argumentsOfSecondCall, 1, true),
             // the definition has a call to this method, but the arguments don't match
-            array($definitionWithTwoMethodCalls, $method, $otherArguments, false),
+            array($definitionWithTwoMethodCalls, 'methodCallOne', $otherArguments, null, false),
+            // the definition has a call to this method, arguments match with the first call, but invocation index is wrong
+            array($definitionWithTwoMethodCalls, 'methodCallOne', $argumentsOfFirstCall, 1, false),
         );
     }
 
@@ -55,6 +55,6 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
         $method = 'methodName';
         $constraint = new DefinitionHasMethodCallConstraint($method, array());
 
-        $this->assertSame('has a method call to "'.$method.'" with the given arguments', $constraint->toString());
+        $this->assertSame('has a method call to "'.$method.'" with the given arguments on any or explicitly stated invocation order index.', $constraint->toString());
     }
 }

@@ -10,13 +10,19 @@ class DefinitionHasMethodCallConstraint extends Constraint
 {
     private $methodName;
     private $arguments;
+    private $index;
 
-    public function __construct($methodName, array $arguments = array())
+    public function __construct($methodName, array $arguments = array(), $index = null)
     {
+        if ($index !== null && !is_int($index)) {
+            throw new \RuntimeException(sprintf('Expected value of integer type for method call index, "%s" given.', is_object($index) ? get_class($index) : gettype($index)));
+        }
+
         parent::__construct();
 
         $this->methodName = $methodName;
         $this->arguments = $arguments;
+        $this->index = $index;
     }
 
     public function evaluate($other, $description = '', $returnResult = false)
@@ -27,10 +33,14 @@ class DefinitionHasMethodCallConstraint extends Constraint
             );
         }
 
-        foreach ($other->getMethodCalls() as $methodCall) {
-            list($method, $arguments) = $methodCall;
+        for ($i = 0; $i < $iMax = count($methodCalls = $other->getMethodCalls()); $i++) {
+            list($method, $arguments) = $methodCalls[$i];
 
             if ($method !== $this->methodName) {
+                continue;
+            }
+
+            if (null !== $this->index && $i !== $this->index) {
                 continue;
             }
 
@@ -43,9 +53,10 @@ class DefinitionHasMethodCallConstraint extends Constraint
             $this->fail(
                 $other,
                 sprintf(
-                    'None of the method calls matched the expected method "%s" with arguments %s',
+                    'None of the method calls matched the expected method "%s" with arguments %s with %s invocation order index',
                     $this->methodName,
-                    $this->exporter->export($this->arguments)
+                    $this->exporter->export($this->arguments),
+                    (null === $this->index) ? 'any' : sprintf('"%s"', $this->index)
                 )
             );
         }
@@ -56,7 +67,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
     public function toString()
     {
         return sprintf(
-            'has a method call to "%s" with the given arguments',
+            'has a method call to "%s" with the given arguments on any or explicitly stated invocation order index.',
             $this->methodName
         );
     }
