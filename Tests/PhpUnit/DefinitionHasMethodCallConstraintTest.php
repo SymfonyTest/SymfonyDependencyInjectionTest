@@ -55,6 +55,11 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
         $method = 'methodName';
         $constraint = new DefinitionHasMethodCallConstraint($method, array());
 
-        $this->assertSame('has a method call to "'.$method.'" with the given arguments on any or explicitly stated invocation order index.', $constraint->toString());
+        $this->assertSame('has a method call to "'.$method.'" with the given arguments.', $constraint->toString());
+
+        $invocationIndex = 2;
+        $constraint = new DefinitionHasMethodCallConstraint($method, array(), $invocationIndex);
+
+        $this->assertSame('has a method call to "'.$method.'" with the given arguments on invocation order index with value of '.$invocationIndex.'.', $constraint->toString());
     }
 }

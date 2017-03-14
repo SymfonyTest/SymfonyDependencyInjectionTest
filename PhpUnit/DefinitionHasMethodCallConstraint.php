@@ -15,7 +15,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
     public function __construct($methodName, array $arguments = array(), $index = null)
     {
         if ($index !== null && !is_int($index)) {
-            throw new \RuntimeException(sprintf('Expected value of integer type for method call index, "%s" given.', is_object($index) ? get_class($index) : gettype($index)));
+            throw new \InvalidArgumentException(sprintf('Expected value of integer type for method call index, "%s" given.', is_object($index) ? get_class($index) : gettype($index)));
         }
 
         parent::__construct();
@@ -33,14 +33,16 @@ class DefinitionHasMethodCallConstraint extends Constraint
             );
         }
 
-        for ($i = 0; $i < $iMax = count($methodCalls = $other->getMethodCalls()); $i++) {
-            list($method, $arguments) = $methodCalls[$i];
+        $methodCalls = $other->getMethodCalls();
+
+        for ($currentIndex = 0; $currentIndex < $iMax = count($methodCalls); $currentIndex++) {
+            list($method, $arguments) = $methodCalls[$currentIndex];
 
             if ($method !== $this->methodName) {
                 continue;
             }
 
-            if (null !== $this->index && $i !== $this->index) {
+            if (null !== $this->index && $currentIndex !== $this->index) {
                 continue;
             }
 
@@ -66,8 +68,16 @@ class DefinitionHasMethodCallConstraint extends Constraint
 
     public function toString()
     {
+        if (null !== $this->index) {
+            return sprintf(
+                'has a method call to "%s" with the given arguments on invocation order index with value of %s.',
+                $this->methodName,
+                $this->index
+            );
+        }
+
         return sprintf(
-            'has a method call to "%s" with the given arguments on any or explicitly stated invocation order index.',
+            'has a method call to "%s" with the given arguments.',
             $this->methodName
         );
     }
