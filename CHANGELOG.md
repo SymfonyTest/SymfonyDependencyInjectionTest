@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.0
+
+- Added support for validating invocation index order of method call (see #69).
+
 ## v2.0.0
 
 - Only support PHPUnit 6
