@@ -35,7 +35,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
 
         $methodCalls = $other->getMethodCalls();
 
-        for ($currentIndex = 0; $currentIndex < $iMax = count($methodCalls); $currentIndex++) {
+        for ($currentIndex = 0; $currentIndex < count($methodCalls); $currentIndex++) {
             list($method, $arguments) = $methodCalls[$currentIndex];
 
             if ($method !== $this->methodName) {
