@@ -49,6 +49,35 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         // check for existence of manually created arguments, not checking values.
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 0);
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1);
+
+        // manually defined parameter in prepend service
+        $this->assertContainerBuilderHasParameter('manual_parameter', 'parameter value');
+
+        // prepend method is not invoked before load method, it must be invoked manually
+        $this->assertFalse($this->container->hasParameter('prepend_extension_interface.successfully_invoked'));
+    }
+
+    /**
+     * @test
+     */
+    public function if_prepend_is_invoked_before_load_it_does_not_fail()
+    {
+        $this->prepend();
+        $this->load();
+
+        // prepend method modifies container builder
+        $this->assertContainerBuilderHasParameter('prepend_extension_interface.successfully_invoked', 'prepended value');
+    }
+
+    /**
+     * @test
+     */
+    public function if_prepend_is_invoked_after_load_it_fails()
+    {
+        $this->expectException(\LogicException::class);
+
+        $this->load();
+        $this->prepend();
     }
 
     /**
