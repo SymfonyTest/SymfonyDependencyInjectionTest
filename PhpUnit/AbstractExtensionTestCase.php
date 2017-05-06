@@ -8,11 +8,6 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCase
 {
     /**
-     * @var bool denotes if load() method has been invoked.
-     */
-    private $loadMethodInvoked;
-
-    /**
      * Return an array of container extensions you need to be registered for each test (usually just the container
      * extension you are testing.
      *
@@ -41,8 +36,6 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
     {
         parent::setUp();
 
-        $this->loadMethodInvoked = false;
-
         foreach ($this->getContainerExtensions() as $extension) {
             $this->container->registerExtension($extension);
         }
@@ -60,8 +53,6 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
      */
     protected function load(array $configurationValues = array(), $withPrependInvocation = false)
     {
-        $this->loadMethodInvoked = true;
-
         $configs = array($this->getMinimalConfiguration(), $configurationValues);
 
         foreach ($this->container->getExtensions() as $extension) {
