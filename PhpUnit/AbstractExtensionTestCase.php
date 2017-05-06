@@ -49,40 +49,27 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
     }
 
     /**
-     * Call this method (optionally) form within your test after you have (optionally) modified the ContainerBuilder
-     * for this test ($this->container), but BEFORE you call load method ($this->load()) - if your extension(s) implements
-     * \Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
-     *
-     * @see http://symfony.com/doc/current/bundles/prepend_extension.html
-     * @see \Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
-     */
-    protected function prepend()
-    {
-        if ($this->loadMethodInvoked) {
-            throw new \LogicException(sprintf('Method "prepend()" from "%s" must not be invoked after "load()" method.', PrependExtensionInterface::class));
-        }
-
-        foreach ($this->container->getExtensions() as $extension) {
-
-            if ($extension instanceof PrependExtensionInterface) {
-                $extension->prepend($this->container);
-            }
-        }
-    }
-
-    /**
      * Call this method from within your test after you have (optionally) modified the ContainerBuilder for this test
      * ($this->container).
      *
-     * @param array $specificConfiguration
+     * If your extension(s) implements \Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface, you may
+     * set $withPrependInvocation to TRUE to invoke prepend() method prior to load() method of your extension.
+     *
+     * @param array $configurationValues
+     * @param bool $withPrependInvocation
      */
-    protected function load(array $configurationValues = array())
+    protected function load(array $configurationValues = array(), $withPrependInvocation = false)
     {
         $this->loadMethodInvoked = true;
 
         $configs = array($this->getMinimalConfiguration(), $configurationValues);
 
         foreach ($this->container->getExtensions() as $extension) {
+
+            if ($withPrependInvocation && $extension instanceof PrependExtensionInterface) {
+                $extension->prepend($this->container);
+            }
+
             $extension->load($configs, $this->container);
         }
     }
