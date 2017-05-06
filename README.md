@@ -102,6 +102,26 @@ class MyExtensionTest extends AbstractExtensionTestCase
 To prevent duplication of required configuration values, you can provide some minimal configuration, by overriding
 the ``getMinimalConfiguration()`` method of the test case.
 
+If your extension implements `Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface`, you may test
+its effect on execution by passing ``true`` as a second parameter to ``load()`` method.
+
+```php
+<?php
+
+class MyExtensionTest extends AbstractExtensionTestCase
+{
+    /**
+     * @test
+     */
+    public function after_loading_the_correct_parameter_has_been_set()
+    {
+        $this->load(array(), true);
+
+        ...
+    }
+}
+```
+
 ## Testing a compiler pass
 
 To test a compiler pass, create a test class and extend from
