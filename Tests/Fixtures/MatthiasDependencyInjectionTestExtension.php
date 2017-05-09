@@ -5,20 +5,11 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 
-class MatthiasDependencyInjectionTestExtension implements ExtensionInterface, PrependExtensionInterface
+class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-        $container->setParameter('prepend_extension_interface.successfully_invoked', 'prepended value');
-    }
-
     public function load(array $config, ContainerBuilder $container)
     {
         // load some service definitions

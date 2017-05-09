@@ -49,15 +49,14 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
      * set $withPrependInvocation to TRUE to invoke prepend() method prior to load() method of your extension.
      *
      * @param array $configurationValues
-     * @param bool $withPrependInvocation
      */
-    protected function load(array $configurationValues = array(), $withPrependInvocation = false)
+    protected function load(array $configurationValues = array())
     {
         $configs = array($this->getMinimalConfiguration(), $configurationValues);
 
         foreach ($this->container->getExtensions() as $extension) {
 
-            if ($withPrependInvocation && $extension instanceof PrependExtensionInterface) {
+            if ($extension instanceof PrependExtensionInterface) {
                 $extension->prepend($this->container);
             }
 

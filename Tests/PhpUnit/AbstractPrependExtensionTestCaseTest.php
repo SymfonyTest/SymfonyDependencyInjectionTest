@@ -3,7 +3,8 @@
 namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\MatthiasDependencyInjectionTestExtension;
+use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\NonPrependableTestExtension;
+use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\PrependableTestExtension;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
@@ -11,30 +12,31 @@ class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
     protected function getContainerExtensions()
     {
         return array(
-            new MatthiasDependencyInjectionTestExtension()
+            new PrependableTestExtension(),
+            new NonPrependableTestExtension()
         );
     }
 
     /**
      * @test
      */
-    public function if_prepend_invoked_it_does_not_fails()
+    public function prepend_invoked_only_if_prepend_interface_is_implemented()
     {
-        $this->load([], true);
+        $this->load();
 
-        $this->assertContainerBuilderHasParameter('prepend_extension_interface.successfully_invoked', 'prepended value');
+        $this->assertContainerBuilderHasParameter('prepend_parameter_set', 'prepended value');
     }
 
     /**
      * @test
      */
-    public function if_prepend_is_not_invoked_it_does_not_fails()
+    public function if_prepend_interface_is_not_implemented_prepend_is_not_invoked()
     {
         $this->load();
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('prepend_extension_interface.successfully_invoked');
+        $this->expectExceptionMessage('ignored_invocation');
 
-        $this->assertContainerBuilderHasParameter('prepend_extension_interface.successfully_invoked', 'prepended value');
+        $this->assertContainerBuilderHasParameter('ignored_invocation', 'ignored value');
     }
 }
