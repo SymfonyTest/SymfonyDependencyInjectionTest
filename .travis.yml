@@ -28,6 +28,8 @@ install:
 
 script: vendor/bin/phpunit
 
+script: vendor/bin/phpunit
+
 notifications:
   email: matthiasnoback@gmail.com
 
