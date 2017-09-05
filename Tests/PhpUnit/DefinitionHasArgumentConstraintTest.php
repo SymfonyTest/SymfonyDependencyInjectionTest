@@ -4,6 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInject
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasArgumentConstraint;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
@@ -44,5 +45,21 @@ class DefinitionHasArgumentConstraintTest extends TestCase
             // the definition is a decorated definition
             array($decoratedDefinitionWithArguments, 1, $rightValue, true),
         );
+    }
+
+    /**
+     * @test
+     */
+    public function supports_named_arguments()
+    {
+        $expectedValue = 'bar';
+
+        $constraint = new DefinitionHasArgumentConstraint('$foo', $expectedValue);
+        $definition = new Definition(stdClass::class, [
+            '$foo' => $expectedValue,
+        ]);
+
+        self::assertTrue($constraint->evaluate($definition));
+        self::assertSame('has an argument with index $foo with the given value', $constraint->toString());
     }
 }

@@ -17,7 +17,7 @@ class DefinitionHasArgumentConstraint extends Constraint
     {
         parent::__construct();
 
-        $this->argumentIndex = (integer)$argumentIndex;
+        $this->argumentIndex = $argumentIndex;
         $this->expectedValue = $expectedValue;
         $this->checkExpectedValue = $checkExpectedValue;
     }
@@ -25,7 +25,7 @@ class DefinitionHasArgumentConstraint extends Constraint
     public function toString()
     {
         return sprintf(
-            'has an argument with index %d with the given value',
+            'has an argument with index %s with the given value',
             $this->argumentIndex
         );
     }
