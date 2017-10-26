@@ -3,6 +3,7 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasArgumentConstraint;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\DependencyInjection\Definition;
@@ -49,17 +50,128 @@ class DefinitionHasArgumentConstraintTest extends TestCase
 
     /**
      * @test
+     * @dataProvider invalid_definition_indexes
+     *
+     * @param mixed $argument
+     * @param string $exceptionMessage
      */
-    public function supports_named_arguments()
+    public function validates_definitionIndex($argument, $exceptionMessage)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage($exceptionMessage);
+
+        new DefinitionHasArgumentConstraint($argument, 0);
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function invalid_definition_indexes()
+    {
+        yield [
+            new stdClass(), 'Expected either a string or a positive integer for $argumentIndex.'
+        ];
+
+        yield [
+            1.0, 'Expected either a string or a positive integer for $argumentIndex.'
+        ];
+
+        yield [
+            '1', 'Unknown argument "1". Did you mean "$1"?',
+        ];
+
+        yield [
+            'a', 'Unknown argument "a". Did you mean "$a"?',
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider indexed_arguments
+     * @param string $argumentIndex
+     */
+    public function supports_indexed_arguments($argumentIndex)
     {
         $expectedValue = 'bar';
 
-        $constraint = new DefinitionHasArgumentConstraint('$foo', $expectedValue);
+        $constraint = new DefinitionHasArgumentConstraint($argumentIndex, $expectedValue);
         $definition = new Definition(stdClass::class, [
-            '$foo' => $expectedValue,
+            $argumentIndex => $expectedValue,
         ]);
 
         self::assertTrue($constraint->evaluate($definition));
-        self::assertSame('has an argument with index $foo with the given value', $constraint->toString());
+        self::assertSame("has an argument with index $argumentIndex with the given value", $constraint->toString());
+
+        $failingExpectation = $expectedValue . $expectedValue;
+        $constraint = new DefinitionHasArgumentConstraint($argumentIndex, $failingExpectation);
+
+        try {
+            $constraint->evaluate($definition);
+            $this->fail('The expression above should throw an exception.');
+        } catch (ExpectationFailedException $e) {
+            self::assertStringStartsWith(
+                sprintf(
+                    'The value of argument with index %d (\'%s\') is not equal to the expected value (\'%s\')',
+                    $argumentIndex, $expectedValue, $failingExpectation
+                ),
+                $e->getMessage()
+            );
+        }
     }
+
+    /**
+     * @return \Generator
+     */
+    public function indexed_arguments()
+    {
+        yield [0];
+        yield [1];
+        yield [2];
+        yield [3];
+    }
+
+    /**
+     * @test
+     * @dataProvider named_arguments
+     * @param string $argument
+     */
+    public function supports_named_arguments($argument)
+    {
+        $expectedValue = 'bar';
+
+        $constraint = new DefinitionHasArgumentConstraint($argument, $expectedValue);
+        $definition = new Definition(stdClass::class, [
+            $argument => $expectedValue,
+        ]);
+
+        self::assertTrue($constraint->evaluate($definition));
+        self::assertSame(sprintf('has an argument named "%s" with the given value', $argument), $constraint->toString());
+
+        $failingExpectation = $expectedValue . $expectedValue;
+        $constraint = new DefinitionHasArgumentConstraint($argument, $failingExpectation);
+
+        try {
+            $constraint->evaluate($definition);
+            $this->fail('The expression above should throw an exception.');
+        } catch (ExpectationFailedException $e) {
+            self::assertStringStartsWith(
+                sprintf(
+                    'The value of argument named "%s" (\'%s\') is not equal to the expected value (\'%s\')',
+                    $argument, $expectedValue, $failingExpectation
+                ),
+                $e->getMessage()
+            );
+        }
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function named_arguments()
+    {
+        yield ['$foo'];
+        yield ['$bar'];
+        yield ['$a'];
+    }
+
 }
