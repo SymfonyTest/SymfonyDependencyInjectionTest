@@ -6,13 +6,13 @@ matrix:
   fast_finish: true
   include:
     - php: 7.0
-      env: SYMFONY_DI_VERSION=2.3.*
-    - php: 7.0
       env: SYMFONY_DI_VERSION=2.7.*
     - php: 7.0
       env: SYMFONY_DI_VERSION=2.8.*
     - php: 7.0
-      env: SYMFONY_DI_VERSION=3.2.*
+      env: SYMFONY_DI_VERSION=3.3.*
+    - php: 7.0
+      env: SYMFONY_DI_VERSION=4.0.*
 
 cache:
   directories:
