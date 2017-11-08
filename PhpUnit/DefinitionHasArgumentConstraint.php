@@ -25,10 +25,16 @@ class DefinitionHasArgumentConstraint extends Constraint
             throw new \InvalidArgumentException('Expected either a string or a positive integer for $argumentIndex.');
         }
 
-        if (is_string($argumentIndex) && '$' !== $argumentIndex[0]) {
-            throw new \InvalidArgumentException(
-                sprintf('Unknown argument "%s". Did you mean "$%s"?', $argumentIndex, $argumentIndex)
-            );
+        if (is_string($argumentIndex)) {
+            if ('' === $argumentIndex) {
+                throw new \InvalidArgumentException('A named argument must begin with a "$".');
+            }
+
+            if ('$' !== $argumentIndex[0]) {
+                throw new \InvalidArgumentException(
+                    sprintf('Unknown argument "%s". Did you mean "$%s"?', $argumentIndex, $argumentIndex)
+                );
+            }
         }
 
         $this->argumentIndex = $argumentIndex;

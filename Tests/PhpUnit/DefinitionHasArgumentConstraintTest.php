@@ -83,6 +83,10 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         yield [
             'a', 'Unknown argument "a". Did you mean "$a"?',
         ];
+
+        yield [
+            '', 'A named argument must begin with a "$".'
+        ];
     }
 
     /**
