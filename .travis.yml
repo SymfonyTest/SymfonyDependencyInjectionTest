@@ -23,7 +23,7 @@ before_install:
   - composer self-update
 
 install:
-  - if [ ! -z ${SYMFONY_VERSION+x} ]; then composer require --no-update "symfony/dependency-injection:${SYMFONY_VERSION}"; fi
+  - if [ ! -z ${SYMFONY_DI_VERSION+x} ]; then composer require --no-update "symfony/dependency-injection:${SYMFONY_DI_VERSION}"; fi
   - composer install --prefer-dist
 
 script: vendor/bin/phpunit
