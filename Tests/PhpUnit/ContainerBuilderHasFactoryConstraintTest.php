@@ -24,8 +24,8 @@ class ContainerBuilderHasFactoryConstraintTest extends TestCase
     {
         $rightServiceId = 'some_service_id';
         $wrongServiceId = 'other_service_id';
-        $factoryClass = 'SomeFactoryClass';
-        $invalidFactoryClass = 'InvalidFactoryClass';
+        $factoryClass = 'factory_class_service';
+        $invalidFactoryClass = 'invalid_class_service';
         $factoryMethod = 'someMethod';
         $invalidFactoryMethod = 'invalidMethod';
 
