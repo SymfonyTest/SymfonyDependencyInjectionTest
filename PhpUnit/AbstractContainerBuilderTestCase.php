@@ -130,7 +130,7 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     }
 
     /**
-     * Assert that the ContainerBuilder for this test has an service wich is created by other service
+     * Assert that the ContainerBuilder for this test has a service which is created by other service
      *
      * @param $serivceId
      * @param $expectedFactoryClass
