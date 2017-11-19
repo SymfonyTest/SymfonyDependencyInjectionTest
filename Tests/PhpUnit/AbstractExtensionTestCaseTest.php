@@ -28,6 +28,9 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         // defined in services.xml
         $this->assertContainerBuilderHasSyntheticService('synthetic_service');
 
+        // defined in services.xml
+        $this->assertContainerBuilderHasCreatedByFactoryService('created_by_factory_service', '@factory_service', 'factoryMethod');
+
         // manually defined parameter
         $this->assertContainerBuilderHasParameter('manual_parameter', 'parameter value');
         // Just check parameter exists, value will not be checked.
@@ -49,6 +52,12 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         // check for existence of manually created arguments, not checking values.
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 0);
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1);
+
+        // manually created factory service
+        $this->assertContainerBuilderHasCreatedByFactoryService(
+            'manual_created_by_factory_service',
+            'manual_factory_service',
+            'factoryMethod' );
     }
 
     /**

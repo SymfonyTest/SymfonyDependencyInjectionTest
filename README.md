@@ -301,6 +301,10 @@ These are the available semantic assertions for each of the test cases shown abo
 <dd>Assert that the <code>ContainerBuilder</code> for this test has an alias.</dd>
 <dt><code>assertContainerBuilderHasAlias($aliasId, $expectedServiceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has an alias and that it is an alias for the given service id.</dd>
+<dt><code>assertContainerBuilderHasCreatedByFactoryService($serviceId)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has an service with factory.</dd>
+<dt><code>assertContainerBuilderHasCreatedByFactoryService($serviceId,$factoryService, $factoryMethod)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has an service with factory for given factory service and method.</dd>
 <dt><code>assertContainerBuilderHasParameter($parameterName)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter.</dd>
 <dt><code>assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)</code></dt>

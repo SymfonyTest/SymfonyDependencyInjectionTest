@@ -26,5 +26,12 @@
 
         <service id="synthetic_service" synthetic="true">
         </service>
+
+        <service id="factory_service">
+        </service>
+
+        <service id="created_by_factory_service">
+          <factory class="@factory_service" method="factoryMethod" />
+        </service>
     </services>
 </container>

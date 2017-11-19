@@ -3,6 +3,7 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -31,6 +32,15 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 
         // add an alias to an existing service
         $container->setAlias('manual_alias', 'service_id');
+
+        // add an factory service
+        $container
+            ->register( 'manual_factory_service', new Definition() );
+
+        $container
+            ->register( 'manual_created_by_factory_service', new Definition() )
+            ->setFactory( [new Reference('manual_factory_service'), 'factoryMethod'] )
+            ;
     }
 
     public function getAlias()
