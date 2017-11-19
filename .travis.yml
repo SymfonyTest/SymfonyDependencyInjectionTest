@@ -2,36 +2,29 @@ sudo: false
 
 language: php
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
-
 matrix:
   fast_finish: true
   include:
-    - php: 5.3
-      env: deps="low"
-    - php: 7.0
-      env: SYMFONY_DI_VERSION=2.3.*
     - php: 7.0
       env: SYMFONY_DI_VERSION=2.7.*
     - php: 7.0
       env: SYMFONY_DI_VERSION=2.8.*
     - php: 7.0
-      env: SYMFONY_DI_VERSION=3.0.*
-  allow_failures:
-    - php: hhvm
+      env: SYMFONY_DI_VERSION=3.3.*
+    - php: 7.1
+      env: SYMFONY_DI_VERSION=4.0.*
 
-before_script:
-  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then phpenv config-rm xdebug.ini; fi
-  - if [ "$SYMFONY_DI_VERSION" != "" ]; then composer require --no-update "symfony/dependency-injection:${SYMFONY_DI_VERSION}"; fi
-  - if [ "$PHPUNIT_VERSION" != "" ]; then composer require --no-update "phpunit/phpunit:${PHPUNIT_VERSION}"; fi
-  - if [ "$deps" = "low" ]; then composer update --prefer-lowest; fi
-  - if [ "$deps" = "" ]; then composer install; fi
+cache:
+  directories:
+    - ~/.composer/cache/files
+
+before_install:
+  - phpenv config-rm xdebug.ini || true
+  - composer self-update
+
+install:
+  - if [ ! -z ${SYMFONY_DI_VERSION+x} ]; then composer require --no-update "symfony/dependency-injection:${SYMFONY_DI_VERSION}"; fi
+  - composer install --prefer-dist
 
 script: vendor/bin/phpunit
 
