@@ -6,6 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Definition;
 
 class ContainerBuilderHasFactoryConstraint extends Constraint
 {
@@ -93,7 +94,7 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
         /** @var Definition */
         $definition = $containerBuilder->getDefinition($this->serviceId);
 
-        $factory = $definition->getFactory();
+        $factory = $this->getFactoryData($definition);
 
         if( !is_array( $factory ) ) {
             if ($returnResult) {
@@ -117,7 +118,7 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
         /** @var Definition */
         $definition = $containerBuilder->getDefinition($this->serviceId);
 
-        $factory = $definition->getFactory();
+        $factory = $this->getFactoryData( $definition );
 
         list( $factoryDefinition, $factoryMethod ) = $factory;
 
@@ -175,4 +176,30 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
         return true;
     }
 
+    private function getFactoryData( Definition $definition )
+    {
+        if( self::isLegacySymfonyDI() ) {
+            $factoryService = $definition->getFactoryService();
+            $factoryMethod = $definition->getFactoryMethod();
+            $factoryClass = $definition->getFactoryClass();
+            if( !$factoryService && !$factoryClass )
+                return null;
+
+            return array( $factoryClass ? $factoryClass : $factoryService, $factoryMethod );
+        } else {
+            $factory = $definition->getFactory();
+            if( is_array( $factory ) ) return $factory;
+
+            if( is_string( $factory ) && false !== strpos( $factory, ':' ) )
+                return preg_split( '/:/', $factory, 2 );
+
+            return $factory;
+        }
+    }
+
+
+    static public function isLegacySymfonyDI()
+    {
+        return method_exists( new Definition(), 'getFactoryService' );
+    }
 }
