@@ -33,12 +33,17 @@ class ContainerBuilderHasFactoryConstraintTest extends TestCase
 
         $builderWithFactory = new ContainerBuilder();
         $factoryReference = new Reference($factoryClass);
-        $builderWithFactory->register( $rightServiceId)
-            ->setFactory([$factoryReference,$factoryMethod]);
-        $builderWithFactory->register( $wrongServiceId );
 
-        return [ 
-            array($builderWithFactory, $rightServiceId, $factoryClass, $factoryMethod, true ), ];
+        if( ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI() ) {
+            $builderWithFactory->register( $rightServiceId)
+                ->setFactoryService($factoryReference)
+                ->setFactoryMethod($factoryMethod);
+        } else {
+            $builderWithFactory->register( $rightServiceId)
+                ->setFactory([$factoryReference,$factoryMethod]);
+        }
+
+        $builderWithFactory->register( $wrongServiceId );
 
         return array(
             // the container does not have the service
