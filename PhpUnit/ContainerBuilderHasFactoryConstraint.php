@@ -200,6 +200,6 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
 
     static public function isLegacySymfonyDI()
     {
-        return method_exists( new Definition(), 'getFactoryService' );
+        return method_exists( Definition::class, 'getFactoryService' );
     }
 }
