@@ -13,7 +13,7 @@ matrix:
     include:
           # Minimum supported Symfony version with the latest PHP version
         - php: 7.1
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
 
           # Test the latest stable release
         - php: 7.0
@@ -46,11 +46,10 @@ install:
     # To be removed when this issue will be resolved: https://github.com/composer/composer/issues/5355
     - if [[ "$COMPOSER_FLAGS" == *"--prefer-lowest"* ]]; then composer update --prefer-dist --no-interaction --prefer-stable --quiet; fi
     - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
-    - vendor/bin/simple-phpunit install
 
 script:
     - composer validate --strict --no-check-lock
-    - ./vendor/bin/simple-phpunit $PHPUNIT_FLAGS
+    - ./vendor/bin/phpunit $PHPUNIT_FLAGS
 
 notifications:
   email: matthiasnoback@gmail.com
