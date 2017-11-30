@@ -4,6 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInject
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasArgumentConstraint;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
@@ -30,7 +31,13 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         $arguments = array(0 => 'first argument', 1 => $rightValue);
         $definitionWithArguments->setArguments($arguments);
 
-        $decoratedDefinitionWithArguments = new DefinitionDecorator('parent_service_id');
+        $parentServiceId = 'parent_service_id';
+        if (class_exists(ChildDefinition::class)) {
+            $decoratedDefinitionWithArguments = new ChildDefinition($parentServiceId);
+        } else {
+            $decoratedDefinitionWithArguments = new DefinitionDecorator($parentServiceId);
+        }
+
         $decoratedDefinitionWithArguments->setArguments(array(0 => 'first argument', 1 => $wrongValue));
         $decoratedDefinitionWithArguments->replaceArgument(1, $rightValue);
 
