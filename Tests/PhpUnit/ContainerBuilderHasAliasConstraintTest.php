@@ -78,4 +78,16 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
 
         new ContainerBuilderHasAliasConstraint('alias_id', new \stdClass());
     }
+
+    /**
+     * @test
+     */
+    public function it_does_not_change_case_of_aliased_service_ids()
+    {
+        $containerBuilder = new ContainerBuilder();
+        $containerBuilder->setAlias('Interface', 'InterfaceImplementationService');
+        $constraint = new ContainerBuilderHasAliasConstraint('Interface', 'InterfaceImplementationService');
+
+        $this->assertTrue($constraint->evaluate($containerBuilder, null, true));
+    }
 }
