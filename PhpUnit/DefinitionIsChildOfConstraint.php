@@ -3,6 +3,7 @@
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
@@ -19,7 +20,7 @@ class DefinitionIsChildOfConstraint extends Constraint
 
     public function evaluate($other, $description = '', $returnResult = false)
     {
-        if (!($other instanceof Definition)) {
+        if (!$other instanceof Definition) {
             throw new \InvalidArgumentException(
                 'Expected an instance of Symfony\Component\DependencyInjection\Definition'
             );
@@ -46,7 +47,13 @@ class DefinitionIsChildOfConstraint extends Constraint
 
     private function evaluateDefinitionIsDecorator(Definition $definition, $returnResult)
     {
-        if (!($definition instanceof DefinitionDecorator)) {
+        if (!class_exists(ChildDefinition::class) && !$definition instanceof DefinitionDecorator) {
+            if ($returnResult) {
+                return false;
+            }
+
+            $this->fail($definition, 'The definition has no parent service');
+        } elseif (!$other instanceof ChildDefinition) {
             if ($returnResult) {
                 return false;
             }
