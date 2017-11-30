@@ -53,12 +53,6 @@ class DefinitionIsChildOfConstraint extends Constraint
             }
 
             $this->fail($definition, 'The definition has no parent service');
-        } elseif (!$definition instanceof ChildDefinition) {
-            if ($returnResult) {
-                return false;
-            }
-
-            $this->fail($definition, 'The definition has no parent service');
         }
 
         return true;
