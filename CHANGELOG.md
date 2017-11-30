@@ -3,7 +3,8 @@
 ## v2.3.0
 
 - Testing on Symfony 4 and make sure test passes
-- Support for named arguments 
+- Support for named arguments
+- Service/alias names might be FQCNs
 
 ## v2.2.0
 
