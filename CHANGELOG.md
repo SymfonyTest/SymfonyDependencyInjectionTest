@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.2.0
+
+- Support for Symfony 4
+
 ## v2.1.0
 
 - Added support for validating invocation index order of method call (see #69).
