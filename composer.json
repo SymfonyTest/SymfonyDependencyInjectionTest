@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "matthiasnoback/symfony-config-test": "^1.0 || ^2.0 || ^3.0",
+        "matthiasnoback/symfony-config-test": "^1.0 || ^2.0",
         "symfony/dependency-injection": "^2.7 || ^3.3 || ^4.0",
         "symfony/config": "^2.7 || ^3.3 || ^4.0",
         "symfony/yaml": "^2.7 || ^3.3 || ^4.0",
