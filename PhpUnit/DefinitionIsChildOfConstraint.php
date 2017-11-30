@@ -58,7 +58,7 @@ class DefinitionIsChildOfConstraint extends Constraint
         return true;
     }
 
-    private function evaluateDefinitionHasExpectedParentService(DefinitionDecorator $definition, $returnResult)
+    private function evaluateDefinitionHasExpectedParentService($definition, $returnResult)
     {
         $actualParentService = $this->expectedParentServiceId;
 
