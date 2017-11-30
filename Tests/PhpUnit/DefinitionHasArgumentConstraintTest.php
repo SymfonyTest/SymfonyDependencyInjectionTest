@@ -5,7 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInject
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasArgumentConstraint;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
-use stdClass;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
@@ -32,7 +32,13 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         $arguments = array(0 => 'first argument', 1 => $rightValue);
         $definitionWithArguments->setArguments($arguments);
 
-        $decoratedDefinitionWithArguments = new DefinitionDecorator('parent_service_id');
+        $parentServiceId = 'parent_service_id';
+        if (class_exists(ChildDefinition::class)) {
+            $decoratedDefinitionWithArguments = new ChildDefinition($parentServiceId);
+        } else {
+            $decoratedDefinitionWithArguments = new DefinitionDecorator($parentServiceId);
+        }
+
         $decoratedDefinitionWithArguments->setArguments(array(0 => 'first argument', 1 => $wrongValue));
         $decoratedDefinitionWithArguments->replaceArgument(1, $rightValue);
 
@@ -69,7 +75,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     public function invalid_definition_indexes()
     {
         yield [
-            new stdClass(), 'Expected either a string or a positive integer for $argumentIndex.'
+            new \stdClass(), 'Expected either a string or a positive integer for $argumentIndex.'
         ];
 
         yield [
@@ -175,5 +181,4 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         yield ['$bar'];
         yield ['$a'];
     }
-
 }

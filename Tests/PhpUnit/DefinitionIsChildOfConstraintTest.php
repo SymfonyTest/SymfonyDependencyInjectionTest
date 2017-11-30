@@ -1,10 +1,10 @@
 <?php
 
-
 namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionIsChildOfConstraint;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
@@ -24,7 +24,11 @@ class DefinitionIsChildOfConstraintTest extends TestCase
     public function definitionProvider()
     {
         $definition = new Definition();
-        $decoratedDefinition = new DefinitionDecorator('parent_service_id');
+        if (class_exists(ChildDefinition::class)) {
+            $decoratedDefinition = new ChildDefinition('parent_service_id');
+        } else {
+            $decoratedDefinition = new DefinitionDecorator('parent_service_id');
+        }
 
         return array(
             // the provided definition has the same parent service id
