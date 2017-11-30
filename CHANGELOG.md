@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.3.0
+
+- Testing on Symfony 4 and make sure test passes
+- Support for named arguments 
+
 ## v2.2.0
 
 - Support for Symfony 4
