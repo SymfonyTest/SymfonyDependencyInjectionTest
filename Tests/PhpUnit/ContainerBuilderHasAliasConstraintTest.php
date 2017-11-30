@@ -78,16 +78,4 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
 
         new ContainerBuilderHasAliasConstraint('alias_id', new \stdClass());
     }
-
-    /**
-     * @test
-     */
-    public function it_lower_cases_aliased_service_ids()
-    {
-        $containerBuilder = new ContainerBuilder();
-        $containerBuilder->setAlias('foo', 'fooBar');
-        $constraint = new ContainerBuilderHasAliasConstraint('foo', 'fooBar');
-
-        $this->assertTrue($constraint->evaluate($containerBuilder, null, true));
-    }
 }
