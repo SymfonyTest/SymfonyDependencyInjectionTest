@@ -2,7 +2,7 @@
 
 By Matthias Noback
 
-[![Build Status](https://secure.travis-ci.org/matthiasnoback/SymfonyDependencyInjectionTest.png)](http://travis-ci.org/matthiasnoback/SymfonyDependencyInjectionTest)
+[![Build Status](https://secure.travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest.png)](http://travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest)
 
 This library contains several PHPUnit test case classes and many semantic [assertions](#list-of-assertions) which
 you can use to functionally test your [container extensions](#testing-a-container-extension) (or "bundle extensions")
