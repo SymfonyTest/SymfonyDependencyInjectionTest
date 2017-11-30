@@ -47,7 +47,7 @@ class DefinitionIsChildOfConstraint extends Constraint
 
     private function evaluateDefinitionIsDecorator(Definition $definition, $returnResult)
     {
-        if (!class_exists(ChildDefinition::class) && !$definition instanceof DefinitionDecorator) {
+        if (!$definition instanceof ChildDefinition && !$definition instance of DefinitionDecorator) {
             if ($returnResult) {
                 return false;
             }
