@@ -328,7 +328,7 @@ container:
 <dl>
 <dt><code>setDefinition($serviceId, $definition)</code></dt>
 <dd>Set a definition. The second parameter is a <code>Definition</code> class</dd>
-<dt><code>registerDefinition($serviceId, $class)</code></dt>
+<dt><code>registerService($serviceId, $class)</code></dt>
 <dd>A shortcut for <code>setDefinition</code>. It returns a <code>Definition</code> object that can be modified if necessary.</dd>
 <dt><code>setParameter($parameterId, $parameterValue)</code></dt>
 <dd>Set a parameter.</dd>
