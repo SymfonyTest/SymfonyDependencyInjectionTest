@@ -47,17 +47,17 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
         $container->setAlias('manual_alias', 'service_id');
 
         // add an factory service
-        $container->register('manual_factory_service', new Definition());
+        $container->register('manual_factory_service', 'stdClass');
 
         if (ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI()) {
             $container
-                ->register('manual_created_by_factory_service', new Definition())
+                ->register('manual_created_by_factory_service', 'stdClass')
                 ->setFactoryService(new Reference('manual_factory_service'))
                 ->setFactoryMethod('factoryMethod');
             ;
         } else {
             $container
-                ->register('manual_created_by_factory_service', new Definition())
+                ->register('manual_created_by_factory_service', 'stdClass')
                 ->setFactory('manual_factory_service:factoryMethod')
                 ;
         }
