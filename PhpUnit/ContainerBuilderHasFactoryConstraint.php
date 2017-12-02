@@ -26,11 +26,11 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
             throw new \InvalidArgumentException('The $expectedFactoryClass argument should be a string');
         }
 
-        if( null !== $expectedFactoryMethod && null === $expectedFactoryClass ) {
+        if (null !== $expectedFactoryMethod && null === $expectedFactoryClass) {
             throw new \InvalidArgumentException('When argument $expectedFactoryMethod is set, must inform $expectedFactoryClass');
         }
 
-        if( null !== $expectedFactoryMethod && !is_string($expectedFactoryMethod ) ) {
+        if (null !== $expectedFactoryMethod && !is_string($expectedFactoryMethod)) {
             throw new \InvalidArgumentException('The $expectedFactoryMethod argument should be a string');
         }
 
@@ -41,10 +41,11 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
 
     public function toString()
     {
-        if( null === $this->expectedFactoryClass )
-            return sprintf( '"%s" has factory', $this->serviceId );
+        if (null === $this->expectedFactoryClass) {
+            return sprintf('"%s" has factory', $this->serviceId);
+        }
 
-        return sprintf( '"%s" has factory "@%s:%s"', $this->serviceId, $this->expectedFactoryClass, $this->expectedFactoryMethod );
+        return sprintf('"%s" has factory "@%s:%s"', $this->serviceId, $this->expectedFactoryClass, $this->expectedFactoryMethod);
     }
 
     public function evaluate($other, $description = '', $returnResult = false)
@@ -96,7 +97,7 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
 
         $factory = $this->getFactoryData($definition);
 
-        if( !is_array( $factory ) ) {
+        if (!is_array($factory)) {
             if ($returnResult) {
                 return false;
             }
@@ -105,7 +106,8 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
                 $containerBuilder,
                 sprintf(
                     'The container builder has service "%s" with not "%s" factory',
-                    $this->serviceId, $this->expectedFactoryClass
+                    $this->serviceId,
+                    $this->expectedFactoryClass
                 )
             );
         }
@@ -118,13 +120,13 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
         /** @var Definition */
         $definition = $containerBuilder->getDefinition($this->serviceId);
 
-        $factory = $this->getFactoryData( $definition );
+        $factory = $this->getFactoryData($definition);
 
-        list( $factoryDefinition, $factoryMethod ) = $factory;
+        list($factoryDefinition, $factoryMethod) = $factory;
 
-        if( $factoryDefinition instanceof Reference ) {
+        if ($factoryDefinition instanceof Reference) {
             $factoryClass = (string)$factoryDefinition;
-        } else if( is_string( $factoryDefinition ) ) {
+        } elseif (is_string($factoryDefinition)) {
             $factoryClass = $factoryDefinition;
         } else {
             if ($returnResult) {
@@ -135,13 +137,14 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
                 $containerBuilder,
                 sprintf(
                     'The container builder has service "%s" with not service "%s" factory',
-                    $this->serviceId, $this->expectedFactoryClass
+                    $this->serviceId,
+                    $this->expectedFactoryClass
                 )
             );
         }
 
         $constraint = new IsEqual($this->expectedFactoryClass);
-        if( !$constraint->evaluate( $factoryClass, '', true ) ) {
+        if (!$constraint->evaluate($factoryClass, '', true)) {
             if ($returnResult) {
                 return false;
             }
@@ -150,14 +153,15 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
                 $containerBuilder,
                 sprintf(
                     'The container builder has service "%s" with not service class "%s" factory',
-                    $this->serviceId, $this->expectedFactoryClass
+                    $this->serviceId,
+                    $this->expectedFactoryClass
                 )
             );
         }
 
-        if( $this->expectedFactoryMethod ) {
+        if ($this->expectedFactoryMethod) {
             $constraint = new IsEqual($this->expectedFactoryMethod);
-            if( !$constraint->evaluate( $factoryMethod, '', true ) ) {
+            if (!$constraint->evaluate($factoryMethod, '', true)) {
                 if ($returnResult) {
                     return false;
                 }
@@ -166,7 +170,8 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
                     $containerBuilder,
                     sprintf(
                         'The container builder has service "%s" with not service class method "%s::%s" factory',
-                        $this->serviceId, $this->expectedFactoryClass,
+                        $this->serviceId,
+                        $this->expectedFactoryClass,
                         $this->expectedFactoryMethod
                     )
                 );
@@ -176,30 +181,34 @@ class ContainerBuilderHasFactoryConstraint extends Constraint
         return true;
     }
 
-    private function getFactoryData( Definition $definition )
+    private function getFactoryData(Definition $definition)
     {
-        if( self::isLegacySymfonyDI() ) {
+        if (self::isLegacySymfonyDI()) {
             $factoryService = $definition->getFactoryService();
             $factoryMethod = $definition->getFactoryMethod();
             $factoryClass = $definition->getFactoryClass();
-            if( !$factoryService && !$factoryClass )
+            if (!$factoryService && !$factoryClass) {
                 return null;
+            }
 
             return array( $factoryClass ? $factoryClass : $factoryService, $factoryMethod );
         } else {
             $factory = $definition->getFactory();
-            if( is_array( $factory ) ) return $factory;
+            if (is_array($factory)) {
+                return $factory;
+            }
 
-            if( is_string( $factory ) && false !== strpos( $factory, ':' ) )
-                return preg_split( '/:/', $factory, 2 );
+            if (is_string($factory) && false !== strpos($factory, ':')) {
+                return preg_split('/:/', $factory, 2);
+            }
 
             return $factory;
         }
     }
 
 
-    static public function isLegacySymfonyDI()
+    public static function isLegacySymfonyDI()
     {
-        return method_exists( Definition::class, 'getFactoryService' );
+        return method_exists(Definition::class, 'getFactoryService');
     }
 }

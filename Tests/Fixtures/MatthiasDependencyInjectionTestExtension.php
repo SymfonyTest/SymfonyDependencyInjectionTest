@@ -20,7 +20,7 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
         $loader->load('services.xml');
 
         // load factory services definitions
-        if( ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI() ) {
+        if (ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI()) {
             $loader->load('services-factory-legacy.xml');
         } else {
             $loader->load('services-factory.xml');
@@ -47,18 +47,18 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
         $container->setAlias('manual_alias', 'service_id');
 
         // add an factory service
-        $container->register( 'manual_factory_service', new Definition() );
+        $container->register('manual_factory_service', new Definition());
 
-        if( ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI() ) {
+        if (ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI()) {
             $container
-                ->register( 'manual_created_by_factory_service', new Definition() )
+                ->register('manual_created_by_factory_service', new Definition())
                 ->setFactoryService(new Reference('manual_factory_service'))
                 ->setFactoryMethod('factoryMethod');
-                ;
+            ;
         } else {
             $container
-                ->register( 'manual_created_by_factory_service', new Definition() )
-                ->setFactory( 'manual_factory_service:factoryMethod' )
+                ->register('manual_created_by_factory_service', new Definition())
+                ->setFactory('manual_factory_service:factoryMethod')
                 ;
         }
     }
