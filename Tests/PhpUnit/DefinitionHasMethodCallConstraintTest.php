@@ -44,6 +44,8 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
             array($definitionWithTwoMethodCalls, 'methodCallOne', $otherArguments, null, false),
             // the definition has a call to this method, arguments match with the first call, but invocation index is wrong
             array($definitionWithTwoMethodCalls, 'methodCallOne', $argumentsOfFirstCall, 1, false),
+            // the definition has a call to this method, has arguments, but they are not checked
+            array($definitionWithTwoMethodCalls, 'methodCallOne', null, null, true),
         );
     }
 
