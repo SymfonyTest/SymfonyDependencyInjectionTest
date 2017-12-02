@@ -80,7 +80,7 @@ class ContainerBuilderHasAliasConstraint extends Constraint
          */
         $actualServiceId = (string) $alias;
 
-        $constraint = new IsEqual(strtolower($this->expectedServiceId));
+        $constraint = new IsEqual($this->expectedServiceId);
         if (!$constraint->evaluate($actualServiceId, '', true)) {
             if ($returnResult) {
                 return false;

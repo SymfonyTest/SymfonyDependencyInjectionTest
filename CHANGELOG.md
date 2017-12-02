@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.3.0
+
+- Testing on Symfony 4 and make sure test passes
+- Support for named arguments
+- Service/alias names might be FQCNs
+
+## v2.2.0
+
+- Support for Symfony 4
+
 ## v2.1.0
 
 - Added support for validating invocation index order of method call (see #69).

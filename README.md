@@ -2,7 +2,7 @@
 
 By Matthias Noback
 
-[![Build Status](https://secure.travis-ci.org/matthiasnoback/SymfonyDependencyInjectionTest.png)](http://travis-ci.org/matthiasnoback/SymfonyDependencyInjectionTest)
+[![Build Status](https://secure.travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest.png)](http://travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest)
 
 This library contains several PHPUnit test case classes and many semantic [assertions](#list-of-assertions) which
 you can use to functionally test your [container extensions](#testing-a-container-extension) (or "bundle extensions")
@@ -332,8 +332,15 @@ container:
 <dl>
 <dt><code>setDefinition($serviceId, $definition)</code></dt>
 <dd>Set a definition. The second parameter is a <code>Definition</code> class</dd>
-<dt><code>registerDefinition($serviceId, $class)</code></dt>
+<dt><code>registerService($serviceId, $class)</code></dt>
 <dd>A shortcut for <code>setDefinition</code>. It returns a <code>Definition</code> object that can be modified if necessary.</dd>
 <dt><code>setParameter($parameterId, $parameterValue)</code></dt>
 <dd>Set a parameter.</dd>
 </dl>
+
+## Version Guidance
+
+| Version | Released     | Status     |
+|---------|--------------|------------|
+| 2.x     | May 9, 2016  | Latest     |
+| 1.x     | Jul 4, 2016  | EOL        |
