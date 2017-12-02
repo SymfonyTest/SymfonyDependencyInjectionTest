@@ -58,13 +58,15 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasCreatedByFactoryService(
             'manual_created_by_factory_service',
             'manual_factory_service',
-            'factoryMethod' );
+            'factoryMethod'
+        );
 
-        if( !ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI() ) {
+        if (!ContainerBuilderHasFactoryConstraint::isLegacySymfonyDI()) {
             $this->assertContainerBuilderHasCreatedByFactoryService(
                 'created_with_factory_with_old_syntax',
                 'factory_service',
-                'factoryMethod' );
+                'factoryMethod'
+            );
         }
     }
 
