@@ -333,3 +333,10 @@ container:
 <dt><code>setParameter($parameterId, $parameterValue)</code></dt>
 <dd>Set a parameter.</dd>
 </dl>
+
+## Version Guidance
+
+| Version | Released     | Status     |
+|---------|--------------|------------|
+| 2.x     | May 9, 2016  | Latest     |
+| 1.x     | Jul 4, 2016  | EOL        |
