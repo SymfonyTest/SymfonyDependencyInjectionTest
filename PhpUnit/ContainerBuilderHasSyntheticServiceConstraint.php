@@ -20,7 +20,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
         $this->serviceId = $serviceId;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return sprintf(
             'has a synthetic service "%s"',

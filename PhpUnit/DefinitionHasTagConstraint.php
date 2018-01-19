@@ -62,7 +62,7 @@ class DefinitionHasTagConstraint extends Constraint
         return false;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return sprintf(
             'has the "%s" tag with the given attributes',

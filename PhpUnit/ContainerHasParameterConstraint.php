@@ -21,7 +21,7 @@ class ContainerHasParameterConstraint extends Constraint
         $this->checkParameterValue = $checkParameterValue;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return sprintf(
             'has a parameter "%s" with the given value',

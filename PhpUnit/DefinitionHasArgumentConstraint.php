@@ -42,7 +42,7 @@ class DefinitionHasArgumentConstraint extends Constraint
         $this->checkExpectedValue = $checkExpectedValue;
     }
 
-    public function toString()
+    public function toString(): string
     {
         if (is_string($this->argumentIndex)) {
             return sprintf(
