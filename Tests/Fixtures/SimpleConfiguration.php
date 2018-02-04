@@ -2,8 +2,8 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class SimpleConfiguration implements ConfigurationInterface
 {

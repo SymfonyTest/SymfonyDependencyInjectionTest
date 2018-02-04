@@ -11,7 +11,7 @@ class DefinitionHasTagConstraint extends Constraint
     private $name;
     private $attributes;
 
-    public function __construct($name, array $attributes = array())
+    public function __construct($name, array $attributes = [])
     {
         parent::__construct();
         $this->name = $name;
