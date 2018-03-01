@@ -17,9 +17,7 @@
         "matthiasnoback/symfony-config-test": "^3.0",
         "symfony/dependency-injection": "^2.7 || ^3.3 || ^4.0",
         "symfony/config": "^2.7 || ^3.3 || ^4.0",
-        "symfony/yaml": "^2.7 || ^3.3 || ^4.0"
-    },
-    "require-dev": {
+        "symfony/yaml": "^2.7 || ^3.3 || ^4.0",
         "phpunit/phpunit": "^6.0"
     },
     "autoload": {
