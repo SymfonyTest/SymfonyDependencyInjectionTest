@@ -66,7 +66,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
         return false;
     }
 
-    public function toString()
+    public function toString(): string
     {
         if (null !== $this->index) {
             return sprintf(

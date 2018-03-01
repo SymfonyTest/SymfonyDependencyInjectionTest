@@ -27,7 +27,7 @@ class ContainerBuilderHasAliasConstraint extends Constraint
         $this->expectedServiceId = $expectedServiceId;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return 'has an alias "' . $this->aliasId . '" for service "' . $this->expectedServiceId . '"';
     }
