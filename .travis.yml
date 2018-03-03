@@ -11,11 +11,10 @@ matrix:
     fast_finish: true
     include:
           # Minimum supported Symfony version with the latest PHP version
-        - php: 7.1
+        - php: 7.2
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
 
           # Test the latest stable release
-        - php: 7.0
         - php: 7.1
         - php: 7.2
           env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
