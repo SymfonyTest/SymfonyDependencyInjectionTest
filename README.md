@@ -1,6 +1,6 @@
 # SymfonyDependencyInjectionTest
 
-By Matthias Noback
+*By Matthias Noback and contributors*
 
 [![Build Status](https://secure.travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest.png)](http://travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest)
 
