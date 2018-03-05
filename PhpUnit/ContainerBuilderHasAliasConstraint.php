@@ -29,7 +29,7 @@ class ContainerBuilderHasAliasConstraint extends Constraint
 
     public function toString(): string
     {
-        return 'has an alias "' . $this->aliasId . '" for service "' . $this->expectedServiceId . '"';
+        return 'has an alias "'.$this->aliasId.'" for service "'.$this->expectedServiceId.'"';
     }
 
     public function evaluate($other, $description = '', $returnResult = false)
