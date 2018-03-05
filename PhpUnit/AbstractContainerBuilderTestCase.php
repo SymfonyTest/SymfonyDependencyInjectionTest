@@ -102,7 +102,6 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
         );
     }
 
-
     /**
      * Assert that the ContainerBuilder for this test has a synthetic service with the given id.
      *

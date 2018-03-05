@@ -57,7 +57,7 @@ class DefinitionHasTagConstraintTest extends TestCase
 
         return [
             // the definition has no tags
-            [$definitionWithoutTags, $tag, array(), false],
+            [$definitionWithoutTags, $tag, [], false],
             // the definition has this tag, attributes match with the first tag
             [$definitionWithTwoTags, $tag, $attributesOfFirstTag, true],
             // the definition has this tag, attributes match with the second tag

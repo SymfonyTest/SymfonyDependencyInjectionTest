@@ -39,7 +39,7 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
             'collecting_service_id',
             'add',
             [
-                new Reference('collected_service_1')
+                new Reference('collected_service_1'),
             ]
         );
 
@@ -47,7 +47,7 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
             'collecting_service_id',
             'add',
             [
-                new Reference('collected_service_2')
+                new Reference('collected_service_2'),
             ]
         );
     }
