@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.3.1
+
+- Added conflicts with PHPUnit < 6.0
+
 ## v2.3.0
 
 - Testing on Symfony 4 and make sure test passes
