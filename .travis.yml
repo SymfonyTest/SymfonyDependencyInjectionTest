@@ -50,6 +50,3 @@ install:
 script:
     - composer validate --strict --no-check-lock
     - ./vendor/bin/phpunit $PHPUNIT_FLAGS
-
-notifications:
-  email: matthiasnoback@gmail.com
