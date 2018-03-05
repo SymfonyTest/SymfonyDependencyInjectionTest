@@ -3,7 +3,7 @@
 
 $container->loadFromExtension(
     'simple',
-    array(
-        'types' => array('php')
-    )
+    [
+        'types' => ['php'],
+    ]
 );

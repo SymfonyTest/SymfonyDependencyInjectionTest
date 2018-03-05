@@ -17,8 +17,8 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     protected function setUp()
     {
         $this->container = new ContainerBuilder();
-        $this->container->getCompilerPassConfig()->setOptimizationPasses(array());
-        $this->container->getCompilerPassConfig()->setRemovingPasses(array());
+        $this->container->getCompilerPassConfig()->setOptimizationPasses([]);
+        $this->container->getCompilerPassConfig()->setRemovingPasses([]);
     }
 
     protected function tearDown()
@@ -31,6 +31,7 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
      *
      * @param $serviceId
      * @param $class
+     *
      * @return Definition
      */
     protected function registerService($serviceId, $class)
@@ -171,15 +172,15 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has a method
      * call to the given method with the given arguments.
      *
-     * @param string $serviceId
-     * @param string $method
-     * @param array $arguments
+     * @param string   $serviceId
+     * @param string   $method
+     * @param array    $arguments
      * @param int|null $index
      */
     protected function assertContainerBuilderHasServiceDefinitionWithMethodCall(
         $serviceId,
         $method,
-        array $arguments = array(),
+        array $arguments = [],
         $index = null
     ) {
         $definition = $this->container->findDefinition($serviceId);
@@ -198,7 +199,7 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     protected function assertContainerBuilderHasServiceDefinitionWithTag(
         $serviceId,
         $tag,
-        array $attributes = array()
+        array $attributes = []
     ) {
         $definition = $this->container->findDefinition($serviceId);
 

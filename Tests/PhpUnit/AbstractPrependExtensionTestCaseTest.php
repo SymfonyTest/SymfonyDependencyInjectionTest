@@ -11,10 +11,10 @@ class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions()
     {
-        return array(
+        return [
             new PrependableTestExtension(),
-            new NonPrependableTestExtension()
-        );
+            new NonPrependableTestExtension(),
+        ];
     }
 
     /**

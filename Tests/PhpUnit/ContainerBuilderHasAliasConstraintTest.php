@@ -32,16 +32,16 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
 
         $wrongServiceId = 'other_service_id';
 
-        return array(
+        return [
             // the container does not have the alias
-            array($emptyContainerBuilder, $aliasId, $rightServiceId, false),
+            [$emptyContainerBuilder, $aliasId, $rightServiceId, false],
             // the container has the alias, but for another service
-            array($emptyContainerBuilder, $aliasId, $wrongServiceId, false),
+            [$emptyContainerBuilder, $aliasId, $wrongServiceId, false],
             // the container has the alias for the right service id
-            array($builderWithAlias, $aliasId, $rightServiceId, true),
+            [$builderWithAlias, $aliasId, $rightServiceId, true],
             // service id is optional
-            array($builderWithAlias, $aliasId, null, true),
-        );
+            [$builderWithAlias, $aliasId, null, true],
+        ];
     }
 
     /**
@@ -53,7 +53,7 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
         $serviceId = 'service_id';
         $constraint = new ContainerBuilderHasAliasConstraint($aliasId, $serviceId);
         $this->assertSame(
-            'has an alias "' . $aliasId . '" for service "' . $serviceId . '"',
+            'has an alias "'.$aliasId.'" for service "'.$serviceId.'"',
             $constraint->toString()
         );
     }

@@ -24,21 +24,21 @@ class AbstractExtensionConfigurationTestCaseTest extends AbstractExtensionConfig
      */
     public function it_compares_expected_configuration_values_with_values_loaded_from_files()
     {
-        $sources = array(
+        $sources = [
             __DIR__ . '/../Fixtures/simple.php',
             function (ContainerBuilder $container) {
                 $container->loadFromExtension(
                     'simple',
-                    array(
-                        'types' => array('closure')
-                    )
+                    [
+                        'types' => ['closure'],
+                    ]
                 );
             },
             __DIR__ . '/../Fixtures/simple.yml',
             __DIR__ . '/../Fixtures/simple.xml',
-        );
+        ];
 
-        $expectedConfiguration = array('types' => array('php', 'closure', 'yml', 'xml'));
+        $expectedConfiguration = ['types' => ['php', 'closure', 'yml', 'xml']];
 
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
     }

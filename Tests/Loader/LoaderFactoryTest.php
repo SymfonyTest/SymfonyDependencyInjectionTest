@@ -24,7 +24,8 @@ class LoaderFactoryTest extends TestCase
      */
     public function it_creates_a_closure_loader_when_source_is_a_closure()
     {
-        $source = function() {};
+        $source = function () {
+        };
         $factory = new LoaderFactory();
 
         $loader = $factory->createLoaderForSource($this->createMockContainerBuilder(), $source);
@@ -33,11 +34,11 @@ class LoaderFactoryTest extends TestCase
 
     public function fileProvider()
     {
-        return array(
-            array('file.xml', 'Symfony\Component\DependencyInjection\Loader\XmlFileLoader'),
-            array('file.yml', 'Symfony\Component\DependencyInjection\Loader\YamlFileLoader'),
-            array('file.php', 'Symfony\Component\DependencyInjection\Loader\PhpFileLoader')
-        );
+        return [
+            ['file.xml', 'Symfony\Component\DependencyInjection\Loader\XmlFileLoader'],
+            ['file.yml', 'Symfony\Component\DependencyInjection\Loader\YamlFileLoader'],
+            ['file.php', 'Symfony\Component\DependencyInjection\Loader\PhpFileLoader'],
+        ];
     }
 
     private function createMockContainerBuilder()
