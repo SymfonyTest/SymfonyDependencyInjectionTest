@@ -49,22 +49,22 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
 
         $wrongClass = 'TheWrongClass';
 
-        return array(
+        return [
             // the container does not have the service definition
-            array($emptyContainerBuilder, $serviceId, $rightClass, true, false),
+            [$emptyContainerBuilder, $serviceId, $rightClass, true, false],
             // the container has a service definition, but with the wrong class
-            array($containerBuilderWithServiceDefinition, $serviceId, $wrongClass, true, false),
+            [$containerBuilderWithServiceDefinition, $serviceId, $wrongClass, true, false],
             // the container has a service definition with the right class
-            array($containerBuilderWithServiceDefinition, $serviceId, $rightClass, true, true),
+            [$containerBuilderWithServiceDefinition, $serviceId, $rightClass, true, true],
             // the container has a service definition with the right class, but it's a parameter
-            array($containerBuilderWithServiceDefinitionWithParameterClass, $serviceId, $rightClass, true, true),
+            [$containerBuilderWithServiceDefinitionWithParameterClass, $serviceId, $rightClass, true, true],
             // the container has an alias, but with the wrong class
-            array($containerBuilderWithAlias, $aliasId, $wrongClass, true, false),
+            [$containerBuilderWithAlias, $aliasId, $wrongClass, true, false],
             // the container has an alias with the right class
-            array($containerBuilderWithAlias, $aliasId, $rightClass, true, true),
+            [$containerBuilderWithAlias, $aliasId, $rightClass, true, true],
             // giving a class is optional
-            array($containerBuilderWithAlias, $aliasId, null, false, true),
-        );
+            [$containerBuilderWithAlias, $aliasId, null, false, true],
+        ];
     }
 
     /**
@@ -76,7 +76,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
         $class = 'SomeClass';
         $constraint = new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $class);
         $this->assertSame(
-            'has a service definition "' . $serviceId . '" with class "' . $class . '"',
+            'has a service definition "'.$serviceId.'" with class "'.$class.'"',
             $constraint->toString()
         );
     }
@@ -99,7 +99,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('string');
-        
+
         new ContainerBuilderHasServiceDefinitionConstraint('service_id', new \stdClass());
     }
 }

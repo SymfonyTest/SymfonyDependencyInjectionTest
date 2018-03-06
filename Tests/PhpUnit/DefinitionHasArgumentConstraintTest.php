@@ -29,7 +29,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         $definitionWithArguments = new Definition();
         $rightValue = 'the right value';
         $wrongValue = 'the wrong value';
-        $arguments = array(0 => 'first argument', 1 => $rightValue);
+        $arguments = [0 => 'first argument', 1 => $rightValue];
         $definitionWithArguments->setArguments($arguments);
 
         $parentServiceId = 'parent_service_id';
@@ -39,26 +39,26 @@ class DefinitionHasArgumentConstraintTest extends TestCase
             $decoratedDefinitionWithArguments = new DefinitionDecorator($parentServiceId);
         }
 
-        $decoratedDefinitionWithArguments->setArguments(array(0 => 'first argument', 1 => $wrongValue));
+        $decoratedDefinitionWithArguments->setArguments([0 => 'first argument', 1 => $wrongValue]);
         $decoratedDefinitionWithArguments->replaceArgument(1, $rightValue);
 
-        return array(
+        return [
             // the definition has no second argument
-            array($definitionWithNoArguments, 1, $rightValue, false),
+            [$definitionWithNoArguments, 1, $rightValue, false],
             // the definition has a second argument, but with the wrong value
-            array($definitionWithNoArguments, 1, $wrongValue, false),
+            [$definitionWithNoArguments, 1, $wrongValue, false],
             // the definition has a second argument with the right value
-            array($definitionWithArguments, 1, $rightValue, true),
+            [$definitionWithArguments, 1, $rightValue, true],
             // the definition is a decorated definition
-            array($decoratedDefinitionWithArguments, 1, $rightValue, true),
-        );
+            [$decoratedDefinitionWithArguments, 1, $rightValue, true],
+        ];
     }
 
     /**
      * @test
      * @dataProvider invalid_definition_indexes
      *
-     * @param mixed $argument
+     * @param mixed  $argument
      * @param string $exceptionMessage
      */
     public function validates_definitionIndex($argument, $exceptionMessage)
@@ -75,11 +75,11 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     public function invalid_definition_indexes()
     {
         yield [
-            new \stdClass(), 'Expected either a string or a positive integer for $argumentIndex.'
+            new \stdClass(), 'Expected either a string or a positive integer for $argumentIndex.',
         ];
 
         yield [
-            1.0, 'Expected either a string or a positive integer for $argumentIndex.'
+            1.0, 'Expected either a string or a positive integer for $argumentIndex.',
         ];
 
         yield [
@@ -91,13 +91,14 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         ];
 
         yield [
-            '', 'A named argument must begin with a "$".'
+            '', 'A named argument must begin with a "$".',
         ];
     }
 
     /**
      * @test
      * @dataProvider indexed_arguments
+     *
      * @param int $argumentIndex
      */
     public function supports_indexed_arguments($argumentIndex)
@@ -110,7 +111,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         self::assertTrue($constraint->evaluate($definition));
         self::assertSame("has an argument with index $argumentIndex with the given value", $constraint->toString());
 
-        $failingExpectation = $expectedValue . $expectedValue;
+        $failingExpectation = $expectedValue.$expectedValue;
         $constraint = new DefinitionHasArgumentConstraint($argumentIndex, $failingExpectation);
 
         try {
@@ -141,6 +142,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     /**
      * @test
      * @dataProvider named_arguments
+     *
      * @param string $argument
      */
     public function supports_named_arguments($argument)
@@ -155,7 +157,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         self::assertTrue($constraint->evaluate($definition));
         self::assertSame(sprintf('has an argument named "%s" with the given value', $argument), $constraint->toString());
 
-        $failingExpectation = $expectedValue . $expectedValue;
+        $failingExpectation = $expectedValue.$expectedValue;
         $constraint = new DefinitionHasArgumentConstraint($argument, $failingExpectation);
 
         try {

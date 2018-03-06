@@ -26,22 +26,22 @@ class ContainerHasParameterConstraintTest extends TestCase
 
     public function containerBuilderProvider()
     {
-        $emptyContainer = $this->createMockContainerWithParameters(array());
+        $emptyContainer = $this->createMockContainerWithParameters([]);
 
         $parameterName = 'parameter_name';
         $parameterValue = 'some value';
         $wrongParameterValue = 'some other value';
 
-        return array(
+        return [
             // the container does not have the parameter
-            array($emptyContainer, $parameterName, $parameterValue, true, false),
+            [$emptyContainer, $parameterName, $parameterValue, true, false],
             // the container has the parameter but the values don't match
-            array($this->createMockContainerWithParameters(array($parameterName => $parameterValue)), $parameterName, $wrongParameterValue, true, false),
+            [$this->createMockContainerWithParameters([$parameterName => $parameterValue]), $parameterName, $wrongParameterValue, true, false],
             // the container has the parameter and the value matches
-            array($this->createMockContainerWithParameters(array($parameterName => $parameterValue)), $parameterName, $parameterValue, true, true),
+            [$this->createMockContainerWithParameters([$parameterName => $parameterValue]), $parameterName, $parameterValue, true, true],
             // the container has the parameter and the value is optional
-            array($this->createMockContainerWithParameters(array($parameterName => $parameterValue)), $parameterName, null, false, true),
-        );
+            [$this->createMockContainerWithParameters([$parameterName => $parameterValue]), $parameterName, null, false, true],
+        ];
     }
 
     private function createMockContainerWithParameters(array $parameters)

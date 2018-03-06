@@ -17,7 +17,7 @@ class CollectServicesAndAddThemWithMethodCallsCompilerPass implements CompilerPa
         $service = $container->getDefinition('collecting_service_id');
 
         foreach ($container->findTaggedServiceIds('collect_with_method_calls') as $serviceId => $tags) {
-            $service->addMethodCall('add', array(new Reference($serviceId)));
+            $service->addMethodCall('add', [new Reference($serviceId)]);
         }
     }
 }
