@@ -16,11 +16,11 @@ class CollectServicesAndSetThemAsArgumentCompilerPass implements CompilerPassInt
 
         $service = $container->getDefinition('collecting_service_id');
 
-        $collectedServices = array();
+        $collectedServices = [];
         foreach ($container->findTaggedServiceIds('collect_with_argument') as $serviceId => $tags) {
             $collectedServices[] = new Reference($serviceId);
         }
 
-        $service->setArguments(array($collectedServices));
+        $service->setArguments([$collectedServices]);
     }
 }

@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 class ExtensionConfigurationBuilder
 {
     private $extension;
-    private $sources = array();
+    private $sources = [];
     private $loaderFactory;
 
     public function __construct(LoaderFactoryInterface $loaderFactory)

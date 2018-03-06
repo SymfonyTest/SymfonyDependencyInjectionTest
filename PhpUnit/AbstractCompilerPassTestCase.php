@@ -8,14 +8,14 @@ abstract class AbstractCompilerPassTestCase extends AbstractContainerBuilderTest
 {
     /**
      * Register the compiler pass under test, just like you would do inside a bundle's load()
-     * method:
+     * method:.
      *
      *   $container->addCompilerPass(new MyCompilerPass());
      */
     abstract protected function registerCompilerPass(ContainerBuilder $container);
 
     /**
-     * This test will run the compile method
+     * This test will run the compile method.
      *
      * @test
      */

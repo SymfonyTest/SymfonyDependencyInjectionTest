@@ -38,17 +38,17 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'collecting_service_id',
             'add',
-            array(
-                new Reference('collected_service_1')
-            )
+            [
+                new Reference('collected_service_1'),
+            ]
         );
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'collecting_service_id',
             'add',
-            array(
-                new Reference('collected_service_2')
-            )
+            [
+                new Reference('collected_service_2'),
+            ]
         );
     }
 
@@ -70,10 +70,10 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
 
         $this->compile();
 
-        $expectedReferences = array(
+        $expectedReferences = [
             new Reference('collected_service_1'),
-            new Reference('collected_service_2')
-        );
+            new Reference('collected_service_2'),
+        ];
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('collecting_service_id', 0, $expectedReferences);
     }
