@@ -12,7 +12,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
     private $arguments;
     private $index;
 
-    public function __construct($methodName, array $arguments = array(), $index = null)
+    public function __construct($methodName, array $arguments = [], $index = null)
     {
         if ($index !== null && !is_int($index)) {
             throw new \InvalidArgumentException(sprintf('Expected value of integer type for method call index, "%s" given.', is_object($index) ? get_class($index) : gettype($index)));

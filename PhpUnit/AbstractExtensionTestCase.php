@@ -22,13 +22,13 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
      */
     protected function getMinimalConfiguration()
     {
-        return array();
+        return [];
     }
 
     /**
      * Setup for each test: creates a new ContainerBuilder,
      * registers the ValidateServiceDefinitionsPass which will validate all defined services when
-     * the container is compiled
+     * the container is compiled.
      *
      * @see AbstractExtensionTestCase::tearDown()
      */
@@ -47,9 +47,9 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
      *
      * @param array $configurationValues
      */
-    protected function load(array $configurationValues = array())
+    protected function load(array $configurationValues = [])
     {
-        $configs = array($this->getMinimalConfiguration(), $configurationValues);
+        $configs = [$this->getMinimalConfiguration(), $configurationValues];
 
         foreach ($this->container->getExtensions() as $extension) {
             if ($extension instanceof PrependExtensionInterface) {

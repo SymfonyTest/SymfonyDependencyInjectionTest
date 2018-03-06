@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
 class DefinitionHasArgumentConstraint extends Constraint
 {
-
     /**
      * @var int|string
      */

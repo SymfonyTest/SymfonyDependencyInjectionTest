@@ -9,7 +9,8 @@ interface LoaderFactoryInterface
 {
     /**
      * @param ContainerBuilder $container
-     * @param $source
+     * @param                  $source
+     *
      * @return LoaderInterface
      */
     public function createLoaderForSource(ContainerBuilder $container, $source);

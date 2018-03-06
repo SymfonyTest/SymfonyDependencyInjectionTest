@@ -47,24 +47,24 @@ class DefinitionHasTagConstraintTest extends TestCase
 
         $tag = 'some_provider';
 
-        $attributesOfFirstTag = array('name' => 'attribute of first tag');
+        $attributesOfFirstTag = ['name' => 'attribute of first tag'];
         $definitionWithTwoTags->addTag($tag, $attributesOfFirstTag);
 
-        $attributesOfSecondTag = array('name' => 'attributes of second tag');
+        $attributesOfSecondTag = ['name' => 'attributes of second tag'];
         $definitionWithTwoTags->addTag($tag, $attributesOfSecondTag);
 
-        $otherAttributes = array('name' => 'some other attribute');
+        $otherAttributes = ['name' => 'some other attribute'];
 
-        return array(
+        return [
             // the definition has no tags
-            array($definitionWithoutTags, $tag, array(), false),
+            [$definitionWithoutTags, $tag, [], false],
             // the definition has this tag, attributes match with the first tag
-            array($definitionWithTwoTags, $tag, $attributesOfFirstTag, true),
+            [$definitionWithTwoTags, $tag, $attributesOfFirstTag, true],
             // the definition has this tag, attributes match with the second tag
-            array($definitionWithTwoTags, $tag, $attributesOfSecondTag, true),
+            [$definitionWithTwoTags, $tag, $attributesOfSecondTag, true],
             // the definition has this tag, but the attributes don't match
-            array($definitionWithTwoTags, $tag, $otherAttributes, false),
-        );
+            [$definitionWithTwoTags, $tag, $otherAttributes, false],
+        ];
     }
 
     /**
@@ -73,7 +73,7 @@ class DefinitionHasTagConstraintTest extends TestCase
     public function it_has_a_string_representation()
     {
         $tag = 'tagName';
-        $constraint = new DefinitionHasTagConstraint($tag, array());
+        $constraint = new DefinitionHasTagConstraint($tag, []);
 
         $this->assertSame('has the "'.$tag.'" tag with the given attributes', $constraint->toString());
     }
