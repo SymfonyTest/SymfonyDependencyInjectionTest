@@ -3,20 +3,18 @@ sudo: false
 cache:
     directories:
         - $HOME/.composer/cache/files
-        - $HOME/symfony-bridge/.phpunit
 env:
     global:
         - PHPUNIT_FLAGS="-v"
-        - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
+
 matrix:
     fast_finish: true
     include:
           # Minimum supported Symfony version with the latest PHP version
-        - php: 7.1
+        - php: 7.2
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
 
           # Test the latest stable release
-        - php: 7.0
         - php: 7.1
         - php: 7.2
           env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
@@ -27,7 +25,7 @@ matrix:
         - php: 7.2
           env: DEPENDENCIES="dunglas/symfony-lock:^3"
         - php: 7.2
-          env: DEPENDENCIES="dunglas/symfony-lock:^4" STABILITY="beta"
+          env: DEPENDENCIES="dunglas/symfony-lock:^4"
 
           # Latest commit to master
         - php: 7.2
@@ -50,6 +48,3 @@ install:
 script:
     - composer validate --strict --no-check-lock
     - ./vendor/bin/phpunit $PHPUNIT_FLAGS
-
-notifications:
-  email: matthiasnoback@gmail.com

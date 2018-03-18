@@ -29,7 +29,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         $this->checkExpectedClass = $checkExpectedClass;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return sprintf(
             'has a service definition "%s" with class "%s"',

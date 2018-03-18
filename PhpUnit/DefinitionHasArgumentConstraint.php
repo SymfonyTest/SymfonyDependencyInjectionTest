@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
 class DefinitionHasArgumentConstraint extends Constraint
 {
-
     /**
      * @var int|string
      */
@@ -42,7 +41,7 @@ class DefinitionHasArgumentConstraint extends Constraint
         $this->checkExpectedValue = $checkExpectedValue;
     }
 
-    public function toString()
+    public function toString(): string
     {
         if (is_string($this->argumentIndex)) {
             return sprintf(

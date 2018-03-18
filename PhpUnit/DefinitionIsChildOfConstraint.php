@@ -37,7 +37,7 @@ class DefinitionIsChildOfConstraint extends Constraint
         return true;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return sprintf(
             'is a child of service "%s"',

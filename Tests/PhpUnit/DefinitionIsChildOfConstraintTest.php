@@ -30,13 +30,13 @@ class DefinitionIsChildOfConstraintTest extends TestCase
             $decoratedDefinition = new DefinitionDecorator('parent_service_id');
         }
 
-        return array(
+        return [
             // the provided definition has the same parent service id
-            array($decoratedDefinition, 'parent_service_id', true),
+            [$decoratedDefinition, 'parent_service_id', true],
             // the provided definition has another parent service id
-            array($decoratedDefinition, 'invalid_parent_service_id', false),
+            [$decoratedDefinition, 'invalid_parent_service_id', false],
             // the provided definition is no DefinitionDecorator
-            array($definition, 'any_parent_service_id', false)
-        );
+            [$definition, 'any_parent_service_id', false],
+        ];
     }
 }

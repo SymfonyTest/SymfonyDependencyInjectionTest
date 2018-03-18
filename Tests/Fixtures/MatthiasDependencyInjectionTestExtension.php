@@ -2,13 +2,13 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasFactoryConstraint;
 
 class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
@@ -35,7 +35,7 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 
         // manually add a service definition
         $definition = new Definition('stdClass');
-        $definition->setArguments(array('first', 'second'));
+        $definition->setArguments(['first', 'second']);
         $container->setDefinition('manual_service_id', $definition);
 
         // replace an argument of a previously defined service definition

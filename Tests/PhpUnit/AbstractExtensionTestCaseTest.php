@@ -11,9 +11,9 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions()
     {
-        return array(
-            new MatthiasDependencyInjectionTestExtension()
-        );
+        return [
+            new MatthiasDependencyInjectionTestExtension(),
+        ];
     }
 
     /**
@@ -250,7 +250,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'service_with_method_calls_id',
             'wrongMethodName',
-            array('some argument')
+            ['some argument']
         );
     }
 
@@ -267,7 +267,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'service_with_method_calls_id',
             'theRightMethodName',
-            array('a wrong argument')
+            ['a wrong argument']
         );
     }
 
