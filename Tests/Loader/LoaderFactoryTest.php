@@ -37,6 +37,7 @@ class LoaderFactoryTest extends TestCase
         return [
             ['file.xml', 'Symfony\Component\DependencyInjection\Loader\XmlFileLoader'],
             ['file.yml', 'Symfony\Component\DependencyInjection\Loader\YamlFileLoader'],
+            ['file.yaml', 'Symfony\Component\DependencyInjection\Loader\YamlFileLoader'],
             ['file.php', 'Symfony\Component\DependencyInjection\Loader\PhpFileLoader'],
         ];
     }
