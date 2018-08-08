@@ -27,6 +27,7 @@ class LoaderFactory implements LoaderFactoryInterface
 
         switch ($extension) {
             case 'yml':
+            case 'yaml':
                 return $this->createYamlFileLoader($container);
             case 'xml':
                 return $this->createXmlFileLoader($container);
