@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.1.0
+
+- Added support for `yaml` file extension. 
+
 ## v3.0.0
 
 - Dropped support for PHPUnit < 7.0
