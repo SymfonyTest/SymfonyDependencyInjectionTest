@@ -6,6 +6,7 @@ use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractContainerBuilderTestCase extends TestCase
 {
@@ -168,6 +169,25 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     }
 
     /**
+     * Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument
+     * at the given index, and its value is a ServiceLocator with a reference-map equal to the given value.
+     *
+     * @param string     $serviceId
+     * @param int|string $argumentIndex
+     * @param array      $expectedServiceMap an array of service-id references and their key in the map
+     */
+    protected function assertContainerBuilderHasServiceDefinitionWithServiceLocatorArgument(
+        $serviceId,
+        $argumentIndex,
+        array $expectedValue
+    ) {
+        self::assertThat(
+            $this->container,
+            new DefinitionArgumentEqualsServiceLocatorConstraint($serviceId, $argumentIndex, $expectedValue)
+        );
+    }
+
+    /**
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has a method
      * call to the given method with the given arguments.
      *
@@ -217,5 +237,23 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
         $definition = $this->container->findDefinition($serviceId);
 
         self::assertThat($definition, new DefinitionIsChildOfConstraint($parentServiceId));
+    }
+
+    /**
+     * Assert that the ContainerBuilder for this test has a ServiceLocator service definition with the given id.
+     *
+     * @param string $serviceId
+     * @param array  $expectedServiceMap an array of service-id references and their key in the map
+     */
+    protected function assertContainerBuilderHasServiceLocator(string $serviceId, array $expectedServiceMap = [])
+    {
+        $definition = $this->container->findDefinition($serviceId);
+
+        // Service locator was provided as context (and therefor a factory)
+        if (isset($definition->getFactory()[1])) {
+            $definition = $this->container->findDefinition((string) $definition->getFactory()[0]);
+        }
+
+        self::assertThat($definition, new DefinitionEqualsServiceLocatorConstraint($expectedServiceMap));
     }
 }

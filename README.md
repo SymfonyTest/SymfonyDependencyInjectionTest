@@ -311,6 +311,9 @@ the given index.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex, $expectedValue)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument at
 the given index, and its value is the given value.</dd>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithServiceLocatorArgument($serviceId, $argumentIndex, $expectedValue)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument
+at the given index, and its value is a ServiceLocator with a reference-map equal to the given value.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments = array(), $index = null)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has a method call to
 the given method with the given arguments. If index is provided, invocation index order of method call is asserted as well.</dd>
@@ -318,6 +321,8 @@ the given method with the given arguments. If index is provided, invocation inde
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has the given tag with the given arguments.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithParent($serviceId, $parentServiceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id which is a decorated service and it has the given parent service.</dd>
+<dt><code>assertContainerBuilderHasServiceLocator($serviceId, $expectedServiceMap)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a ServiceLocator service definition with the given id.</dd>
 </dl>
 
 ## Available methods to set up container
