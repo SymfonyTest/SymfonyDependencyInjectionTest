@@ -15,7 +15,7 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
      */
     private $containerBuilder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->containerBuilder = new ContainerBuilder();
     }

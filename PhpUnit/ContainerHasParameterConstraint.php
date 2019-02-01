@@ -14,8 +14,6 @@ class ContainerHasParameterConstraint extends Constraint
 
     public function __construct($parameterName, $expectedParameterValue = null, $checkParameterValue = false)
     {
-        parent::__construct();
-
         $this->parameterName = $parameterName;
         $this->expectedParameterValue = $expectedParameterValue;
         $this->checkParameterValue = $checkParameterValue;
@@ -78,8 +76,8 @@ class ContainerHasParameterConstraint extends Constraint
             $this->fail($container, sprintf(
                 'The value of parameter "%s" (%s) does not match the expected value (%s)',
                 $this->parameterName,
-                $this->exporter->export($actualValue),
-                $this->exporter->export($this->expectedParameterValue)
+                $this->exporter()->export($actualValue),
+                $this->exporter()->export($this->expectedParameterValue)
             ));
         }
 

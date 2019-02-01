@@ -22,8 +22,6 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
 
     public function __construct($serviceId, $argumentIndex, array $expectedValue)
     {
-        parent::__construct();
-
         if (!(is_string($argumentIndex) || (is_int($argumentIndex) && $argumentIndex >= 0))) {
             throw new \InvalidArgumentException('Expected either a string or a positive integer for $argumentIndex.');
         }
@@ -135,7 +133,7 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
                 sprintf(
                     'The value of argument with index %s (%s) was expected to an instance of Symfony\Component\DependencyInjection\Reference or \Symfony\Component\DependencyInjection\Definition',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue)
+                    $this->exporter()->export($actualValue)
                 )
             );
         }
@@ -150,7 +148,7 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
                 sprintf(
                     'The referenced service class of argument with index %s (%s) was expected to be an instance of Symfony\Component\DependencyInjection\ServiceLocator',
                     $this->argumentIndex,
-                    $this->exporter->export($serviceLocatorDef->getClass())
+                    $this->exporter()->export($serviceLocatorDef->getClass())
                 )
             );
         }
@@ -178,8 +176,8 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
                 sprintf(
                     'The value of argument with index %s (%s) does not equal to the expected ServiceLocator service-map (%s)',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    $this->exporter()->export($actualValue),
+                    $this->exporter()->export($this->expectedValue)
                 )
             );
         }
