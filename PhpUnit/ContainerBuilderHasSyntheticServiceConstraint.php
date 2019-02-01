@@ -11,8 +11,6 @@ class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
 
     public function __construct($serviceId)
     {
-        parent::__construct();
-
         if (!is_string($serviceId)) {
             throw new \InvalidArgumentException('The $serviceId argument should be a string');
         }

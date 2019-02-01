@@ -13,8 +13,6 @@ class DefinitionIsChildOfConstraint extends Constraint
 
     public function __construct($expectedParentServiceId)
     {
-        parent::__construct();
-
         $this->expectedParentServiceId = $expectedParentServiceId;
     }
 
