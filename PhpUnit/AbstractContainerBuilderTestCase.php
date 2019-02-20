@@ -15,14 +15,14 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
      */
     protected $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = new ContainerBuilder();
         $this->container->getCompilerPassConfig()->setOptimizationPasses([]);
         $this->container->getCompilerPassConfig()->setRemovingPasses([]);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->container = null;
     }
