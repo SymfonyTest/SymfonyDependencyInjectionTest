@@ -18,8 +18,6 @@ class DefinitionHasMethodCallConstraint extends Constraint
             throw new \InvalidArgumentException(sprintf('Expected value of integer type for method call index, "%s" given.', is_object($index) ? get_class($index) : gettype($index)));
         }
 
-        parent::__construct();
-
         $this->methodName = $methodName;
         $this->arguments = $arguments;
         $this->index = $index;
@@ -57,7 +55,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
                 sprintf(
                     'None of the method calls matched the expected method "%s" with arguments %s with %s invocation order index',
                     $this->methodName,
-                    $this->exporter->export($this->arguments),
+                    $this->exporter()->export($this->arguments),
                     (null === $this->index) ? 'any' : sprintf('"%s"', $this->index)
                 )
             );

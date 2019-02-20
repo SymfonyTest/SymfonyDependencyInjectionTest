@@ -14,8 +14,6 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
 
     public function __construct($serviceId, $expectedClass = null, $checkExpectedClass = true)
     {
-        parent::__construct();
-
         if (!is_string($serviceId)) {
             throw new \InvalidArgumentException('The $serviceId argument should be a string');
         }
@@ -92,8 +90,8 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
             $this->fail($containerBuilder, sprintf(
                 'The class of the service definition of "%s" (%s) does not match the expected value (%s)',
                 $this->serviceId,
-                $this->exporter->export($actualClass),
-                $this->exporter->export($this->expectedClass)
+                $this->exporter()->export($actualClass),
+                $this->exporter()->export($this->expectedClass)
             ));
         }
 

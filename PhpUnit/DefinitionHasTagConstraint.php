@@ -13,7 +13,6 @@ class DefinitionHasTagConstraint extends Constraint
 
     public function __construct($name, array $attributes = [])
     {
-        parent::__construct();
         $this->name = $name;
         $this->attributes = $attributes;
     }
@@ -43,7 +42,7 @@ class DefinitionHasTagConstraint extends Constraint
                     sprintf(
                         'None of the tags matched the expected name "%s" with attributes %s',
                         $this->name,
-                        $this->exporter->export($this->attributes)
+                        $this->exporter()->export($this->attributes)
                     )
                 );
             }

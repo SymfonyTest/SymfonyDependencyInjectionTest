@@ -13,8 +13,6 @@ class ContainerBuilderHasAliasConstraint extends Constraint
 
     public function __construct($aliasId, $expectedServiceId = null)
     {
-        parent::__construct();
-
         if (!is_string($aliasId)) {
             throw new \InvalidArgumentException('The $aliasId argument should be a string');
         }

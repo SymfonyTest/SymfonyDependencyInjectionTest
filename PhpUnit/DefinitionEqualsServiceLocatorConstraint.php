@@ -15,8 +15,6 @@ class DefinitionEqualsServiceLocatorConstraint extends Constraint
 
     public function __construct($expectedValue)
     {
-        parent::__construct();
-
         $this->expectedValue = array_map(
             function ($serviceId) {
                 if (is_string($serviceId)) {
@@ -72,8 +70,8 @@ class DefinitionEqualsServiceLocatorConstraint extends Constraint
             $definition,
             sprintf(
                 'class %s was expected as service definition class, found %s instead',
-                $this->exporter->export(ServiceLocator::class),
-                $this->exporter->export($definition->getClass())
+                $this->exporter()->export(ServiceLocator::class),
+                $this->exporter()->export($definition->getClass())
             )
         );
     }
@@ -92,8 +90,8 @@ class DefinitionEqualsServiceLocatorConstraint extends Constraint
                 $definition,
                 sprintf(
                     'The service-map %s does not equal to the expected service-map (%s)',
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    $this->exporter()->export($actualValue),
+                    $this->exporter()->export($this->expectedValue)
                 )
             );
         }
