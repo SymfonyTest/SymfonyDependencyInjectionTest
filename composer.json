@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "matthiasnoback/symfony-config-test": "^4.0",
+        "matthiasnoback/symfony-config-test": "^4.0.1",
         "symfony/dependency-injection": "^2.7 || ^3.3 || ^4.0",
         "symfony/config": "^2.7 || ^3.3 || ^4.0",
         "symfony/yaml": "^2.7 || ^3.3 || ^4.0"
