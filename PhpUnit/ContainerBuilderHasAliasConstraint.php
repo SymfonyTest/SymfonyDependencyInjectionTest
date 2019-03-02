@@ -11,16 +11,8 @@ class ContainerBuilderHasAliasConstraint extends Constraint
     private $aliasId;
     private $expectedServiceId;
 
-    public function __construct($aliasId, $expectedServiceId = null)
+    public function __construct(string $aliasId, ?string $expectedServiceId = null)
     {
-        if (!is_string($aliasId)) {
-            throw new \InvalidArgumentException('The $aliasId argument should be a string');
-        }
-
-        if ($expectedServiceId !== null && !is_string($expectedServiceId)) {
-            throw new \InvalidArgumentException('The $expectedServiceId argument should be a string');
-        }
-
         $this->aliasId = $aliasId;
         $this->expectedServiceId = $expectedServiceId;
     }

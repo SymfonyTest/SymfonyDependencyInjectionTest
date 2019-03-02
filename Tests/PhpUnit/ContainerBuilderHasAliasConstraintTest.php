@@ -60,28 +60,6 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_expects_a_string_for_alias_id()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('string');
-
-        new ContainerBuilderHasAliasConstraint(new \stdClass(), 'service_id');
-    }
-
-    /**
-     * @test
-     */
-    public function it_expects_a_string_for_service_id()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('string');
-
-        new ContainerBuilderHasAliasConstraint('alias_id', new \stdClass());
-    }
-
-    /**
-     * @test
-     */
     public function it_does_not_change_case_of_aliased_service_ids()
     {
         $containerBuilder = new ContainerBuilder();
