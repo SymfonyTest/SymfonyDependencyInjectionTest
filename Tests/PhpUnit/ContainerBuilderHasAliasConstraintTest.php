@@ -4,7 +4,6 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasAliasConstraint;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ContainerBuilderHasAliasConstraintTest extends TestCase
@@ -85,10 +84,6 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
      */
     public function it_does_not_change_case_of_aliased_service_ids()
     {
-        if (!class_exists(ChildDefinition::class)) {
-            $this->markTestSkipped('This test requires at least Symfony 3.3');
-        }
-
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->setAlias('Interface', 'InterfaceImplementationService');
         $constraint = new ContainerBuilderHasAliasConstraint('Interface', 'InterfaceImplementationService');

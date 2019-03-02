@@ -77,14 +77,7 @@ class DefinitionHasArgumentConstraint extends Constraint
     {
         try {
             $definition->getArgument($this->argumentIndex);
-        } catch (\Exception $exception) {
-            // Older versions of Symfony throw \OutOfBoundsException
-            // Newer versions throw Symfony\Component\DependencyInjection\Exception\OutOfBoundsException
-            if (!($exception instanceof \OutOfBoundsException || $exception instanceof OutOfBoundsException)) {
-                // this was not the expected exception
-                throw $exception;
-            }
-
+        } catch (OutOfBoundsException $exception) {
             if ($returnResult) {
                 return false;
             }
