@@ -343,6 +343,7 @@ container:
 
 | Version | Released     | PHPUnit    | Status     |
 |---------|--------------|------------|------------|
-| 3.x     | Mar 5, 2018  | 7.x        | Latest     |
+| 4.x     | Mar 5, 2019  | 8.x        | Latest     |
+| 3.x     | Mar 5, 2018  | 7.x        | Bugfixes     |
 | 2.x     | May 9, 2017  | 6.x        | Bugfixes   |
 | 1.x     | Jul 4, 2016  | 4.x and 5x | EOL        |
