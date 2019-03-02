@@ -27,5 +27,10 @@
     },
     "autoload": {
         "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.0.x-dev"
+        }
     }
 }
