@@ -18,7 +18,7 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
      */
     private $containerBuilder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!class_exists(ServiceLocator::class)) {
             $this->markTestSkipped('Requires the Symfony DependencyInjection component v3.4 or higher');

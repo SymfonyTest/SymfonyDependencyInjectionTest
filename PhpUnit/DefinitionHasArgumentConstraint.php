@@ -18,8 +18,6 @@ class DefinitionHasArgumentConstraint extends Constraint
 
     public function __construct($argumentIndex, $expectedValue, $checkExpectedValue = true)
     {
-        parent::__construct();
-
         if (!(is_string($argumentIndex) || (is_int($argumentIndex) && $argumentIndex >= 0))) {
             throw new \InvalidArgumentException('Expected either a string or a positive integer for $argumentIndex.');
         }
@@ -118,15 +116,15 @@ class DefinitionHasArgumentConstraint extends Constraint
                 $message = sprintf(
                     'The value of argument named "%s" (%s) is not equal to the expected value (%s)',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    $this->exporter()->export($actualValue),
+                    $this->exporter()->export($this->expectedValue)
                 );
             } else {
                 $message = sprintf(
                     'The value of argument with index %d (%s) is not equal to the expected value (%s)',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    $this->exporter()->export($actualValue),
+                    $this->exporter()->export($this->expectedValue)
                 );
             }
 
