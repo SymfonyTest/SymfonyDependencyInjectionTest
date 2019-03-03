@@ -7,12 +7,12 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class NonPrependableTestExtension implements ExtensionInterface
 {
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $container->setParameter('ignored_invocation', 'ignored value');
     }
 
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
     }
 
@@ -21,11 +21,11 @@ class NonPrependableTestExtension implements ExtensionInterface
         return 'non_prependable_test';
     }
 
-    public function getNamespace()
+    public function getNamespace(): void
     {
     }
 
-    public function getXsdValidationBasePath()
+    public function getXsdValidationBasePath(): void
     {
     }
 }

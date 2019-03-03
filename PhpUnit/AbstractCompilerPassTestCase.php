@@ -12,14 +12,14 @@ abstract class AbstractCompilerPassTestCase extends AbstractContainerBuilderTest
      *
      *   $container->addCompilerPass(new MyCompilerPass());
      */
-    abstract protected function registerCompilerPass(ContainerBuilder $container);
+    abstract protected function registerCompilerPass(ContainerBuilder $container): void;
 
     /**
      * This test will run the compile method.
      *
      * @test
      */
-    public function compilation_should_not_fail_with_empty_container()
+    public function compilation_should_not_fail_with_empty_container(): void
     {
         try {
             $this->compile();

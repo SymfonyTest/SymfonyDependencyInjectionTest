@@ -36,7 +36,7 @@ class DefinitionEqualsServiceLocatorConstraint extends Constraint
         return sprintf('service definition is a service locator');
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof Definition)) {
             throw new \InvalidArgumentException(
@@ -47,7 +47,7 @@ class DefinitionEqualsServiceLocatorConstraint extends Constraint
         return $this->evaluateServiceDefinition($other, $returnResult);
     }
 
-    private function evaluateServiceDefinition(Definition $definition, $returnResult)
+    private function evaluateServiceDefinition(Definition $definition, bool $returnResult): bool
     {
         if (!$this->evaluateServiceDefinitionClass($definition, $returnResult)) {
             return false;
@@ -56,7 +56,7 @@ class DefinitionEqualsServiceLocatorConstraint extends Constraint
         return $this->evaluateArgumentIndex($definition, $returnResult);
     }
 
-    private function evaluateServiceDefinitionClass(Definition $definition, $returnResult)
+    private function evaluateServiceDefinitionClass(Definition $definition, bool $returnResult): bool
     {
         if (is_a($definition->getClass(), ServiceLocator::class, true)) {
             return true;
@@ -76,7 +76,7 @@ class DefinitionEqualsServiceLocatorConstraint extends Constraint
         );
     }
 
-    private function evaluateArgumentIndex(Definition $definition, $returnResult)
+    private function evaluateArgumentIndex(Definition $definition, bool $returnResult): bool
     {
         $actualValue = $definition->getArgument(0);
         $constraint = new IsEqual($this->expectedValue);

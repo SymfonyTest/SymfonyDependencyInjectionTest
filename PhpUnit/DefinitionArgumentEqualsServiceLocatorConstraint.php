@@ -20,7 +20,7 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
     private $expectedValue;
     private $serviceId;
 
-    public function __construct($serviceId, $argumentIndex, array $expectedValue)
+    public function __construct(string $serviceId, $argumentIndex, array $expectedValue)
     {
         if (!(is_string($argumentIndex) || (is_int($argumentIndex) && $argumentIndex >= 0))) {
             throw new \InvalidArgumentException('Expected either a string or a positive integer for $argumentIndex.');
@@ -71,7 +71,7 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
         );
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof ContainerBuilder)) {
             throw new \InvalidArgumentException(
@@ -90,7 +90,7 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
         return true;
     }
 
-    private function evaluateArgumentIndex(Definition $definition, $returnResult)
+    private function evaluateArgumentIndex(Definition $definition, bool $returnResult): bool
     {
         try {
             $definition->getArgument($this->argumentIndex);
@@ -108,7 +108,7 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
         return true;
     }
 
-    private function evaluateArgumentValue(ContainerBuilder $container, $returnResult)
+    private function evaluateArgumentValue(ContainerBuilder $container, bool $returnResult): bool
     {
         $definition = $container->findDefinition($this->serviceId);
         $actualValue = $definition->getArgument($this->argumentIndex);
@@ -154,8 +154,11 @@ class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
         return $this->evaluateServiceDefinition($serviceLocatorDef, $definition, $returnResult);
     }
 
-    private function evaluateServiceDefinition(Definition $serviceLocatorDef, Definition $definition, $returnResult): bool
-    {
+    private function evaluateServiceDefinition(
+        Definition $serviceLocatorDef,
+        Definition $definition,
+        bool $returnResult
+    ): bool {
         $actualValue = $serviceLocatorDef->getArgument(0);
         $constraint = new IsEqual($this->expectedValue);
 

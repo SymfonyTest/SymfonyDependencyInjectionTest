@@ -19,7 +19,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
       $expectedClass,
       $checkExpectedClass,
       $shouldMatch
-    ) {
+    ): void {
         $constraint = new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass, $checkExpectedClass);
 
         $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
@@ -70,7 +70,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_string_representation()
+    public function it_has_a_string_representation(): void
     {
         $serviceId = 'some_service_id';
         $class = 'SomeClass';

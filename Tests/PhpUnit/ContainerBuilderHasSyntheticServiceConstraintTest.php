@@ -23,7 +23,7 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_if_the_service_definition_is_a_regular_definition()
+    public function it_fails_if_the_service_definition_is_a_regular_definition(): void
     {
         $this->containerBuilder->setDefinition('synthetic_service', new Definition());
 
@@ -35,7 +35,7 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_does_not_fail_if_the_synthetic_service_definition_exists()
+    public function it_does_not_fail_if_the_synthetic_service_definition_exists(): void
     {
         $this->containerBuilder->setDefinition('synthetic_service', $this->createSyntheticDefinition());
 
@@ -47,7 +47,7 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_does_not_fail_if_the_synthetic_service_has_been_provided_already()
+    public function it_does_not_fail_if_the_synthetic_service_has_been_provided_already(): void
     {
         $this->containerBuilder->setDefinition('synthetic_service', $this->createSyntheticDefinition());
         $this->containerBuilder->set('synthetic_service', new \stdClass());
@@ -65,12 +65,12 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
         return $syntheticDefinition;
     }
 
-    private function assertConstraintFails(Constraint $constraint)
+    private function assertConstraintFails(Constraint $constraint): void
     {
         $this->assertFalse($constraint->evaluate($this->containerBuilder, '', true));
     }
 
-    private function assertConstraintPasses(Constraint $constraint)
+    private function assertConstraintPasses(Constraint $constraint): void
     {
         $this->assertTrue($constraint->evaluate($this->containerBuilder, '', true));
     }

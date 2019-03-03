@@ -30,7 +30,7 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_if_the_service_definition_is_not_a_service_locator()
+    public function it_fails_if_the_service_definition_is_not_a_service_locator(): void
     {
         $this->assertConstraintFails(new DefinitionEqualsServiceLocatorConstraint([]), new Definition());
         $this->assertConstraintFails(new DefinitionEqualsServiceLocatorConstraint([]), new Definition(\stdClass::class));
@@ -41,7 +41,7 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
      *
      * @dataProvider provideInvalidServiceLocatorReferences
      */
-    public function if_fails_if_the_service_definition_value_is_not_a_valid_reference($arguments)
+    public function if_fails_if_the_service_definition_value_is_not_a_valid_reference($arguments): void
     {
         $this->assertConstraintFails(
             new DefinitionEqualsServiceLocatorConstraint([]),
@@ -62,7 +62,7 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
      *
      * @dataProvider provideValidServiceLocatorDefs
      */
-    public function it_does_not_fail_if_the_service_definition_is_a_service_locator(array $defArguments, array $expected)
+    public function it_does_not_fail_if_the_service_definition_is_a_service_locator(array $defArguments, array $expected): void
     {
         $this->assertConstraintPasses(
             new DefinitionEqualsServiceLocatorConstraint($expected),
@@ -101,12 +101,12 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
         ];
     }
 
-    private function assertConstraintFails(Constraint $constraint, $value)
+    private function assertConstraintFails(Constraint $constraint, $value): void
     {
         $this->assertFalse($constraint->evaluate($value, '', true));
     }
 
-    private function assertConstraintPasses(Constraint $constraint, $value)
+    private function assertConstraintPasses(Constraint $constraint, $value): void
     {
         $this->assertTrue($constraint->evaluate($value, '', true));
     }

@@ -12,8 +12,11 @@ class ContainerHasParameterConstraint extends Constraint
     private $expectedParameterValue;
     private $checkParameterValue;
 
-    public function __construct($parameterName, $expectedParameterValue = null, $checkParameterValue = false)
-    {
+    public function __construct(
+        string $parameterName,
+        $expectedParameterValue = null,
+        bool $checkParameterValue = false
+    ) {
         $this->parameterName = $parameterName;
         $this->expectedParameterValue = $expectedParameterValue;
         $this->checkParameterValue = $checkParameterValue;
@@ -27,7 +30,7 @@ class ContainerHasParameterConstraint extends Constraint
         );
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof ContainerInterface)) {
             throw new \InvalidArgumentException(
@@ -46,7 +49,7 @@ class ContainerHasParameterConstraint extends Constraint
         return true;
     }
 
-    private function evaluateParameterName(ContainerInterface $container, $returnResult)
+    private function evaluateParameterName(ContainerInterface $container, bool $returnResult): bool
     {
         if (!$container->hasParameter($this->parameterName)) {
             if ($returnResult) {
@@ -62,7 +65,7 @@ class ContainerHasParameterConstraint extends Constraint
         return true;
     }
 
-    private function evaluateParameterValue(ContainerInterface $container, $returnResult)
+    private function evaluateParameterValue(ContainerInterface $container, bool $returnResult): bool
     {
         $actualValue = $container->getParameter($this->parameterName);
 

@@ -12,11 +12,11 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
      * @test
      * @dataProvider containerBuilderProvider
      */
-    public function match(ContainerBuilder $containerBuilder, $alias, $expectedServiceId, $shouldMatch)
+    public function match(ContainerBuilder $containerBuilder, $alias, $expectedServiceId, $shouldMatch): void
     {
         $constraint = new ContainerBuilderHasAliasConstraint($alias, $expectedServiceId);
 
-        $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, null, true));
+        $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
     }
 
     public function containerBuilderProvider()
@@ -46,7 +46,7 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_string_representation()
+    public function it_has_a_string_representation(): void
     {
         $aliasId = 'alias_id';
         $serviceId = 'service_id';
@@ -60,12 +60,12 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_does_not_change_case_of_aliased_service_ids()
+    public function it_does_not_change_case_of_aliased_service_ids(): void
     {
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->setAlias('Interface', 'InterfaceImplementationService');
         $constraint = new ContainerBuilderHasAliasConstraint('Interface', 'InterfaceImplementationService');
 
-        $this->assertTrue($constraint->evaluate($containerBuilder, null, true));
+        $this->assertTrue($constraint->evaluate($containerBuilder, '', true));
     }
 }

@@ -15,7 +15,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
      * @test
      * @dataProvider definitionProvider
      */
-    public function match(Definition $definition, $argumentIndex, $expectedValue, $shouldMatch)
+    public function match(Definition $definition, $argumentIndex, $expectedValue, $shouldMatch): void
     {
         $constraint = new DefinitionHasArgumentConstraint($argumentIndex, $expectedValue);
 
@@ -61,7 +61,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
      * @param mixed  $argument
      * @param string $exceptionMessage
      */
-    public function validates_definitionIndex($argument, $exceptionMessage)
+    public function validates_definitionIndex($argument, $exceptionMessage): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage($exceptionMessage);
@@ -101,7 +101,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
      *
      * @param int $argumentIndex
      */
-    public function supports_indexed_arguments($argumentIndex)
+    public function supports_indexed_arguments($argumentIndex): void
     {
         $expectedValue = 'bar';
 
@@ -145,7 +145,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
      *
      * @param string $argument
      */
-    public function supports_named_arguments($argument)
+    public function supports_named_arguments($argument): void
     {
         $expectedValue = 'bar';
 

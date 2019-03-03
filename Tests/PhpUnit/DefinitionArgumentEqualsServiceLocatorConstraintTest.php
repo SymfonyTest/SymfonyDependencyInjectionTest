@@ -32,7 +32,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
     /**
      * @test
      */
-    public function it_fails_if_the_service_definition_is_not_a_service_locator()
+    public function it_fails_if_the_service_definition_is_not_a_service_locator(): void
     {
         $this->containerBuilder->setDefinition('not_a_service_locator', new Definition());
         $this->containerBuilder->setDefinition('using_service', new Definition(\stdClass::class, [new Reference('not_a_service_locator')]));
@@ -43,7 +43,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
     /**
      * @test
      */
-    public function if_fails_if_the_service_definition_value_references_a_missing_service()
+    public function if_fails_if_the_service_definition_value_references_a_missing_service(): void
     {
         $this->containerBuilder->setDefinition('using_service', new Definition(\stdClass::class, [new Reference('not_a_service_locator')]));
 
@@ -57,7 +57,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
      *
      * @dataProvider provideInvalidServiceLocatorReferences
      */
-    public function if_fails_if_the_service_definition_value_is_not_a_valid_reference($arguments)
+    public function if_fails_if_the_service_definition_value_is_not_a_valid_reference($arguments): void
     {
         $this->containerBuilder->setDefinition('service_locator', new Definition(ServiceLocator::class, $arguments));
         $this->containerBuilder->setDefinition('using_service', new Definition(\stdClass::class, [new Reference('service_locator')]));
@@ -76,7 +76,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
     /**
      * @test
      */
-    public function it_does_not_fail_if_the_service_definition_is_a_service_locator()
+    public function it_does_not_fail_if_the_service_definition_is_a_service_locator(): void
     {
         $definition = new Definition(ServiceLocator::class, [['bar' => new ServiceClosureArgument(new Reference('foo'))]]);
         $this->containerBuilder->setDefinition('using_service', new Definition(\stdClass::class, [null, '$l' => $definition]));
@@ -87,7 +87,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
     /**
      * @test
      */
-    public function it_does_not_fail_if_the_service_definition_is_a_service_locator_reference()
+    public function it_does_not_fail_if_the_service_definition_is_a_service_locator_reference(): void
     {
         $id = ServiceLocatorTagPass::register($this->containerBuilder, ['bar' => new Reference('foo')]);
         $this->containerBuilder->setDefinition('using_service', new Definition(\stdClass::class, [$id]));
@@ -100,7 +100,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
     /**
      * @test
      */
-    public function it_does_not_fail_if_the_service_definition_is_a_service_locator_with_a_with_a_context()
+    public function it_does_not_fail_if_the_service_definition_is_a_service_locator_with_a_with_a_context(): void
     {
         $id = ServiceLocatorTagPass::register($this->containerBuilder, ['bar' => new Reference('foo')], 'using_service');
         $this->containerBuilder->setDefinition('using_service', new Definition(\stdClass::class, [$id]));
@@ -110,12 +110,12 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
         );
     }
 
-    private function assertConstraintFails(Constraint $constraint)
+    private function assertConstraintFails(Constraint $constraint): void
     {
         $this->assertFalse($constraint->evaluate($this->containerBuilder, '', true));
     }
 
-    private function assertConstraintPasses(Constraint $constraint)
+    private function assertConstraintPasses(Constraint $constraint): void
     {
         $this->assertTrue($constraint->evaluate($this->containerBuilder, '', false));
     }

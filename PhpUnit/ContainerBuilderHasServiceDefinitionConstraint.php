@@ -31,7 +31,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         );
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof ContainerBuilder)) {
             throw new \InvalidArgumentException(
@@ -50,7 +50,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         return true;
     }
 
-    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, bool $returnResult): bool
     {
         if (!$containerBuilder->has($this->serviceId)) {
             if ($returnResult) {
@@ -69,7 +69,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         return true;
     }
 
-    private function evaluateClass(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateClass(ContainerBuilder $containerBuilder, bool $returnResult): bool
     {
         $definition = $containerBuilder->findDefinition($this->serviceId);
 

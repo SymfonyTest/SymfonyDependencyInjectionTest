@@ -12,7 +12,7 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
      * @test
      * @dataProvider definitionProvider
      */
-    public function match(Definition $definition, $method, $arguments, $index, $expectedToMatch)
+    public function match(Definition $definition, $method, $arguments, $index, $expectedToMatch): void
     {
         $constraint = new DefinitionHasMethodCallConstraint($method, $arguments, $index);
 
@@ -50,7 +50,7 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_string_representation()
+    public function it_has_a_string_representation(): void
     {
         $method = 'methodName';
         $constraint = new DefinitionHasMethodCallConstraint($method, []);

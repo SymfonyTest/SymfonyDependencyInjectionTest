@@ -22,7 +22,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
         );
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof ContainerBuilder)) {
             throw new \InvalidArgumentException(
@@ -37,7 +37,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
         return true;
     }
 
-    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, bool $returnResult): bool
     {
         if (!$containerBuilder->has($this->serviceId)) {
             if ($returnResult) {
