@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
-class DefinitionIsChildOfConstraint extends Constraint
+final class DefinitionIsChildOfConstraint extends Constraint
 {
     private $expectedParentServiceId;
 

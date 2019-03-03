@@ -6,7 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\Definition;
 
-class DefinitionHasMethodCallConstraint extends Constraint
+final class DefinitionHasMethodCallConstraint extends Constraint
 {
     private $methodName;
     private $arguments;

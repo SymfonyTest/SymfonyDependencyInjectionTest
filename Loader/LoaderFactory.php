@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class LoaderFactory implements LoaderFactoryInterface
+final class LoaderFactory implements LoaderFactoryInterface
 {
     public function createLoaderForSource(ContainerBuilder $container, $source): LoaderInterface
     {

@@ -19,7 +19,7 @@ abstract class AbstractCompilerPassTestCase extends AbstractContainerBuilderTest
      *
      * @test
      */
-    public function compilation_should_not_fail_with_empty_container(): void
+    final public function compilation_should_not_fail_with_empty_container(): void
     {
         try {
             $this->compile();

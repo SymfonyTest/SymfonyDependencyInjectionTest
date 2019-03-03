@@ -2,6 +2,6 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\Loader\Exception;
 
-class UnknownConfigurationSourceException extends \InvalidArgumentException
+final class UnknownConfigurationSourceException extends \InvalidArgumentException
 {
 }

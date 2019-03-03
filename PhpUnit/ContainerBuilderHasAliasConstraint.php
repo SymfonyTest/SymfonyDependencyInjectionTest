@@ -6,7 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ContainerBuilderHasAliasConstraint extends Constraint
+final class ContainerBuilderHasAliasConstraint extends Constraint
 {
     private $aliasId;
     private $expectedServiceId;
