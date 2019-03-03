@@ -15,7 +15,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
     public function __construct(
         string $serviceId,
         ?string $expectedClass = null,
-        $checkExpectedClass = true
+        bool $checkExpectedClass = true
     ) {
         $this->serviceId = $serviceId;
         $this->expectedClass = $expectedClass;
