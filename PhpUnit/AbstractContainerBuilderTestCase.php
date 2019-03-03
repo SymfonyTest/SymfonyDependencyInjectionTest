@@ -29,13 +29,8 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
 
     /**
      * Shortcut for quickly defining services. The returned Definition object can be further modified if necessary.
-     *
-     * @param $serviceId
-     * @param $class
-     *
-     * @return Definition
      */
-    protected function registerService($serviceId, $class)
+    protected function registerService(string $serviceId, string $class): Definition
     {
         $definition = new Definition($class);
 
@@ -46,11 +41,8 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
 
     /**
      * Set a service definition you manually created.
-     *
-     * @param $serviceId
-     * @param Definition $definition
      */
-    protected function setDefinition($serviceId, Definition $definition)
+    protected function setDefinition(string $serviceId, Definition $definition): void
     {
         $this->container->setDefinition($serviceId, $definition);
     }
@@ -58,10 +50,9 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     /**
      * Set a parameter.
      *
-     * @param $parameterId
-     * @param $parameterValue
+     * @param mixed $parameterValue
      */
-    protected function setParameter($parameterId, $parameterValue)
+    protected function setParameter(string $parameterId, $parameterValue): void
     {
         $this->container->setParameter($parameterId, $parameterValue);
     }
@@ -69,18 +60,15 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     /**
      * Call this method to compile the ContainerBuilder, to test if any problems would occur at runtime.
      */
-    protected function compile()
+    protected function compile(): void
     {
         $this->container->compile();
     }
 
     /**
      * Assert that the ContainerBuilder for this test has a service definition with the given id and class.
-     *
-     * @param $serviceId
-     * @param $expectedClass
      */
-    protected function assertContainerBuilderHasService($serviceId, $expectedClass = null)
+    protected function assertContainerBuilderHasService(string $serviceId, ?string $expectedClass = null): void
     {
         $checkExpectedClass = (func_num_args() > 1);
 
@@ -92,10 +80,8 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
 
     /**
      * Assert that the ContainerBuilder for this test does not have a service definition with the given id.
-     *
-     * @param $serviceId
      */
-    protected function assertContainerBuilderNotHasService($serviceId)
+    protected function assertContainerBuilderNotHasService(string $serviceId): void
     {
         self::assertThat(
             $this->container,
@@ -105,10 +91,8 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
 
     /**
      * Assert that the ContainerBuilder for this test has a synthetic service with the given id.
-     *
-     * @param $serviceId
      */
-    protected function assertContainerBuilderHasSyntheticService($serviceId)
+    protected function assertContainerBuilderHasSyntheticService(string $serviceId): void
     {
         self::assertThat(
             $this->container,
@@ -118,11 +102,8 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
 
     /**
      * Assert that the ContainerBuilder for this test has an alias and that it is an alias for the given service id.
-     *
-     * @param $aliasId
-     * @param $expectedServiceId
      */
-    protected function assertContainerBuilderHasAlias($aliasId, $expectedServiceId = null)
+    protected function assertContainerBuilderHasAlias(string $aliasId, ?string $expectedServiceId = null): void
     {
         self::assertThat(
             $this->container,
@@ -133,10 +114,9 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     /**
      * Assert that the ContainerBuilder for this test has a parameter and that its value is the given value.
      *
-     * @param $parameterName
-     * @param $expectedParameterValue
+     * @param mixed $expectedParameterValue
      */
-    protected function assertContainerBuilderHasParameter($parameterName, $expectedParameterValue = null)
+    protected function assertContainerBuilderHasParameter(string $parameterName, $expectedParameterValue = null): void
     {
         $checkParameterValue = (func_num_args() > 1);
 
@@ -150,15 +130,13 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument
      * at the given index, and its value is the given value.
      *
-     * @param $serviceId
-     * @param $argumentIndex
-     * @param $expectedValue
+     * @param mixed $expectedValue
      */
     protected function assertContainerBuilderHasServiceDefinitionWithArgument(
-        $serviceId,
+        string $serviceId,
         $argumentIndex,
         $expectedValue = null
-    ) {
+    ): void {
         $definition = $this->container->findDefinition($serviceId);
         $checkValue = (func_num_args() > 2);
 
@@ -172,15 +150,14 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument
      * at the given index, and its value is a ServiceLocator with a reference-map equal to the given value.
      *
-     * @param string     $serviceId
      * @param int|string $argumentIndex
      * @param array      $expectedServiceMap an array of service-id references and their key in the map
      */
     protected function assertContainerBuilderHasServiceDefinitionWithServiceLocatorArgument(
-        $serviceId,
+        string $serviceId,
         $argumentIndex,
         array $expectedValue
-    ) {
+    ): void {
         self::assertThat(
             $this->container,
             new DefinitionArgumentEqualsServiceLocatorConstraint($serviceId, $argumentIndex, $expectedValue)
@@ -191,17 +168,14 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has a method
      * call to the given method with the given arguments.
      *
-     * @param string   $serviceId
-     * @param string   $method
-     * @param array    $arguments
      * @param int|null $index
      */
     protected function assertContainerBuilderHasServiceDefinitionWithMethodCall(
-        $serviceId,
-        $method,
+        string $serviceId,
+        string $method,
         array $arguments = [],
         $index = null
-    ) {
+    ): void {
         $definition = $this->container->findDefinition($serviceId);
 
         self::assertThat($definition, new DefinitionHasMethodCallConstraint($method, $arguments, $index));
@@ -210,16 +184,12 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     /**
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has a tag
      * with the given attributes.
-     *
-     * @param string $serviceId
-     * @param string $tag
-     * @param array  $attributes
      */
     protected function assertContainerBuilderHasServiceDefinitionWithTag(
-        $serviceId,
-        $tag,
+        string $serviceId,
+        string $tag,
         array $attributes = []
-    ) {
+    ): void {
         $definition = $this->container->findDefinition($serviceId);
 
         self::assertThat($definition, new DefinitionHasTagConstraint($tag, $attributes));
@@ -228,11 +198,8 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     /**
      * Assert that the ContainerBuilder for this test has a service definition with the given id which is a decorated
      * service and it has the given parent service.
-     *
-     * @param $serviceId
-     * @param $parentServiceId
      */
-    protected function assertContainerBuilderHasServiceDefinitionWithParent($serviceId, $parentServiceId)
+    protected function assertContainerBuilderHasServiceDefinitionWithParent(string $serviceId, string $parentServiceId): void
     {
         $definition = $this->container->findDefinition($serviceId);
 
@@ -242,10 +209,9 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     /**
      * Assert that the ContainerBuilder for this test has a ServiceLocator service definition with the given id.
      *
-     * @param string $serviceId
-     * @param array  $expectedServiceMap an array of service-id references and their key in the map
+     * @param array $expectedServiceMap an array of service-id references and their key in the map
      */
-    protected function assertContainerBuilderHasServiceLocator(string $serviceId, array $expectedServiceMap = [])
+    protected function assertContainerBuilderHasServiceLocator(string $serviceId, array $expectedServiceMap = []): void
     {
         $definition = $this->container->findDefinition($serviceId);
 

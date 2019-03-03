@@ -9,7 +9,7 @@ use PHPUnit\Framework\ExpectationFailedException;
 
 class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
 {
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [
             new PrependableTestExtension(),
@@ -20,7 +20,7 @@ class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function prepend_invoked_only_if_prepend_interface_is_implemented()
+    public function prepend_invoked_only_if_prepend_interface_is_implemented(): void
     {
         $this->load();
 
@@ -30,7 +30,7 @@ class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_prepend_interface_is_not_implemented_prepend_is_not_invoked()
+    public function if_prepend_interface_is_not_implemented_prepend_is_not_invoked(): void
     {
         $this->load();
 

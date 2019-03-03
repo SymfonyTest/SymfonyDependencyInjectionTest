@@ -9,12 +9,8 @@ class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
 {
     private $serviceId;
 
-    public function __construct($serviceId)
+    public function __construct(string $serviceId)
     {
-        if (!is_string($serviceId)) {
-            throw new \InvalidArgumentException('The $serviceId argument should be a string');
-        }
-
         $this->serviceId = $serviceId;
     }
 
@@ -26,7 +22,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
         );
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof ContainerBuilder)) {
             throw new \InvalidArgumentException(
@@ -41,7 +37,7 @@ class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
         return true;
     }
 
-    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, bool $returnResult): bool
     {
         if (!$containerBuilder->has($this->serviceId)) {
             if ($returnResult) {

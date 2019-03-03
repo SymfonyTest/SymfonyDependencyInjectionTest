@@ -11,13 +11,13 @@ class DefinitionHasTagConstraint extends Constraint
     private $name;
     private $attributes;
 
-    public function __construct($name, array $attributes = [])
+    public function __construct(string $name, array $attributes = [])
     {
         $this->name = $name;
         $this->attributes = $attributes;
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof Definition)) {
             throw new \InvalidArgumentException(
@@ -69,7 +69,7 @@ class DefinitionHasTagConstraint extends Constraint
         );
     }
 
-    private function equalAttributes($expectedAttributes, $actualAttributes)
+    private function equalAttributes(array $expectedAttributes, array $actualAttributes): bool
     {
         $constraint = new IsEqual(
             $expectedAttributes

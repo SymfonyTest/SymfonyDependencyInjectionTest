@@ -13,19 +13,15 @@ abstract class AbstractExtensionConfigurationTestCase extends TestCase
 {
     /**
      * Return an instance of the container extension that you are testing.
-     *
-     * @return ExtensionInterface
      */
-    abstract protected function getContainerExtension();
+    abstract protected function getContainerExtension(): ExtensionInterface;
 
     /**
      * Return an instance of the configuration class that you are testing.
-     *
-     * @return ConfigurationInterface
      */
-    abstract protected function getConfiguration();
+    abstract protected function getConfiguration(): ConfigurationInterface;
 
-    protected function assertProcessedConfigurationEquals($expectedConfiguration, array $sources)
+    protected function assertProcessedConfigurationEquals(array $expectedConfiguration, array $sources): void
     {
         $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
         $extensionConfiguration = $extensionConfigurationBuilder

@@ -12,16 +12,11 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
     private $expectedClass;
     private $checkExpectedClass;
 
-    public function __construct($serviceId, $expectedClass = null, $checkExpectedClass = true)
-    {
-        if (!is_string($serviceId)) {
-            throw new \InvalidArgumentException('The $serviceId argument should be a string');
-        }
-
-        if ($checkExpectedClass && !is_string($expectedClass)) {
-            throw new \InvalidArgumentException('The $expectedClass argument should be a string');
-        }
-
+    public function __construct(
+        string $serviceId,
+        ?string $expectedClass = null,
+        bool $checkExpectedClass = true
+    ) {
         $this->serviceId = $serviceId;
         $this->expectedClass = $expectedClass;
         $this->checkExpectedClass = $checkExpectedClass;
@@ -36,7 +31,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         );
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof ContainerBuilder)) {
             throw new \InvalidArgumentException(
@@ -55,7 +50,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         return true;
     }
 
-    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateServiceDefinition(ContainerBuilder $containerBuilder, bool $returnResult): bool
     {
         if (!$containerBuilder->has($this->serviceId)) {
             if ($returnResult) {
@@ -74,7 +69,7 @@ class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         return true;
     }
 
-    private function evaluateClass(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateClass(ContainerBuilder $containerBuilder, bool $returnResult): bool
     {
         $definition = $containerBuilder->findDefinition($this->serviceId);
 

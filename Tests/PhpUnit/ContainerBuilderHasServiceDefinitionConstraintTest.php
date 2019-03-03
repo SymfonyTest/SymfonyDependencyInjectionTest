@@ -19,7 +19,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
       $expectedClass,
       $checkExpectedClass,
       $shouldMatch
-    ) {
+    ): void {
         $constraint = new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass, $checkExpectedClass);
 
         $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
@@ -70,7 +70,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_string_representation()
+    public function it_has_a_string_representation(): void
     {
         $serviceId = 'some_service_id';
         $class = 'SomeClass';
@@ -79,27 +79,5 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
             'has a service definition "'.$serviceId.'" with class "'.$class.'"',
             $constraint->toString()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function it_expects_a_string_for_service_id()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('string');
-
-        new ContainerBuilderHasServiceDefinitionConstraint(new \stdClass(), 'class');
-    }
-
-    /**
-     * @test
-     */
-    public function it_expects_a_string_for_class()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('string');
-
-        new ContainerBuilderHasServiceDefinitionConstraint('service_id', new \stdClass());
     }
 }

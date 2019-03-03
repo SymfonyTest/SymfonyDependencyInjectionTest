@@ -4,6 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\Loader;
 
 use Matthias\SymfonyDependencyInjectionTest\Loader\Exception\UnknownConfigurationSourceException;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
 use Symfony\Component\DependencyInjection\Loader\IniFileLoader;
@@ -13,7 +14,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class LoaderFactory implements LoaderFactoryInterface
 {
-    public function createLoaderForSource(ContainerBuilder $container, $source)
+    public function createLoaderForSource(ContainerBuilder $container, $source): LoaderInterface
     {
         if ($source instanceof \Closure) {
             return new ClosureLoader($container);
@@ -41,22 +42,22 @@ class LoaderFactory implements LoaderFactoryInterface
         ));
     }
 
-    public function createYamlFileLoader($container)
+    public function createYamlFileLoader($container): YamlFileLoader
     {
         return new YamlFileLoader($container, new FileLocator());
     }
 
-    public function createXmlFileLoader(ContainerBuilder $container)
+    public function createXmlFileLoader(ContainerBuilder $container): XmlFileLoader
     {
         return new XmlFileLoader($container, new FileLocator());
     }
 
-    public function createPhpFileLoader(ContainerBuilder $container)
+    public function createPhpFileLoader(ContainerBuilder $container): PhpFileLoader
     {
         return new PhpFileLoader($container, new FileLocator());
     }
 
-    public function createIniFileLoader(ContainerBuilder $container)
+    public function createIniFileLoader(ContainerBuilder $container): IniFileLoader
     {
         return new IniFileLoader($container, new FileLocator());
     }

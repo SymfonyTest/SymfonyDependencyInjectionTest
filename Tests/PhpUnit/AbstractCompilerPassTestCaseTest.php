@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
 {
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CollectServicesAndAddThemWithMethodCallsCompilerPass());
         $container->addCompilerPass(new CollectServicesAndSetThemAsArgumentCompilerPass());
@@ -20,7 +20,7 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function if_compiler_pass_collects_services_by_adding_method_calls_these_can_be_asserted_to_exist()
+    public function if_compiler_pass_collects_services_by_adding_method_calls_these_can_be_asserted_to_exist(): void
     {
         $collectingService = new Definition();
         $this->setDefinition('collecting_service_id', $collectingService);
@@ -55,7 +55,7 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function if_compiler_pass_collects_services_by_setting_constructor_argument_it_can_be_asserted_to_exist()
+    public function if_compiler_pass_collects_services_by_setting_constructor_argument_it_can_be_asserted_to_exist(): void
     {
         $collectingService = new Definition();
         $this->setDefinition('collecting_service_id', $collectingService);

@@ -7,11 +7,5 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 interface LoaderFactoryInterface
 {
-    /**
-     * @param ContainerBuilder $container
-     * @param $source
-     *
-     * @return LoaderInterface
-     */
-    public function createLoaderForSource(ContainerBuilder $container, $source);
+    public function createLoaderForSource(ContainerBuilder $container, $source): LoaderInterface;
 }

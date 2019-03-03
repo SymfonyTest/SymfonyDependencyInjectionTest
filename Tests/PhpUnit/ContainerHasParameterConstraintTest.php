@@ -18,7 +18,7 @@ class ContainerHasParameterConstraintTest extends TestCase
       $parameterValue,
       $checkParameterValue,
       $expectedToMatch
-    ) {
+    ): void {
         $constraint = new ContainerHasParameterConstraint($parameterName, $parameterValue, $checkParameterValue);
 
         $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));

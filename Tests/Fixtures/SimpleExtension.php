@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class SimpleExtension implements ExtensionInterface
 {
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
     }
 
@@ -16,11 +16,11 @@ class SimpleExtension implements ExtensionInterface
         return 'simple';
     }
 
-    public function getNamespace()
+    public function getNamespace(): void
     {
     }
 
-    public function getXsdValidationBasePath()
+    public function getXsdValidationBasePath(): void
     {
     }
 }

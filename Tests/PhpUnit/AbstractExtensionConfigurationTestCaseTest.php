@@ -5,16 +5,18 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\SimpleConfiguration;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\SimpleExtension;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class AbstractExtensionConfigurationTestCaseTest extends AbstractExtensionConfigurationTestCase
 {
-    protected function getContainerExtension()
+    protected function getContainerExtension(): ExtensionInterface
     {
         return new SimpleExtension();
     }
 
-    protected function getConfiguration()
+    protected function getConfiguration(): ConfigurationInterface
     {
         return new SimpleConfiguration();
     }
@@ -22,11 +24,11 @@ class AbstractExtensionConfigurationTestCaseTest extends AbstractExtensionConfig
     /**
      * @test
      */
-    public function it_compares_expected_configuration_values_with_values_loaded_from_files()
+    public function it_compares_expected_configuration_values_with_values_loaded_from_files(): void
     {
         $sources = [
             __DIR__.'/../Fixtures/simple.php',
-            function (ContainerBuilder $container) {
+            function (ContainerBuilder $container): void {
                 $container->loadFromExtension(
                     'simple',
                     [

@@ -8,12 +8,12 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 class PrependableTestExtension implements ExtensionInterface, PrependExtensionInterface
 {
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $container->setParameter('prepend_parameter_set', 'prepended value');
     }
 
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
     }
 
@@ -22,11 +22,11 @@ class PrependableTestExtension implements ExtensionInterface, PrependExtensionIn
         return 'prependable_test';
     }
 
-    public function getNamespace()
+    public function getNamespace(): void
     {
     }
 
-    public function getXsdValidationBasePath()
+    public function getXsdValidationBasePath(): void
     {
     }
 }

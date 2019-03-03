@@ -23,7 +23,7 @@ class ExtensionConfigurationBuilder
         return $this;
     }
 
-    public function getExtension()
+    public function getExtension(): ExtensionInterface
     {
         if (!($this->extension instanceof ExtensionInterface)) {
             throw new \LogicException('You need to call setExtension() first');
@@ -46,7 +46,7 @@ class ExtensionConfigurationBuilder
         return $this;
     }
 
-    public function getSources()
+    public function getSources(): array
     {
         if (count($this->sources) === 0) {
             throw new \LogicException('You need to call setSources() or addSource() first');
@@ -55,7 +55,7 @@ class ExtensionConfigurationBuilder
         return $this->sources;
     }
 
-    public function getConfiguration()
+    public function getConfiguration(): array
     {
         $container = new ContainerBuilder();
 
@@ -66,7 +66,7 @@ class ExtensionConfigurationBuilder
         return $this->getExtensionConfiguration($container);
     }
 
-    private function loadSources(ContainerBuilder $container, array $sources)
+    private function loadSources(ContainerBuilder $container, array $sources): void
     {
         foreach ($sources as $source) {
             $loader = $this->loaderFactory->createLoaderForSource($container, $source);
@@ -74,7 +74,7 @@ class ExtensionConfigurationBuilder
         }
     }
 
-    private function getExtensionConfiguration(ContainerBuilder $container)
+    private function getExtensionConfiguration(ContainerBuilder $container): array
     {
         $extensionAlias = $this->getExtension()->getAlias();
 

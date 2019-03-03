@@ -12,7 +12,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
     private $arguments;
     private $index;
 
-    public function __construct($methodName, array $arguments = [], $index = null)
+    public function __construct(string $methodName, array $arguments = [], $index = null)
     {
         if ($index !== null && !is_int($index)) {
             throw new \InvalidArgumentException(sprintf('Expected value of integer type for method call index, "%s" given.', is_object($index) ? get_class($index) : gettype($index)));
@@ -23,7 +23,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
         $this->index = $index;
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof Definition)) {
             throw new \InvalidArgumentException(
@@ -80,7 +80,7 @@ class DefinitionHasMethodCallConstraint extends Constraint
         );
     }
 
-    private function equalArguments($expectedArguments, $actualArguments)
+    private function equalArguments(array $expectedArguments, array $actualArguments): bool
     {
         $constraint = new IsEqual(
             $expectedArguments

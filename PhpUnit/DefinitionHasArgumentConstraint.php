@@ -16,7 +16,7 @@ class DefinitionHasArgumentConstraint extends Constraint
     private $expectedValue;
     private $checkExpectedValue;
 
-    public function __construct($argumentIndex, $expectedValue, $checkExpectedValue = true)
+    public function __construct($argumentIndex, $expectedValue, bool $checkExpectedValue = true)
     {
         if (!(is_string($argumentIndex) || (is_int($argumentIndex) && $argumentIndex >= 0))) {
             throw new \InvalidArgumentException('Expected either a string or a positive integer for $argumentIndex.');
@@ -54,7 +54,7 @@ class DefinitionHasArgumentConstraint extends Constraint
         );
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof Definition)) {
             throw new \InvalidArgumentException(
@@ -73,18 +73,11 @@ class DefinitionHasArgumentConstraint extends Constraint
         return true;
     }
 
-    private function evaluateArgumentIndex(Definition $definition, $returnResult)
+    private function evaluateArgumentIndex(Definition $definition, bool $returnResult): bool
     {
         try {
             $definition->getArgument($this->argumentIndex);
-        } catch (\Exception $exception) {
-            // Older versions of Symfony throw \OutOfBoundsException
-            // Newer versions throw Symfony\Component\DependencyInjection\Exception\OutOfBoundsException
-            if (!($exception instanceof \OutOfBoundsException || $exception instanceof OutOfBoundsException)) {
-                // this was not the expected exception
-                throw $exception;
-            }
-
+        } catch (OutOfBoundsException $exception) {
             if ($returnResult) {
                 return false;
             }
@@ -101,7 +94,7 @@ class DefinitionHasArgumentConstraint extends Constraint
         return true;
     }
 
-    private function evaluateArgumentValue(Definition $definition, $returnResult)
+    private function evaluateArgumentValue(Definition $definition, bool $returnResult): bool
     {
         $actualValue = $definition->getArgument($this->argumentIndex);
 

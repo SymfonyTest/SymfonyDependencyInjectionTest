@@ -13,7 +13,7 @@ class DefinitionHasTagConstraintTest extends TestCase
      * @test
      * @dataProvider definitionProvider
      */
-    public function match(Definition $definition, $tag, $attributes, $expectedToMatch)
+    public function match(Definition $definition, $tag, $attributes, $expectedToMatch): void
     {
         $constraint = new DefinitionHasTagConstraint($tag, $attributes);
 
@@ -24,7 +24,7 @@ class DefinitionHasTagConstraintTest extends TestCase
      * @test
      * @dataProvider definitionProvider
      */
-    public function evaluateThrowsExceptionOnFailure(Definition $definition, $tag, $attributes, $expectedToMatch)
+    public function evaluateThrowsExceptionOnFailure(Definition $definition, $tag, $attributes, $expectedToMatch): void
     {
         $constraint = new DefinitionHasTagConstraint($tag, $attributes);
 
@@ -70,7 +70,7 @@ class DefinitionHasTagConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_string_representation()
+    public function it_has_a_string_representation(): void
     {
         $tag = 'tagName';
         $constraint = new DefinitionHasTagConstraint($tag, []);

@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 {
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         // load some service definitions
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__));
@@ -38,11 +38,11 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
         return 'matthias_dependency_injection_test';
     }
 
-    public function getNamespace()
+    public function getNamespace(): void
     {
     }
 
-    public function getXsdValidationBasePath()
+    public function getXsdValidationBasePath(): void
     {
     }
 }

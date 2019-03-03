@@ -13,14 +13,14 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
      *
      * @return ExtensionInterface[]
      */
-    abstract protected function getContainerExtensions();
+    abstract protected function getContainerExtensions(): array;
 
     /**
      * Optionally override this method to return an array that will be used as the minimal configuration for loading
      * the container extension under test, to prevent a test from failing because of a missing required
      * configuration value for the container extension.
      */
-    protected function getMinimalConfiguration()
+    protected function getMinimalConfiguration(): array
     {
         return [];
     }
@@ -44,10 +44,8 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
     /**
      * Call this method from within your test after you have (optionally) modified the ContainerBuilder for this test
      * ($this->container).
-     *
-     * @param array $configurationValues
      */
-    protected function load(array $configurationValues = [])
+    protected function load(array $configurationValues = []): void
     {
         $configs = [$this->getMinimalConfiguration(), $configurationValues];
 
@@ -63,7 +61,7 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
     /**
      * Call this method if you want to compile the ContainerBuilder *inside* the test instead of *after* the test.
      */
-    protected function compile()
+    protected function compile(): void
     {
         $this->container->compile();
     }

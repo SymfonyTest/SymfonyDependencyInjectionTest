@@ -14,7 +14,7 @@ class DefinitionIsChildOfConstraintTest extends TestCase
      * @test
      * @dataProvider definitionProvider
      */
-    public function match(Definition $definition, $parentServiceId, $expectedToMatch)
+    public function match(Definition $definition, $parentServiceId, $expectedToMatch): void
     {
         $constraint = new DefinitionIsChildOfConstraint($parentServiceId);
 

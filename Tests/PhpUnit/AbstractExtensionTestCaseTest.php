@@ -8,7 +8,7 @@ use PHPUnit\Framework\ExpectationFailedException;
 
 class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
 {
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [
             new MatthiasDependencyInjectionTestExtension(),
@@ -18,7 +18,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_load_is_successful_it_does_not_fail()
+    public function if_load_is_successful_it_does_not_fail(): void
     {
         $this->load();
 
@@ -54,7 +54,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_service_is_undefined_it_fails()
+    public function if_service_is_undefined_it_fails(): void
     {
         $this->load();
 
@@ -66,7 +66,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_synthetic_service_is_undefined_it_fails()
+    public function if_synthetic_service_is_undefined_it_fails(): void
     {
         $this->load();
 
@@ -79,7 +79,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_service_is_defined_but_not_synthetic_it_fails()
+    public function if_service_is_defined_but_not_synthetic_it_fails(): void
     {
         $this->load();
 
@@ -92,7 +92,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_service_is_defined_but_has_another_class_it_fails()
+    public function if_service_is_defined_but_has_another_class_it_fails(): void
     {
         $this->load();
 
@@ -105,7 +105,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_alias_is_not_defined_it_fails()
+    public function if_alias_is_not_defined_it_fails(): void
     {
         $this->load();
 
@@ -117,7 +117,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_alias_exists_but_for_wrong_service_it_fails()
+    public function if_alias_exists_but_for_wrong_service_it_fails(): void
     {
         $this->load();
 
@@ -130,7 +130,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_parameter_does_not_exist_it_fails()
+    public function if_parameter_does_not_exist_it_fails(): void
     {
         $this->load();
 
@@ -143,7 +143,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_parameter_exists_but_has_wrong_value_it_fails()
+    public function if_parameter_exists_but_has_wrong_value_it_fails(): void
     {
         $this->load();
 
@@ -156,7 +156,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_definition_does_not_have_argument_it_fails()
+    public function if_definition_does_not_have_argument_it_fails(): void
     {
         $this->load();
 
@@ -169,7 +169,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_definition_has_argument_but_with_wrong_value_it_fails()
+    public function if_definition_has_argument_but_with_wrong_value_it_fails(): void
     {
         $this->load();
 
@@ -181,7 +181,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_definition_is_decorated_and_argument_has_wrong_value_it_fails()
+    public function if_definition_is_decorated_and_argument_has_wrong_value_it_fails(): void
     {
         $this->load();
 
@@ -194,7 +194,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_definition_is_decorated_but_by_the_wrong_parent_it_fails()
+    public function if_definition_is_decorated_but_by_the_wrong_parent_it_fails(): void
     {
         $this->load();
 
@@ -207,7 +207,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_definition_should_be_decorated_when_it_is_not_it_fails()
+    public function if_definition_should_be_decorated_when_it_is_not_it_fails(): void
     {
         $this->load();
 
@@ -220,7 +220,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_definition_should_have_a_method_call_and_it_has_not_it_fails()
+    public function if_definition_should_have_a_method_call_and_it_has_not_it_fails(): void
     {
         $this->load();
 
@@ -237,7 +237,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_definition_should_have_a_certain_arguments_for_a_method_call_and_it_has_not_it_fails()
+    public function if_definition_should_have_a_certain_arguments_for_a_method_call_and_it_has_not_it_fails(): void
     {
         $this->load();
 
@@ -254,7 +254,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_service_is_defined_it_fails()
+    public function if_service_is_defined_it_fails(): void
     {
         $this->load();
 
@@ -266,7 +266,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function if_service_is_not_defined_it_does_not_fail()
+    public function if_service_is_not_defined_it_does_not_fail(): void
     {
         $this->load();
 

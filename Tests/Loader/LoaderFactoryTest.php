@@ -11,7 +11,7 @@ class LoaderFactoryTest extends TestCase
      * @test
      * @dataProvider fileProvider
      */
-    public function it_creates_the_appropriate_file_loader_based_on_the_extension($file, $expectedClass)
+    public function it_creates_the_appropriate_file_loader_based_on_the_extension($file, $expectedClass): void
     {
         $factory = new LoaderFactory();
         $loader = $factory->createLoaderForSource($this->createMockContainerBuilder(), $file);
@@ -22,9 +22,9 @@ class LoaderFactoryTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_a_closure_loader_when_source_is_a_closure()
+    public function it_creates_a_closure_loader_when_source_is_a_closure(): void
     {
-        $source = function () {
+        $source = function (): void {
         };
         $factory = new LoaderFactory();
 

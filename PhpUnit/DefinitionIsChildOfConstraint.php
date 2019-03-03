@@ -16,7 +16,7 @@ class DefinitionIsChildOfConstraint extends Constraint
         $this->expectedParentServiceId = $expectedParentServiceId;
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!$other instanceof Definition) {
             throw new \InvalidArgumentException(
@@ -43,7 +43,7 @@ class DefinitionIsChildOfConstraint extends Constraint
         );
     }
 
-    private function evaluateDefinitionIsDecorator(Definition $definition, $returnResult)
+    private function evaluateDefinitionIsDecorator(Definition $definition, bool $returnResult): bool
     {
         if (!$definition instanceof ChildDefinition && !$definition instanceof DefinitionDecorator) {
             if ($returnResult) {
@@ -56,7 +56,7 @@ class DefinitionIsChildOfConstraint extends Constraint
         return true;
     }
 
-    private function evaluateDefinitionHasExpectedParentService($definition, $returnResult)
+    private function evaluateDefinitionHasExpectedParentService(Definition $definition, bool $returnResult): bool
     {
         $actualParentService = $this->expectedParentServiceId;
 

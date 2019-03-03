@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class CollectServicesAndAddThemWithMethodCallsCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('collecting_service_id')) {
             return;

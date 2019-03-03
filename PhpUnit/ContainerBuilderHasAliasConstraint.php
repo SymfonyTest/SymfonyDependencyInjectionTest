@@ -11,16 +11,8 @@ class ContainerBuilderHasAliasConstraint extends Constraint
     private $aliasId;
     private $expectedServiceId;
 
-    public function __construct($aliasId, $expectedServiceId = null)
+    public function __construct(string $aliasId, ?string $expectedServiceId = null)
     {
-        if (!is_string($aliasId)) {
-            throw new \InvalidArgumentException('The $aliasId argument should be a string');
-        }
-
-        if ($expectedServiceId !== null && !is_string($expectedServiceId)) {
-            throw new \InvalidArgumentException('The $expectedServiceId argument should be a string');
-        }
-
         $this->aliasId = $aliasId;
         $this->expectedServiceId = $expectedServiceId;
     }
@@ -30,7 +22,7 @@ class ContainerBuilderHasAliasConstraint extends Constraint
         return 'has an alias "'.$this->aliasId.'" for service "'.$this->expectedServiceId.'"';
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, string $description = '', bool $returnResult = false): bool
     {
         if (!($other instanceof ContainerBuilder)) {
             throw new \InvalidArgumentException(
@@ -49,7 +41,7 @@ class ContainerBuilderHasAliasConstraint extends Constraint
         return true;
     }
 
-    private function evaluateAliasId(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateAliasId(ContainerBuilder $containerBuilder, bool $returnResult): bool
     {
         if (!$containerBuilder->hasAlias($this->aliasId)) {
             if ($returnResult) {
@@ -68,7 +60,7 @@ class ContainerBuilderHasAliasConstraint extends Constraint
         return true;
     }
 
-    private function evaluateServiceId(ContainerBuilder $containerBuilder, $returnResult)
+    private function evaluateServiceId(ContainerBuilder $containerBuilder, $returnResult): bool
     {
         $alias = $containerBuilder->getAlias($this->aliasId);
 

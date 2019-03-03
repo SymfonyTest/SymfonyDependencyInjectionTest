@@ -4,7 +4,6 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasAliasConstraint;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ContainerBuilderHasAliasConstraintTest extends TestCase
@@ -13,11 +12,11 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
      * @test
      * @dataProvider containerBuilderProvider
      */
-    public function match(ContainerBuilder $containerBuilder, $alias, $expectedServiceId, $shouldMatch)
+    public function match(ContainerBuilder $containerBuilder, $alias, $expectedServiceId, $shouldMatch): void
     {
         $constraint = new ContainerBuilderHasAliasConstraint($alias, $expectedServiceId);
 
-        $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, null, true));
+        $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
     }
 
     public function containerBuilderProvider()
@@ -47,7 +46,7 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_string_representation()
+    public function it_has_a_string_representation(): void
     {
         $aliasId = 'alias_id';
         $serviceId = 'service_id';
@@ -61,38 +60,12 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
     /**
      * @test
      */
-    public function it_expects_a_string_for_alias_id()
+    public function it_does_not_change_case_of_aliased_service_ids(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('string');
-
-        new ContainerBuilderHasAliasConstraint(new \stdClass(), 'service_id');
-    }
-
-    /**
-     * @test
-     */
-    public function it_expects_a_string_for_service_id()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('string');
-
-        new ContainerBuilderHasAliasConstraint('alias_id', new \stdClass());
-    }
-
-    /**
-     * @test
-     */
-    public function it_does_not_change_case_of_aliased_service_ids()
-    {
-        if (!class_exists(ChildDefinition::class)) {
-            $this->markTestSkipped('This test requires at least Symfony 3.3');
-        }
-
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->setAlias('Interface', 'InterfaceImplementationService');
         $constraint = new ContainerBuilderHasAliasConstraint('Interface', 'InterfaceImplementationService');
 
-        $this->assertTrue($constraint->evaluate($containerBuilder, null, true));
+        $this->assertTrue($constraint->evaluate($containerBuilder, '', true));
     }
 }
