@@ -57,12 +57,4 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
             $extension->load($configs, $this->container);
         }
     }
-
-    /**
-     * Call this method if you want to compile the ContainerBuilder *inside* the test instead of *after* the test.
-     */
-    protected function compile(): void
-    {
-        $this->container->compile();
-    }
 }
