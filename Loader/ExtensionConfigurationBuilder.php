@@ -5,7 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\Loader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-class ExtensionConfigurationBuilder
+final class ExtensionConfigurationBuilder
 {
     private $extension;
     private $sources = [];

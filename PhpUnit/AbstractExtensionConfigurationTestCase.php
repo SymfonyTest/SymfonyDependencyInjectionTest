@@ -21,8 +21,10 @@ abstract class AbstractExtensionConfigurationTestCase extends TestCase
      */
     abstract protected function getConfiguration(): ConfigurationInterface;
 
-    protected function assertProcessedConfigurationEquals(array $expectedConfiguration, array $sources): void
-    {
+    final protected function assertProcessedConfigurationEquals(
+        array $expectedConfiguration,
+        array $sources
+    ): void {
         $extensionConfigurationBuilder = new ExtensionConfigurationBuilder(new LoaderFactory());
         $extensionConfiguration = $extensionConfigurationBuilder
             ->setExtension($this->getContainerExtension())

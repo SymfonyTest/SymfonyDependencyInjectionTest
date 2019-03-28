@@ -45,7 +45,7 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
      * Call this method from within your test after you have (optionally) modified the ContainerBuilder for this test
      * ($this->container).
      */
-    protected function load(array $configurationValues = []): void
+    final protected function load(array $configurationValues = []): void
     {
         $configs = [$this->getMinimalConfiguration(), $configurationValues];
 
@@ -56,13 +56,5 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
 
             $extension->load($configs, $this->container);
         }
-    }
-
-    /**
-     * Call this method if you want to compile the ContainerBuilder *inside* the test instead of *after* the test.
-     */
-    protected function compile(): void
-    {
-        $this->container->compile();
     }
 }

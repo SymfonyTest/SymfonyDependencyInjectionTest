@@ -7,7 +7,7 @@ use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
-class DefinitionHasArgumentConstraint extends Constraint
+final class DefinitionHasArgumentConstraint extends Constraint
 {
     /**
      * @var int|string

@@ -6,7 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ContainerHasParameterConstraint extends Constraint
+final class ContainerHasParameterConstraint extends Constraint
 {
     private $parameterName;
     private $expectedParameterValue;

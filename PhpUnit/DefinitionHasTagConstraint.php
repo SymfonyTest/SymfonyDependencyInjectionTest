@@ -6,7 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\DependencyInjection\Definition;
 
-class DefinitionHasTagConstraint extends Constraint
+final class DefinitionHasTagConstraint extends Constraint
 {
     private $name;
     private $attributes;

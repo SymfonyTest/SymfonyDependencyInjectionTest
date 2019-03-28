@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
+final class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
 {
     /**
      * @var int|string

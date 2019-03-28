@@ -5,7 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 use PHPUnit\Framework\Constraint\Constraint;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
+final class ContainerBuilderHasSyntheticServiceConstraint extends Constraint
 {
     private $serviceId;
 
