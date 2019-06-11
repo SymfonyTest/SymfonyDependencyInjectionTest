@@ -3,6 +3,8 @@
 namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\AutowiringDependencyInjectionTestExtension;
+use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\ClassLoadedByServiceDefinition;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\MatthiasDependencyInjectionTestExtension;
 use PHPUnit\Framework\ExpectationFailedException;
 
@@ -12,6 +14,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         return [
             new MatthiasDependencyInjectionTestExtension(),
+            new AutowiringDependencyInjectionTestExtension(),
         ];
     }
 
@@ -271,5 +274,63 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderNotHasService('undefined');
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_argument_is_a_valid_argument(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'class_without_autowiring_valid_argument_definition',
+            '$loadedClass',
+            ClassLoadedByServiceDefinition::class
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_argument_is_a_valid_argument_even_not_being_a_reference(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'class_without_autowiring_invalid_argument_definition',
+            '$loadedClass',
+            ClassLoadedByServiceDefinition::class
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_argument_is_a_valid_definition(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithServiceDefinitionArgument(
+            'class_without_autowiring_valid_argument_definition',
+            '$loadedClass',
+            ClassLoadedByServiceDefinition::class
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_argument_is_a_invalid_definition(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+
+        $this->assertContainerBuilderHasServiceDefinitionWithServiceDefinitionArgument(
+            'class_without_autowiring_invalid_argument_definition',
+            '$loadedClass',
+            ClassLoadedByServiceDefinition::class
+        );
     }
 }

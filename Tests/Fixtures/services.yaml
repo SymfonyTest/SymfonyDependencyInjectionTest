@@ -1,0 +1,20 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\ClassWithInjectedServiceDefinitions: ~
+  Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\ClassLoadedByServiceDefinition: ~
+
+  class_without_autowiring_invalid_argument_definition:
+    autowire: false
+    class: Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\ClassWithInjectedServiceDefinitions
+    arguments:
+      $loadedClass: Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\ClassLoadedByServiceDefinition
+
+  class_without_autowiring_valid_argument_definition:
+    autowire: false
+    class:    Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\ClassWithInjectedServiceDefinitions
+    arguments:
+      $loadedClass: '@Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\ClassLoadedByServiceDefinition'

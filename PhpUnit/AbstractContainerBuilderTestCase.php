@@ -171,6 +171,24 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     }
 
     /**
+     * Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument
+     * at the given index, and its value is a ServiceLocator with a reference-map equal to the given value.
+     *
+     * @param int|string $argumentIndex
+     * @param array      $expectedServiceMap an array of service-id references and their key in the map
+     */
+    final protected function assertContainerBuilderHasServiceDefinitionWithServiceDefinitionArgument(
+        string $serviceId,
+        $argumentIndex,
+        $expectedValue
+    ): void {
+        self::assertThat(
+            $this->container,
+            new DefinitionArgumentEqualsServiceDefinitionConstraint($serviceId, $argumentIndex, $expectedValue)
+        );
+    }
+
+    /**
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has a method
      * call to the given method with the given arguments.
      *
