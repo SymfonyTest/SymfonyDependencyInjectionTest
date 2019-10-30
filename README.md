@@ -277,7 +277,7 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
         $sources = array(
             __DIR__ . '/Fixtures/config.yml',
             __DIR__ . '/Fixtures/config.xml',
-        )
+        );
 
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
     }
