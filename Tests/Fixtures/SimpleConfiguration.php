@@ -9,9 +9,13 @@ class SimpleConfiguration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('simple');
 
-        $rootNode = $treeBuilder->root('simple');
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('simple');
+        }
 
         $rootNode
             ->fixXmlConfig('type', 'types')
