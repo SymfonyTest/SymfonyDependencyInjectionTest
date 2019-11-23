@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.1.0
+
+- Support for Symfony 5. 
+
 ## v4.0.0
 
 - Added support for PHPUnit 8.0
