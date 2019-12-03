@@ -20,6 +20,7 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
         $this->container = new ContainerBuilder();
         $this->container->getCompilerPassConfig()->setOptimizationPasses([]);
         $this->container->getCompilerPassConfig()->setRemovingPasses([]);
+        $this->container->getCompilerPassConfig()->setAfterRemovingPasses([]);
     }
 
     protected function tearDown(): void
