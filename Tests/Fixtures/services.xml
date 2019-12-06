@@ -26,5 +26,6 @@
 
         <service id="synthetic_service" synthetic="true">
         </service>
+
     </services>
 </container>
