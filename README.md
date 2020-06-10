@@ -305,6 +305,10 @@ These are the available semantic assertions for each of the test cases shown abo
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter.</dd>
 <dt><code>assertContainerBuilderHasParameter($parameterName, $expectedParameterValue)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter and that its value is the given value.</dd>
+<dt><code>assertContainerBuilderHasExactParameter($parameterName)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter.</dd>
+<dt><code>assertContainerBuilderHasExactParameter($parameterName, $expectedParameterValue)</code></dt>
+<dd>Assert that the <code>ContainerBuilder</code> for this test has a parameter and that its value is the given value, as well as its type matches given value type.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, $argumentIndex)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument at
 the given index.</dd>

@@ -13,13 +13,29 @@ class ContainerHasParameterConstraintTest extends TestCase
      * @dataProvider containerBuilderProvider
      */
     public function match(
-      ContainerInterface $container,
-      $parameterName,
-      $parameterValue,
-      $checkParameterValue,
-      $expectedToMatch
+        ContainerInterface $container,
+        $parameterName,
+        $parameterValue,
+        $checkParameterValue,
+        $expectedToMatch
     ): void {
         $constraint = new ContainerHasParameterConstraint($parameterName, $parameterValue, $checkParameterValue);
+
+        $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));
+    }
+
+    /**
+     * @test
+     * @dataProvider typeAwareContainerBuilderProvider
+     */
+    public function matchWithType(
+        ContainerInterface $container,
+        $parameterName,
+        $parameterValue,
+        $checkParameterValue,
+        $expectedToMatch
+    ): void {
+        $constraint = new ContainerHasParameterConstraint($parameterName, $parameterValue, $checkParameterValue, true);
 
         $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));
     }
@@ -41,6 +57,20 @@ class ContainerHasParameterConstraintTest extends TestCase
             [$this->createMockContainerWithParameters([$parameterName => $parameterValue]), $parameterName, $parameterValue, true, true],
             // the container has the parameter and the value is optional
             [$this->createMockContainerWithParameters([$parameterName => $parameterValue]), $parameterName, null, false, true],
+        ];
+    }
+
+    public function typeAwareContainerBuilderProvider()
+    {
+        $parameterName = 'parameter_name';
+        $parameterValue = '123123';
+        $wrongParameterValue = 123123;
+
+        return [
+            // the container has the parameter but the type don't match
+            [$this->createMockContainerWithParameters([$parameterName => $parameterValue]), $parameterName, $wrongParameterValue, true, false],
+            // the container has the parameter and the value matches
+            [$this->createMockContainerWithParameters([$parameterName => $parameterValue]), $parameterName, $parameterValue, true, true],
         ];
     }
 

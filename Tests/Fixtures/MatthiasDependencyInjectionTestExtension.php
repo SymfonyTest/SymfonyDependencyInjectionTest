@@ -18,6 +18,8 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 
         // set a parameter manually
         $container->setParameter('manual_parameter', 'parameter value');
+        $container->setParameter('manual_number_parameter', 123123);
+        $container->setParameter('manual_array_parameter', ['key1' => 'value1', 'key2' => 'value2']);
 
         // manually add a service definition
         $definition = new Definition('stdClass');
