@@ -14,11 +14,11 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
      * @dataProvider containerBuilderProvider
      */
     public function match(
-      ContainerBuilder $containerBuilder,
-      $serviceId,
-      $expectedClass,
-      $checkExpectedClass,
-      $shouldMatch
+        ContainerBuilder $containerBuilder,
+        $serviceId,
+        $expectedClass,
+        $checkExpectedClass,
+        $shouldMatch
     ): void {
         $constraint = new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass, $checkExpectedClass);
 

@@ -121,7 +121,9 @@ class DefinitionHasArgumentConstraintTest extends TestCase
             self::assertStringStartsWith(
                 sprintf(
                     'The value of argument with index %d (\'%s\') is not equal to the expected value (\'%s\')',
-                    $argumentIndex, $expectedValue, $failingExpectation
+                    $argumentIndex,
+                    $expectedValue,
+                    $failingExpectation
                 ),
                 $e->getMessage()
             );
@@ -167,7 +169,9 @@ class DefinitionHasArgumentConstraintTest extends TestCase
             self::assertStringStartsWith(
                 sprintf(
                     'The value of argument named "%s" (\'%s\') is not equal to the expected value (\'%s\')',
-                    $argument, $expectedValue, $failingExpectation
+                    $argument,
+                    $expectedValue,
+                    $failingExpectation
                 ),
                 $e->getMessage()
             );
