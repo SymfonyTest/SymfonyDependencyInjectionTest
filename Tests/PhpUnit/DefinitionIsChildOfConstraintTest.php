@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionIsChildOfConstraint;
 use PHPUnit\Framework\TestCase;

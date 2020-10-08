@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
 use PHPUnit\Framework\TestCase;

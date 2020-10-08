@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerHasParameterConstraint;
 use PHPUnit\Framework\TestCase;
@@ -13,11 +13,11 @@ class ContainerHasParameterConstraintTest extends TestCase
      * @dataProvider containerBuilderProvider
      */
     public function match(
-      ContainerInterface $container,
-      $parameterName,
-      $parameterValue,
-      $checkParameterValue,
-      $expectedToMatch
+        ContainerInterface $container,
+        $parameterName,
+        $parameterValue,
+        $checkParameterValue,
+        $expectedToMatch
     ): void {
         $constraint = new ContainerHasParameterConstraint($parameterName, $parameterValue, $checkParameterValue);
 
