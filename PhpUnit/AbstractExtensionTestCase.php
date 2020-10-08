@@ -53,7 +53,9 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
             if ($extension instanceof PrependExtensionInterface) {
                 $extension->prepend($this->container);
             }
+        }
 
+        foreach ($this->container->getExtensions() as $extension) {
             $extension->load($configs, $this->container);
         }
     }
