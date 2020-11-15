@@ -1,5 +1,15 @@
 # Changelog
 
+## v4.2.1
+
+- Support for PHP8
+
+## v4.2.0
+
+- Fix: PSR-4 autoloading (#132)
+- Add `@coversNothing` annotation to prevent raising risky warnings in PHPUnit 9
+- Fix:  run `prepend()` for all extensions first, then `load()` then extensions (#126)
+
 ## v4.1.0
 
 - Support for Symfony 5. 
