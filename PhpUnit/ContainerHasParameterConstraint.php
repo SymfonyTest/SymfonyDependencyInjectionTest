@@ -4,6 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
+use PHPUnit\Framework\Constraint\IsIdentical;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class ContainerHasParameterConstraint extends Constraint
@@ -11,15 +12,18 @@ final class ContainerHasParameterConstraint extends Constraint
     private $parameterName;
     private $expectedParameterValue;
     private $checkParameterValue;
+    private $strict;
 
     public function __construct(
         string $parameterName,
         $expectedParameterValue = null,
-        bool $checkParameterValue = false
+        bool $checkParameterValue = false,
+        bool $strict = false
     ) {
         $this->parameterName = $parameterName;
         $this->expectedParameterValue = $expectedParameterValue;
         $this->checkParameterValue = $checkParameterValue;
+        $this->strict = $strict;
     }
 
     public function toString(): string
@@ -69,7 +73,7 @@ final class ContainerHasParameterConstraint extends Constraint
     {
         $actualValue = $container->getParameter($this->parameterName);
 
-        $constraint = new IsEqual($this->expectedParameterValue);
+        $constraint = $this->strict ? new IsIdentical($this->expectedParameterValue) : new IsEqual($this->expectedParameterValue);
 
         if (!$constraint->evaluate($actualValue, '', true)) {
             if ($returnResult) {

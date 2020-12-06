@@ -33,6 +33,16 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         // Just check parameter exists, value will not be checked.
         $this->assertContainerBuilderHasParameter('manual_parameter');
 
+        // manually defined number parameter
+        $this->assertContainerBuilderHasExactParameter('manual_number_parameter', 123123);
+        // Just check parameter exists, value will not be checked.
+        $this->assertContainerBuilderHasExactParameter('manual_number_parameter');
+
+        // manually defined array parameter
+        $this->assertContainerBuilderHasExactParameter('manual_array_parameter', ['key1' => 'value1', 'key2' => 'value2']);
+        // Just check parameter exists, value will not be checked.
+        $this->assertContainerBuilderHasExactParameter('manual_array_parameter');
+
         // manually defined service
         $this->assertContainerBuilderHasService('manual_service_id', 'stdClass');
         // Just check service exists, class will not be checked.
@@ -151,6 +161,32 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->expectExceptionMessage('parameter value');
 
         $this->assertContainerBuilderHasParameter('manual_parameter', 'wrong');
+    }
+
+    /**
+     * @test
+     */
+    public function if_parameter_exists_and_has_good_value_but_has_wrong_type_it_fails(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('parameter value');
+
+        $this->assertContainerBuilderHasExactParameter('manual_number_parameter', '123123');
+    }
+
+    /**
+     * @test
+     */
+    public function if_parameter_exists_but_has_wrong_order_it_fails(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('parameter value');
+
+        $this->assertContainerBuilderHasExactParameter('manual_array_parameter', ['key2' => 'value2', 'key1' => 'value1']);
     }
 
     /**
