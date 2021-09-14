@@ -1,0 +1,74 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    name: PHPUnit PHP ${{ matrix.php }} ${{ matrix.dependency }} (Symfony ${{ matrix.symfony }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php:
+          - '7.2'
+          - '7.3'
+          - '7.4'
+          - '8.0'
+        dependency:
+          - ''
+        symfony:
+          - '4.4.*'
+          - '5.3.*'
+        include:
+          - php: '7.2'
+            symfony: '4.4.*'
+            dependency: 'lowest'
+          - php: '8.0'
+            symfony: '6.0.*'
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pcov
+          tools: flex
+
+      - name: Prefer unstable Composer dependencies for Symfony 6.0
+        if: matrix.symfony == '6.0.*'
+        run: |
+          composer config prefer-stable false
+          composer config minimum-stability dev
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ matrix.php }}-composer-
+
+      - name: Update project dependencies
+        if: matrix.dependency == ''
+        run: composer update --no-progress --ansi --prefer-stable
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+
+      - name: Update project dependencies lowest
+        if: matrix.dependency == 'lowest'
+        run: composer update --no-progress --ansi --prefer-stable --prefer-lowest
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+
+      - name: Validate composer
+        run: composer validate --strict --no-check-lock
+
+      - name: Run tests
+        run: vendor/bin/phpunit
