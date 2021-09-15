@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.3.0
+
+- Added support for Symfony 6,
+- Removed support for Symfony <4.4 & >5.0 - <5.3
+
 ## v4.2.1
 
 - Support for PHP8
