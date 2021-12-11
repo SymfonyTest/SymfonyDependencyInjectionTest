@@ -35,9 +35,9 @@ class MyExtensionTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions(): array
     {
-        return array(
+        return [
             new MyExtension()
-        );
+        ];
     }
 }
 ```
@@ -92,7 +92,7 @@ class MyExtensionTest extends AbstractExtensionTestCase
      */
     public function after_loading_the_correct_parameter_has_been_set()
     {
-        $this->load(array('my' => array('enabled' => 'false')));
+        $this->load(['my' => ['enabled' => 'false']);
 
         ...
     }
@@ -149,9 +149,9 @@ class MyCompilerPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'collecting_service_id',
             'add',
-            array(
+            [
                 new Reference('collected_service')
-            )
+            ]
         );
     }
 }
@@ -270,14 +270,14 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
      */
     public function it_converts_extension_elements_to_extensions()
     {
-        $expectedConfiguration = array(
-            'extensions' => array('twig.extension.foo', 'twig.extension.bar')
-        );
+        $expectedConfiguration = [
+            'extensions' => ['twig.extension.foo', 'twig.extension.bar']
+        ];
 
-        $sources = array(
+        $sources = [
             __DIR__ . '/Fixtures/config.yml',
             __DIR__ . '/Fixtures/config.xml',
-        );
+        ];
 
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
     }
@@ -314,10 +314,10 @@ the given index, and its value is the given value.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithServiceLocatorArgument($serviceId, $argumentIndex, $expectedValue)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument
 at the given index, and its value is a ServiceLocator with a reference-map equal to the given value.</dd>
-<dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments = array(), $index = null)</code></dt>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments = [], $index = null)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has a method call to
 the given method with the given arguments. If index is provided, invocation index order of method call is asserted as well.</dd>
-<dt><code>assertContainerBuilderHasServiceDefinitionWithTag($serviceId, $tag, array $attributes = array())</code></dt>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithTag($serviceId, $tag, array $attributes = [])</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has the given tag with the given arguments.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithParent($serviceId, $parentServiceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id which is a decorated service and it has the given parent service.</dd>
