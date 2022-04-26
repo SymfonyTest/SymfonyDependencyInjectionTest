@@ -55,7 +55,7 @@ abstract class AbstractExtensionTestCase extends AbstractContainerBuilderTestCas
             }
         }
 
-        foreach ($this->container->getExtensions() as $extension) {
+        foreach ($this->getContainerExtensions() as $extension) {
             $extension->load($configs, $this->container);
         }
     }
