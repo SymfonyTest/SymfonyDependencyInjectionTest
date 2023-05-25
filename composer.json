@@ -26,7 +26,11 @@
         "phpunit/phpunit": "<8.0"
     },
     "autoload": {
-        "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" }
+        "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "autoload-dev": {
+        "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\Tests\\" : "Tests/" }
     },
     "extra": {
         "branch-alias": {
