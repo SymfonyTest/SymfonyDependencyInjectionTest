@@ -65,7 +65,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
         $this->assertConstraintFails(new DefinitionArgumentEqualsServiceLocatorConstraint('using_service', 0, [new Reference('foo')]));
     }
 
-    public function provideInvalidServiceLocatorReferences()
+    public static function provideInvalidServiceLocatorReferences()
     {
         yield [['']];
         yield [[null]];

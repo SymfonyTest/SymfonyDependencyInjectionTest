@@ -40,7 +40,7 @@ class DefinitionHasTagConstraintTest extends TestCase
         }
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definitionWithoutTags = new Definition();
         $definitionWithTwoTags = new Definition();

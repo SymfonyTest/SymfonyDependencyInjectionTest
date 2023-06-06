@@ -21,7 +21,7 @@ class DefinitionIsChildOfConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($definition, '', true));
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definition = new Definition();
         if (class_exists(ChildDefinition::class)) {

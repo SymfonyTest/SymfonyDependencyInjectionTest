@@ -49,7 +49,7 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
         );
     }
 
-    public function provideInvalidServiceLocatorReferences()
+    public static function provideInvalidServiceLocatorReferences()
     {
         yield [['']];
         yield [[null]];
@@ -70,7 +70,7 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
         );
     }
 
-    public function provideValidServiceLocatorDefs()
+    public static function provideValidServiceLocatorDefs()
     {
         // Data providers get called before setUp?
         if (!class_exists(ServiceLocator::class)) {

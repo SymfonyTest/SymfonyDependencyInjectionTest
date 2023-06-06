@@ -19,7 +19,7 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($definition, '', true));
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definitionWithNoMethodCalls = new Definition();
 

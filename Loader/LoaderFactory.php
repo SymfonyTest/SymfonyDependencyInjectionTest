@@ -56,9 +56,4 @@ final class LoaderFactory implements LoaderFactoryInterface
     {
         return new PhpFileLoader($container, new FileLocator());
     }
-
-    public function createIniFileLoader(ContainerBuilder $container): IniFileLoader
-    {
-        return new IniFileLoader($container, new FileLocator());
-    }
 }

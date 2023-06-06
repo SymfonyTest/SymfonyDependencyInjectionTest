@@ -19,7 +19,7 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
         $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
     }
 
-    public function containerBuilderProvider()
+    public static function containerBuilderProvider()
     {
         $emptyContainerBuilder = new ContainerBuilder();
 

@@ -22,7 +22,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         $this->assertSame($shouldMatch, $constraint->evaluate($definition, '', true));
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definitionWithNoArguments = new Definition();
 
@@ -72,7 +72,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     /**
      * @return \Generator
      */
-    public function invalid_definition_indexes()
+    public static function invalid_definition_indexes()
     {
         yield [
             new \stdClass(), 'Expected either a string or a positive integer for $argumentIndex.',
@@ -133,7 +133,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     /**
      * @return \Generator
      */
-    public function indexed_arguments()
+    public static function indexed_arguments()
     {
         // yield [0];
         yield [1];
@@ -181,7 +181,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     /**
      * @return \Generator
      */
-    public function named_arguments()
+    public static function named_arguments()
     {
         yield ['$foo'];
         yield ['$bar'];
