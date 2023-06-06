@@ -7,12 +7,12 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
 class DefinitionHasArgumentConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function match(Definition $definition, $argumentIndex, $expectedValue, $shouldMatch): void
@@ -52,6 +52,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider invalid_definition_indexes
      *
      * @param mixed  $argument
@@ -93,6 +94,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider indexed_arguments
      *
      * @param int $argumentIndex
@@ -139,6 +141,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider named_arguments
      *
      * @param string $argument

@@ -15,6 +15,7 @@ class LoaderFactoryTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider fileProvider
      */
     public function it_creates_the_appropriate_file_loader_based_on_the_extension($file, $expectedClass): void

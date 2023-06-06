@@ -11,6 +11,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider containerBuilderProvider
      */
     public function match(

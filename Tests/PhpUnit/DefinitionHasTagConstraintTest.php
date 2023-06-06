@@ -11,6 +11,7 @@ class DefinitionHasTagConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function match(Definition $definition, $tag, $attributes, $expectedToMatch): void
@@ -22,6 +23,7 @@ class DefinitionHasTagConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function evaluateThrowsExceptionOnFailure(Definition $definition, $tag, $attributes, $expectedToMatch): void

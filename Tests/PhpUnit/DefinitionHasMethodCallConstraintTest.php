@@ -10,6 +10,7 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function match(Definition $definition, $method, $arguments, $index, $expectedToMatch): void

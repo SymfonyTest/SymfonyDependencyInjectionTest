@@ -12,6 +12,7 @@ class DefinitionDecoratesConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider containerBuilderProvider
      */
     public function match(ContainerBuilder $containerBuilder, bool $expectedToMatch, string $serviceId, string $decoratedServiceId, ?string $renamedId, int $priority, ?int $invalidBehavior): void
@@ -46,6 +47,7 @@ class DefinitionDecoratesConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider stringRepresentationProvider
      */
     public function it_has_a_string_representation(DefinitionDecoratesConstraint $constraint, string $expectedRepresentation): void
