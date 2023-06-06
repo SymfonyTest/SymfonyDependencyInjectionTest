@@ -33,11 +33,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         $definitionWithArguments->setArguments($arguments);
 
         $parentServiceId = 'parent_service_id';
-        if (class_exists(ChildDefinition::class)) {
-            $decoratedDefinitionWithArguments = new ChildDefinition($parentServiceId);
-        } else {
-            $decoratedDefinitionWithArguments = new DefinitionDecorator($parentServiceId);
-        }
+        $decoratedDefinitionWithArguments = new ChildDefinition($parentServiceId);
 
         $decoratedDefinitionWithArguments->setArguments([0 => 'first argument', 1 => $wrongValue]);
         $decoratedDefinitionWithArguments->replaceArgument(1, $rightValue);

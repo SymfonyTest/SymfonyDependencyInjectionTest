@@ -24,11 +24,7 @@ class DefinitionIsChildOfConstraintTest extends TestCase
     public static function definitionProvider()
     {
         $definition = new Definition();
-        if (class_exists(ChildDefinition::class)) {
-            $decoratedDefinition = new ChildDefinition('parent_service_id');
-        } else {
-            $decoratedDefinition = new DefinitionDecorator('parent_service_id');
-        }
+        $decoratedDefinition = new ChildDefinition('parent_service_id');
 
         return [
             // the provided definition has the same parent service id
