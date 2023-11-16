@@ -217,7 +217,7 @@ PHP files, but also closures. When you create a ``Configuration`` class for your
 of these formats is supported. Special attention needs to be given to XML files.
 
 In order to verify that any type of configuration file will be correctly loaded by your bundle, you must install the
-[SymfonyConfigTest](https://github.com/matthiasnoback/SymfonyConfigTest) library and create a test class that extends
+[SymfonyConfigTest](https://github.com/SymfonyTest/SymfonyConfigTest) library and create a test class that extends
 from ``AbstractExtensionConfigurationTestCase``:
 
 ```php
