@@ -22,10 +22,6 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
 
     protected function setUp(): void
     {
-        if (!class_exists(ServiceLocator::class)) {
-            $this->markTestSkipped('Requires the Symfony DependencyInjection component v3.4 or higher');
-        }
-
         $this->containerBuilder = new ContainerBuilder();
     }
 
@@ -65,7 +61,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraintTest extends TestCas
         $this->assertConstraintFails(new DefinitionArgumentEqualsServiceLocatorConstraint('using_service', 0, [new Reference('foo')]));
     }
 
-    public function provideInvalidServiceLocatorReferences()
+    public static function provideInvalidServiceLocatorReferences()
     {
         yield [['']];
         yield [[null]];

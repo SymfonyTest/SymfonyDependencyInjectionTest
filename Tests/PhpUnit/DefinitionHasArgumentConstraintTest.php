@@ -7,12 +7,12 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
 class DefinitionHasArgumentConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function match(Definition $definition, $argumentIndex, $expectedValue, $shouldMatch): void
@@ -22,7 +22,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         $this->assertSame($shouldMatch, $constraint->evaluate($definition, '', true));
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definitionWithNoArguments = new Definition();
 
@@ -33,11 +33,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
         $definitionWithArguments->setArguments($arguments);
 
         $parentServiceId = 'parent_service_id';
-        if (class_exists(ChildDefinition::class)) {
-            $decoratedDefinitionWithArguments = new ChildDefinition($parentServiceId);
-        } else {
-            $decoratedDefinitionWithArguments = new DefinitionDecorator($parentServiceId);
-        }
+        $decoratedDefinitionWithArguments = new ChildDefinition($parentServiceId);
 
         $decoratedDefinitionWithArguments->setArguments([0 => 'first argument', 1 => $wrongValue]);
         $decoratedDefinitionWithArguments->replaceArgument(1, $rightValue);
@@ -56,6 +52,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider invalid_definition_indexes
      *
      * @param mixed  $argument
@@ -72,7 +69,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     /**
      * @return \Generator
      */
-    public function invalid_definition_indexes()
+    public static function invalid_definition_indexes()
     {
         yield [
             new \stdClass(), 'Expected either a string or a positive integer for $argumentIndex.',
@@ -97,6 +94,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider indexed_arguments
      *
      * @param int $argumentIndex
@@ -133,7 +131,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     /**
      * @return \Generator
      */
-    public function indexed_arguments()
+    public static function indexed_arguments()
     {
         // yield [0];
         yield [1];
@@ -143,6 +141,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider named_arguments
      *
      * @param string $argument
@@ -181,7 +180,7 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     /**
      * @return \Generator
      */
-    public function named_arguments()
+    public static function named_arguments()
     {
         yield ['$foo'];
         yield ['$bar'];

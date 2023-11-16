@@ -12,6 +12,7 @@ class DefinitionDecoratesConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider containerBuilderProvider
      */
     public function match(ContainerBuilder $containerBuilder, bool $expectedToMatch, string $serviceId, string $decoratedServiceId, ?string $renamedId, int $priority, ?int $invalidBehavior): void
@@ -21,7 +22,7 @@ class DefinitionDecoratesConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($containerBuilder, '', true));
     }
 
-    public function containerBuilderProvider(): iterable
+    public static function containerBuilderProvider(): iterable
     {
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->setDefinition('decorated1', new Definition('DecoratedClass1'));
@@ -46,6 +47,7 @@ class DefinitionDecoratesConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider stringRepresentationProvider
      */
     public function it_has_a_string_representation(DefinitionDecoratesConstraint $constraint, string $expectedRepresentation): void
@@ -53,7 +55,7 @@ class DefinitionDecoratesConstraintTest extends TestCase
         $this->assertSame($expectedRepresentation, $constraint->toString());
     }
 
-    public function stringRepresentationProvider(): iterable
+    public static function stringRepresentationProvider(): iterable
     {
         yield [new DefinitionDecoratesConstraint('decorator', 'decorated'), '"decorator" decorates service "decorated" with priority "0" and "RUNTIME_EXCEPTION_ON_INVALID_REFERENCE" behavior.'];
         yield [new DefinitionDecoratesConstraint('decorator', 'decorated', 'decorated_0'), '"decorator" decorates service "decorated" and renames it to "decorated_0" with priority "0" and "RUNTIME_EXCEPTION_ON_INVALID_REFERENCE" behavior.'];

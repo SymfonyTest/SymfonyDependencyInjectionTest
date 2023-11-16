@@ -20,10 +20,6 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
 
     protected function setUp(): void
     {
-        if (!class_exists(ServiceLocator::class)) {
-            $this->markTestSkipped('Requires the Symfony DependencyInjection component v3.4 or higher');
-        }
-
         $this->containerBuilder = new ContainerBuilder();
     }
 
@@ -49,7 +45,7 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
         );
     }
 
-    public function provideInvalidServiceLocatorReferences()
+    public static function provideInvalidServiceLocatorReferences()
     {
         yield [['']];
         yield [[null]];
@@ -70,13 +66,8 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
         );
     }
 
-    public function provideValidServiceLocatorDefs()
+    public static function provideValidServiceLocatorDefs()
     {
-        // Data providers get called before setUp?
-        if (!class_exists(ServiceLocator::class)) {
-            return [[], []];
-        }
-
         yield [
             ['bar' => new ServiceClosureArgument(new Reference('foo'))],
             ['bar' => new Reference('foo')],

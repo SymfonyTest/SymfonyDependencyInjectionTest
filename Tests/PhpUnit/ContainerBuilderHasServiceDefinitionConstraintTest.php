@@ -11,6 +11,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider containerBuilderProvider
      */
     public function match(
@@ -25,7 +26,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
         $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
     }
 
-    public function containerBuilderProvider()
+    public static function containerBuilderProvider()
     {
         $emptyContainerBuilder = new ContainerBuilder();
 
