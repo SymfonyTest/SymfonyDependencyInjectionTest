@@ -10,6 +10,7 @@ class ContainerHasParameterConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider containerBuilderProvider
      */
     public function match(
@@ -27,7 +28,6 @@ class ContainerHasParameterConstraintTest extends TestCase
 
     public static function containerBuilderProvider()
     {
-
         $parameterName = 'parameter_name';
         $parameterValue = 'some value';
         $wrongParameterValue = 'some other value';
