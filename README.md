@@ -102,7 +102,7 @@ class MyExtensionTest extends AbstractExtensionTestCase
 To prevent duplication of required configuration values, you can provide some minimal configuration, by overriding
 the ``getMinimalConfiguration()`` method of the test case.
 
-## Testing a compiler pass
+### Testing a compiler pass
 
 To test a compiler pass, create a test class and extend from
 ``Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase``. Then implement the ``registerCompilerPass()`` method:
@@ -157,7 +157,7 @@ class MyCompilerPassTest extends AbstractCompilerPassTestCase
 }
 ```
 
-### Standard test for unobtrusiveness
+#### Standard test for unobtrusiveness
 
 The ``AbstractCompilerPassTestCase`` class always executes one specific test -
 ``compilation_should_not_fail_with_empty_container()`` - which makes sure that the compiler pass is unobtrusive. For
