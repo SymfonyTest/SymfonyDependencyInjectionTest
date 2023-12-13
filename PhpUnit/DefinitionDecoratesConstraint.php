@@ -16,11 +16,11 @@ final class DefinitionDecoratesConstraint extends Constraint
         ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE      => 'IGNORE_ON_UNINITIALIZED_REFERENCE',
     ];
 
-    private $serviceId;
-    private $decoratedServiceId;
-    private $renamedId;
-    private $priority;
-    private $invalidBehavior;
+    private string $serviceId;
+    private string $decoratedServiceId;
+    private ?string $renamedId;
+    private int $priority;
+    private ?int $invalidBehavior;
 
     public function __construct(string $serviceId, string $decoratedServiceId, ?string $renamedId = null, int $priority = 0, ?int $invalidBehavior = null)
     {
@@ -62,7 +62,7 @@ final class DefinitionDecoratesConstraint extends Constraint
             }
 
             $this->fail(
-                $containerBuilder,
+                $this->serviceId,
                 sprintf(
                     'The container builder has no service "%s"',
                     $this->serviceId
@@ -80,7 +80,7 @@ final class DefinitionDecoratesConstraint extends Constraint
             }
 
             $this->fail(
-                $containerBuilder,
+                $this->serviceId,
                 sprintf(
                     'The container builder has a service "%s", but it does not decorate any service',
                     $this->serviceId
@@ -94,7 +94,7 @@ final class DefinitionDecoratesConstraint extends Constraint
             }
 
             $this->fail(
-                $containerBuilder,
+                $this->serviceId,
                 sprintf(
                     'The container builder has a decorator service "%s", but it does decorate service "%s".',
                     $this->serviceId,
@@ -109,7 +109,7 @@ final class DefinitionDecoratesConstraint extends Constraint
             }
 
             $this->fail(
-                $containerBuilder,
+                $this->serviceId,
                 sprintf(
                     'The container builder has a decorator service "%s", but it does not rename decorated service to "%s".',
                     $this->serviceId,
@@ -124,7 +124,7 @@ final class DefinitionDecoratesConstraint extends Constraint
             }
 
             $this->fail(
-                $containerBuilder,
+                $this->serviceId,
                 sprintf(
                     'The container builder has a decorator service "%s", but it does not decorate at expected "%d" priority.',
                     $this->serviceId,
@@ -139,7 +139,7 @@ final class DefinitionDecoratesConstraint extends Constraint
             }
 
             $this->fail(
-                $containerBuilder,
+                $this->serviceId,
                 sprintf(
                     'The container builder has a decorator service "%s", but it does not decorate with expected "%s" behavior.',
                     $this->serviceId,

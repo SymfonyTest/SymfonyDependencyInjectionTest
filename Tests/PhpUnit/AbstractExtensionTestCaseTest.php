@@ -272,4 +272,30 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderNotHasService('undefined');
     }
+
+    /**
+     * @test
+     */
+    public function if_service_is_not_defined_in_service_decoration_it_fails(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('The container builder has no service "undefined"');
+
+        $this->assertContainerBuilderServiceDecoration('undefined', 'undefined');
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_decoration_is_not_defined_in_service_decoration_it_fails(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('The container builder has a service "manual_service_id", but it does not decorate any service');
+
+        $this->assertContainerBuilderServiceDecoration('manual_service_id', 'undefined');
+    }
 }
