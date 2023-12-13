@@ -240,8 +240,6 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
         int $priority = 0,
         ?int $invalidBehavior = null
     ): void {
-        $definition = $this->container->findDefinition($serviceId);
-
-        self::assertThat($definition, new DefinitionDecoratesConstraint($serviceId, $decoratedServiceId, $renamedId, $priority, $invalidBehavior));
+        self::assertThat($this->container, new DefinitionDecoratesConstraint($serviceId, $decoratedServiceId, $renamedId, $priority, $invalidBehavior));
     }
 }
