@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
 use PHPUnit\Framework\TestCase;
@@ -10,6 +10,7 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function match(Definition $definition, $method, $arguments, $index, $expectedToMatch): void
@@ -19,7 +20,7 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($definition, '', true));
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definitionWithNoMethodCalls = new Definition();
 

@@ -18,6 +18,8 @@ abstract class AbstractCompilerPassTestCase extends AbstractContainerBuilderTest
      * This test will run the compile method.
      *
      * @test
+     *
+     * @coversNothing
      */
     final public function compilation_should_not_fail_with_empty_container(): void
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -11,6 +11,7 @@ class DefinitionHasTagConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function match(Definition $definition, $tag, $attributes, $expectedToMatch): void
@@ -22,6 +23,7 @@ class DefinitionHasTagConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function evaluateThrowsExceptionOnFailure(Definition $definition, $tag, $attributes, $expectedToMatch): void
@@ -40,7 +42,7 @@ class DefinitionHasTagConstraintTest extends TestCase
         }
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definitionWithoutTags = new Definition();
         $definitionWithTwoTags = new Definition();

@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 {
@@ -33,6 +34,11 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
 
         // add an alias to an existing service
         $container->setAlias('manual_alias', 'service_id');
+
+        // add a reference to an existing service
+        $definition = new Definition('manual_with_reference');
+        $definition->addArgument(new Reference('manual_service_id'));
+        $container->setDefinition('manual_with_reference', $definition);
     }
 
     public function getAlias()

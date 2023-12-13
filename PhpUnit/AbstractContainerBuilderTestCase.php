@@ -6,7 +6,6 @@ use PHPUnit\Framework\Constraint\LogicalNot;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractContainerBuilderTestCase extends TestCase
 {
@@ -249,5 +248,15 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
         }
 
         self::assertThat($definition, new DefinitionEqualsServiceLocatorConstraint($expectedServiceMap));
+    }
+
+    final protected function assertContainerBuilderServiceDecoration(
+        string $serviceId,
+        string $decoratedServiceId,
+        ?string $renamedId = null,
+        int $priority = 0,
+        ?int $invalidBehavior = null
+    ): void {
+        self::assertThat($this->container, new DefinitionDecoratesConstraint($serviceId, $decoratedServiceId, $renamedId, $priority, $invalidBehavior));
     }
 }

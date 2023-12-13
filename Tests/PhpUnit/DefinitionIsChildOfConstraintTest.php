@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionIsChildOfConstraint;
 use PHPUnit\Framework\TestCase;
@@ -12,6 +12,7 @@ class DefinitionIsChildOfConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider definitionProvider
      */
     public function match(Definition $definition, $parentServiceId, $expectedToMatch): void
@@ -21,14 +22,10 @@ class DefinitionIsChildOfConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($definition, '', true));
     }
 
-    public function definitionProvider()
+    public static function definitionProvider()
     {
         $definition = new Definition();
-        if (class_exists(ChildDefinition::class)) {
-            $decoratedDefinition = new ChildDefinition('parent_service_id');
-        } else {
-            $decoratedDefinition = new DefinitionDecorator('parent_service_id');
-        }
+        $decoratedDefinition = new ChildDefinition('parent_service_id');
 
         return [
             // the provided definition has the same parent service id

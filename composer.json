@@ -2,8 +2,8 @@
     "name": "matthiasnoback/symfony-dependency-injection-test",
     "type": "library",
     "description": "Library for testing user classes related to the Symfony Dependency Injection Component",
-    "keywords": ["symfony2", "dependency injection", "phpunit"],
-    "homepage": "http://github.com/matthiasnoback/SymfonyDependencyInjectionTest",
+    "keywords": ["symfony2", "dependency injection", "phpunit", "dev"],
+    "homepage": "https://github.com/matthiasnoback/SymfonyDependencyInjectionTest",
     "license": "MIT",
     "authors": [
         {
@@ -13,24 +13,30 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "matthiasnoback/symfony-config-test": "^4.0.1",
-        "symfony/dependency-injection": "^3.4 || ^4.4 || ^5.0",
-        "symfony/config": "^3.4 || ^4.4 || ^5.0",
-        "symfony/yaml": "^3.4 || ^4.4 || ^5.0"
+        "php": "^8.1",
+        "matthiasnoback/symfony-config-test": "^5.0",
+        "symfony/dependency-injection": "^5.4 || ^6.2 || ^7.0",
+        "symfony/config": "^5.4 || ^6.2 || ^7.0",
+        "symfony/yaml": "^5.4 || ^6.2 || ^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^9.6 || ^10.0"
     },
     "conflict": {
-        "phpunit/phpunit": "<8.0"
+        "phpunit/phpunit": "<9.6 || >=11.0"
     },
     "autoload": {
-        "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" }
+        "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\" : "" },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "autoload-dev": {
+        "psr-4" : { "Matthias\\SymfonyDependencyInjectionTest\\Tests\\" : "Tests/" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0.x-dev"
+            "dev-master": "5.0.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

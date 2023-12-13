@@ -7,7 +7,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
-use Symfony\Component\DependencyInjection\Loader\IniFileLoader;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -55,10 +54,5 @@ final class LoaderFactory implements LoaderFactoryInterface
     public function createPhpFileLoader(ContainerBuilder $container): PhpFileLoader
     {
         return new PhpFileLoader($container, new FileLocator());
-    }
-
-    public function createIniFileLoader(ContainerBuilder $container): IniFileLoader
-    {
-        return new IniFileLoader($container, new FileLocator());
     }
 }

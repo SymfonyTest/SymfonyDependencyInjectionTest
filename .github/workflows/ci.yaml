@@ -1,0 +1,70 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    name: PHPUnit PHP ${{ matrix.php }} ${{ matrix.dependency }} (Symfony ${{ matrix.symfony }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php:
+          - '8.1'
+          - '8.2'
+          - '8.3'
+        dependency:
+          - ''
+        symfony:
+          - '5.4.*'
+          - '6.3.*'
+          - '6.4.*'
+          - '7.0.*'
+        include:
+          - php: '8.1'
+            symfony: '5.4.*'
+            dependency: 'lowest'
+        exclude:
+          - php: '8.1'
+            symfony: '7.0.*'
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pcov
+          tools: flex
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ matrix.php }}-composer-
+
+      - name: Update project dependencies
+        if: matrix.dependency == ''
+        run: composer update --no-progress --ansi --prefer-stable
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+
+      - name: Update project dependencies lowest
+        if: matrix.dependency == 'lowest'
+        run: composer update --no-progress --ansi --prefer-stable --prefer-lowest
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+
+      - name: Validate composer
+        run: composer validate --strict --no-check-lock
+
+      - name: Run tests
+        run: vendor/bin/phpunit

@@ -3,12 +3,19 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Loader;
 
 use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class LoaderFactoryTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider fileProvider
      */
     public function it_creates_the_appropriate_file_loader_based_on_the_extension($file, $expectedClass): void
@@ -29,25 +36,21 @@ class LoaderFactoryTest extends TestCase
         $factory = new LoaderFactory();
 
         $loader = $factory->createLoaderForSource($this->createMockContainerBuilder(), $source);
-        $this->assertInstanceOf('Symfony\Component\DependencyInjection\Loader\ClosureLoader', $loader);
+        $this->assertInstanceOf(ClosureLoader::class, $loader);
     }
 
-    public function fileProvider()
+    public static function fileProvider()
     {
         return [
-            ['file.xml', 'Symfony\Component\DependencyInjection\Loader\XmlFileLoader'],
-            ['file.yml', 'Symfony\Component\DependencyInjection\Loader\YamlFileLoader'],
-            ['file.yaml', 'Symfony\Component\DependencyInjection\Loader\YamlFileLoader'],
-            ['file.php', 'Symfony\Component\DependencyInjection\Loader\PhpFileLoader'],
+            ['file.xml', XmlFileLoader::class],
+            ['file.yml', YamlFileLoader::class],
+            ['file.yaml', YamlFileLoader::class],
+            ['file.php', PhpFileLoader::class],
         ];
     }
 
-    private function createMockContainerBuilder()
+    private function createMockContainerBuilder(): MockObject&ContainerBuilder
     {
-        return $this
-            ->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
-            ->disableOriginalConstructor()
-            ->setMethods(null)
-            ->getMock();
+        return $this->createMock(ContainerBuilder::class);
     }
 }

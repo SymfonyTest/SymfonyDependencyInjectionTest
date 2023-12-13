@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit\DependencyInjection;
+namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasServiceDefinitionConstraint;
 use PHPUnit\Framework\TestCase;
@@ -11,21 +11,22 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider containerBuilderProvider
      */
     public function match(
-      ContainerBuilder $containerBuilder,
-      $serviceId,
-      $expectedClass,
-      $checkExpectedClass,
-      $shouldMatch
+        ContainerBuilder $containerBuilder,
+        $serviceId,
+        $expectedClass,
+        $checkExpectedClass,
+        $shouldMatch
     ): void {
         $constraint = new ContainerBuilderHasServiceDefinitionConstraint($serviceId, $expectedClass, $checkExpectedClass);
 
         $this->assertSame($shouldMatch, $constraint->evaluate($containerBuilder, '', true));
     }
 
-    public function containerBuilderProvider()
+    public static function containerBuilderProvider()
     {
         $emptyContainerBuilder = new ContainerBuilder();
 

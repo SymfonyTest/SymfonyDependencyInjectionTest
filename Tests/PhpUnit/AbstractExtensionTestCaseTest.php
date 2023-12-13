@@ -217,6 +217,19 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
+    public function if_definition_has_argument_but_with_wrong_value_it_fails1(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('The value of argument named "0"');
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_with_reference', 0, 'manual_service_id');
+    }
+
+    /**
+     * @test
+     */
     public function if_definition_is_decorated_and_argument_has_wrong_value_it_fails(): void
     {
         $this->load();
@@ -307,5 +320,31 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderNotHasService('undefined');
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_is_not_defined_in_service_decoration_it_fails(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('The container builder has no service "undefined"');
+
+        $this->assertContainerBuilderServiceDecoration('undefined', 'undefined');
+    }
+
+    /**
+     * @test
+     */
+    public function if_service_decoration_is_not_defined_in_service_decoration_it_fails(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('The container builder has a service "manual_service_id", but it does not decorate any service');
+
+        $this->assertContainerBuilderServiceDecoration('manual_service_id', 'undefined');
     }
 }

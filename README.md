@@ -2,7 +2,7 @@
 
 *By Matthias Noback and contributors*
 
-[![Build Status](https://secure.travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest.png)](http://travis-ci.org/SymfonyTest/SymfonyDependencyInjectionTest)
+[![Build Status](https://github.com/SymfonyTest/SymfonyDependencyInjectionTest/actions/workflows/ci.yaml/badge.svg)](https://github.com/SymfonyTest/SymfonyDependencyInjectionTest/actions/workflows/ci.yaml)
 
 This library contains several PHPUnit test case classes and many semantic [assertions](#list-of-assertions) which
 you can use to functionally test your [container extensions](#testing-a-container-extension) (or "bundle extensions")
@@ -16,7 +16,9 @@ these classes.
 
 Using Composer:
 
-    php composer.phar require --dev matthiasnoback/symfony-dependency-injection-test
+```bash
+composer require --dev matthiasnoback/symfony-dependency-injection-test
+```
 
 ## Usage
 
@@ -35,9 +37,9 @@ class MyExtensionTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions(): array
     {
-        return array(
+        return [
             new MyExtension()
-        );
+        ];
     }
 }
 ```
@@ -92,7 +94,7 @@ class MyExtensionTest extends AbstractExtensionTestCase
      */
     public function after_loading_the_correct_parameter_has_been_set()
     {
-        $this->load(array('my' => array('enabled' => 'false')));
+        $this->load(['my' => ['enabled' => 'false']);
 
         ...
     }
@@ -102,7 +104,7 @@ class MyExtensionTest extends AbstractExtensionTestCase
 To prevent duplication of required configuration values, you can provide some minimal configuration, by overriding
 the ``getMinimalConfiguration()`` method of the test case.
 
-## Testing a compiler pass
+### Testing a compiler pass
 
 To test a compiler pass, create a test class and extend from
 ``Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase``. Then implement the ``registerCompilerPass()`` method:
@@ -149,15 +151,15 @@ class MyCompilerPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'collecting_service_id',
             'add',
-            array(
+            [
                 new Reference('collected_service')
-            )
+            ]
         );
     }
 }
 ```
 
-### Standard test for unobtrusiveness
+#### Standard test for unobtrusiveness
 
 The ``AbstractCompilerPassTestCase`` class always executes one specific test -
 ``compilation_should_not_fail_with_empty_container()`` - which makes sure that the compiler pass is unobtrusive. For
@@ -217,7 +219,7 @@ PHP files, but also closures. When you create a ``Configuration`` class for your
 of these formats is supported. Special attention needs to be given to XML files.
 
 In order to verify that any type of configuration file will be correctly loaded by your bundle, you must install the
-[SymfonyConfigTest](https://github.com/matthiasnoback/SymfonyConfigTest) library and create a test class that extends
+[SymfonyConfigTest](https://github.com/SymfonyTest/SymfonyConfigTest) library and create a test class that extends
 from ``AbstractExtensionConfigurationTestCase``:
 
 ```php
@@ -270,14 +272,14 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
      */
     public function it_converts_extension_elements_to_extensions()
     {
-        $expectedConfiguration = array(
-            'extensions' => array('twig.extension.foo', 'twig.extension.bar')
-        );
+        $expectedConfiguration = [
+            'extensions' => ['twig.extension.foo', 'twig.extension.bar']
+        ];
 
-        $sources = array(
+        $sources = [
             __DIR__ . '/Fixtures/config.yml',
             __DIR__ . '/Fixtures/config.xml',
-        );
+        ];
 
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
     }
@@ -318,10 +320,10 @@ the given index, and its value is the given value.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithServiceLocatorArgument($serviceId, $argumentIndex, $expectedValue)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has an argument
 at the given index, and its value is a ServiceLocator with a reference-map equal to the given value.</dd>
-<dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments = array(), $index = null)</code></dt>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithMethodCall($serviceId, $method, array $arguments = [], $index = null)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has a method call to
 the given method with the given arguments. If index is provided, invocation index order of method call is asserted as well.</dd>
-<dt><code>assertContainerBuilderHasServiceDefinitionWithTag($serviceId, $tag, array $attributes = array())</code></dt>
+<dt><code>assertContainerBuilderHasServiceDefinitionWithTag($serviceId, $tag, array $attributes = [])</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id, which has the given tag with the given arguments.</dd>
 <dt><code>assertContainerBuilderHasServiceDefinitionWithParent($serviceId, $parentServiceId)</code></dt>
 <dd>Assert that the <code>ContainerBuilder</code> for this test has a service definition with the given id which is a decorated service and it has the given parent service.</dd>
@@ -345,9 +347,9 @@ container:
 
 ## Version Guidance
 
-| Version | Released     | PHPUnit    | Status     |
-|---------|--------------|------------|------------|
-| 4.x     | Mar 28, 2019 | 8.x        | Latest     |
-| 3.x     | Mar 5, 2018  | 7.x        | Bugfixes   |
-| 2.x     | May 9, 2017  | 6.x        | Bugfixes   |
-| 1.x     | Jul 4, 2016  | 4.x and 5x | EOL        |
+| Version | Released     | PHPUnit     | Status     |
+|---------|--------------|-------------|------------|
+| 4.x     | Mar 28, 2019 | 8.x and 9.x | Latest     |
+| 3.x     | Mar 5, 2018  | 7.x         | Bugfixes   |
+| 2.x     | May 9, 2017  | 6.x         | Bugfixes   |
+| 1.x     | Jul 4, 2016  | 4.x and 5.x | EOL        |
