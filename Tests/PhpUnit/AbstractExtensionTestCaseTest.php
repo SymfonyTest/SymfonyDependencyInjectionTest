@@ -181,6 +181,19 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     /**
      * @test
      */
+    public function if_definition_has_argument_but_with_wrong_value_it_fails1(): void
+    {
+        $this->load();
+
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('The value of argument named "0"');
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_with_reference', 0, 'manual_service_id');
+    }
+
+    /**
+     * @test
+     */
     public function if_definition_is_decorated_and_argument_has_wrong_value_it_fails(): void
     {
         $this->load();
