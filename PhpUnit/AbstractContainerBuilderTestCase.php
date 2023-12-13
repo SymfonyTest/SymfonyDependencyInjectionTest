@@ -116,6 +116,21 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     }
 
     /**
+     * Assert that the ContainerBuilder for this test has a service which is created by other service
+     *
+     * @param $serivceId
+     * @param $expectedFactoryClass
+     * @param $expectedFactoryMethod
+     */
+    protected function assertContainerBuilderHasCreatedByFactoryService($serviceId, $expectedFactoryClass = null, $expectedFactoryMethod)
+    {
+        self::assertThat(
+            $this->container,
+            new ContainerBuilderHasFactoryConstraint($serviceId, $expectedFactoryClass, $expectedFactoryMethod)
+        );
+    }
+
+    /**
      * Assert that the ContainerBuilder for this test has a parameter and that its value is the given value.
      *
      * @param mixed $expectedParameterValue

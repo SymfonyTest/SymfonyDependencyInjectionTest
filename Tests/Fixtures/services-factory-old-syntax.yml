@@ -1,0 +1,3 @@
+services:
+    created_with_factory_with_old_syntax:
+        factory: ['@factory_service', 'factoryMethod']
