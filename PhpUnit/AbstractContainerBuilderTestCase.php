@@ -133,6 +133,23 @@ abstract class AbstractContainerBuilderTestCase extends TestCase
     }
 
     /**
+     * Assert that the ContainerBuilder for this test has a parameter and that its value and type is identical to expected.
+     *
+     * @param mixed $expectedParameterValue
+     */
+    final protected function assertContainerBuilderHasExactParameter(
+        string $parameterName,
+        $expectedParameterValue = null
+    ): void {
+        $checkParameterValue = (func_num_args() > 1);
+
+        self::assertThat(
+            $this->container,
+            new ContainerHasParameterConstraint($parameterName, $expectedParameterValue, $checkParameterValue, true)
+        );
+    }
+
+    /**
      * Assert that the ContainerBuilder for this test has a service definition with the given id, which has an argument
      * at the given index, and its value is the given value.
      *

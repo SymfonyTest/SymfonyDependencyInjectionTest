@@ -26,7 +26,25 @@ class ContainerHasParameterConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));
     }
 
-    public static function containerBuilderProvider()
+    /**
+     * @test
+     *
+     * @dataProvider typeAwareContainerBuilderProvider
+     */
+    public function matchWithType(
+        array $containerParameters,
+        $parameterName,
+        $parameterValue,
+        $checkParameterValue,
+        $expectedToMatch
+    ): void {
+        $container = $this->createMockContainerWithParameters($containerParameters);
+        $constraint = new ContainerHasParameterConstraint($parameterName, $parameterValue, $checkParameterValue, true);
+
+        $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));
+    }
+
+    public static function containerBuilderProvider(): array
     {
         $parameterName = 'parameter_name';
         $parameterValue = 'some value';
@@ -41,6 +59,20 @@ class ContainerHasParameterConstraintTest extends TestCase
             [[$parameterName => $parameterValue], $parameterName, $parameterValue, true, true],
             // the container has the parameter and the value is optional
             [[$parameterName => $parameterValue], $parameterName, null, false, true],
+        ];
+    }
+
+    public static function typeAwareContainerBuilderProvider(): array
+    {
+        $parameterName = 'parameter_name';
+        $parameterValue = '123123';
+        $wrongParameterValue = 123123;
+
+        return [
+            // the container has the parameter but the type don't match
+            [[$parameterName => $parameterValue], $parameterName, $wrongParameterValue, true, false],
+            // the container has the parameter and the value matches
+            [[$parameterName => $parameterValue], $parameterName, $parameterValue, true, true],
         ];
     }
 
