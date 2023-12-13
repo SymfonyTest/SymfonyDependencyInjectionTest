@@ -28,6 +28,7 @@ class ContainerHasParameterConstraintTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider typeAwareContainerBuilderProvider
      */
     public function matchWithType(
@@ -43,7 +44,7 @@ class ContainerHasParameterConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));
     }
 
-    public static function containerBuilderProvider() : array
+    public static function containerBuilderProvider(): array
     {
         $parameterName = 'parameter_name';
         $parameterValue = 'some value';
@@ -61,7 +62,7 @@ class ContainerHasParameterConstraintTest extends TestCase
         ];
     }
 
-    public static function typeAwareContainerBuilderProvider() : array
+    public static function typeAwareContainerBuilderProvider(): array
     {
         $parameterName = 'parameter_name';
         $parameterValue = '123123';
