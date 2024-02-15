@@ -4,7 +4,6 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
-use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 
@@ -16,7 +15,6 @@ final class DefinitionHasArgumentConstraint extends Constraint
     private string|int $argumentIndex;
     private mixed $expectedValue;
     private bool $checkExpectedValue;
-    private Exporter $exporter;
 
     public function __construct($argumentIndex, $expectedValue, bool $checkExpectedValue = true)
     {
@@ -39,7 +37,6 @@ final class DefinitionHasArgumentConstraint extends Constraint
         $this->argumentIndex = $argumentIndex;
         $this->expectedValue = $expectedValue;
         $this->checkExpectedValue = $checkExpectedValue;
-        $this->exporter = new Exporter();
     }
 
     public function toString(): string
@@ -100,6 +97,7 @@ final class DefinitionHasArgumentConstraint extends Constraint
     private function evaluateArgumentValue(Definition $definition, bool $returnResult): bool
     {
         $actualValue = $definition->getArgument($this->argumentIndex);
+        $exporter = $this->exporter();
 
         if (gettype($actualValue) !== gettype($this->expectedValue)) {
             $this->fail(
@@ -107,8 +105,8 @@ final class DefinitionHasArgumentConstraint extends Constraint
                 sprintf(
                     'The value of argument named "%s" (%s) is not equal to the expected value (%s)',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    $exporter->export($actualValue),
+                    $exporter->export($this->expectedValue)
                 )
             );
         }
@@ -124,15 +122,15 @@ final class DefinitionHasArgumentConstraint extends Constraint
                 $message = sprintf(
                     'The value of argument named "%s" (%s) is not equal to the expected value (%s)',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    $exporter->export($actualValue),
+                    $exporter->export($this->expectedValue)
                 );
             } else {
                 $message = sprintf(
                     'The value of argument with index %d (%s) is not equal to the expected value (%s)',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    $exporter->export($actualValue),
+                    $exporter->export($this->expectedValue)
                 );
             }
 
