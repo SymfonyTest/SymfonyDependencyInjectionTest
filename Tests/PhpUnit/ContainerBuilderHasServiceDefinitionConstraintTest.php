@@ -3,17 +3,16 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasServiceDefinitionConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider containerBuilderProvider
-     */
+    #[Test]
+    #[DataProvider('containerBuilderProvider')]
     public function match(
         ContainerBuilder $containerBuilder,
         $serviceId,
@@ -68,9 +67,7 @@ class ContainerBuilderHasServiceDefinitionConstraintTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_has_a_string_representation(): void
     {
         $serviceId = 'some_service_id';

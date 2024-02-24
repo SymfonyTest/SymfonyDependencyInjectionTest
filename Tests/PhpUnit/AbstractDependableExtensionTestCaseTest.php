@@ -5,6 +5,7 @@ namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\DependableExtension;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\NonDependablePrependableExtension;
+use PHPUnit\Framework\Attributes\Test;
 
 class AbstractDependableExtensionTestCaseTest extends AbstractExtensionTestCase
 {
@@ -16,9 +17,7 @@ class AbstractDependableExtensionTestCaseTest extends AbstractExtensionTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function prepend_invoked_before_any_load(): void
     {
         $this->load();
