@@ -4,6 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -12,6 +13,7 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
 final class DefinitionEqualsServiceLocatorConstraint extends Constraint
 {
     private $expectedValue;
+    private $exporter;
 
     public function __construct($expectedValue)
     {
@@ -29,6 +31,7 @@ final class DefinitionEqualsServiceLocatorConstraint extends Constraint
             },
             $expectedValue
         );
+        $this->exporter = new Exporter();
     }
 
     public function toString(): string
@@ -70,8 +73,8 @@ final class DefinitionEqualsServiceLocatorConstraint extends Constraint
             $definition,
             sprintf(
                 'class %s was expected as service definition class, found %s instead',
-                $this->exporter()->export(ServiceLocator::class),
-                $this->exporter()->export($definition->getClass())
+                $this->exporter->export(ServiceLocator::class),
+                $this->exporter->export($definition->getClass())
             )
         );
     }
@@ -90,8 +93,8 @@ final class DefinitionEqualsServiceLocatorConstraint extends Constraint
                 $definition,
                 sprintf(
                     'The service-map %s does not equal to the expected service-map (%s)',
-                    $this->exporter()->export($actualValue),
-                    $this->exporter()->export($this->expectedValue)
+                    $this->exporter->export($actualValue),
+                    $this->exporter->export($this->expectedValue)
                 )
             );
         }
