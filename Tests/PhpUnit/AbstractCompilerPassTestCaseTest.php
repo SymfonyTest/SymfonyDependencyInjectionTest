@@ -5,6 +5,7 @@ namespace Matthias\DependencyInjectionTests\Tests\PhpUnit;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\CollectServicesAndAddThemWithMethodCallsCompilerPass;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\CollectServicesAndSetThemAsArgumentCompilerPass;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -17,9 +18,7 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
         $container->addCompilerPass(new CollectServicesAndSetThemAsArgumentCompilerPass());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_compiler_pass_collects_services_by_adding_method_calls_these_can_be_asserted_to_exist(): void
     {
         $collectingService = new Definition();
@@ -52,9 +51,7 @@ class AbstractCompilerPassTestCaseTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_compiler_pass_collects_services_by_setting_constructor_argument_it_can_be_asserted_to_exist(): void
     {
         $collectingService = new Definition();

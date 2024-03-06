@@ -3,6 +3,8 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Loader;
 
 use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,11 +15,8 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class LoaderFactoryTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider fileProvider
-     */
+    #[Test]
+    #[DataProvider('fileProvider')]
     public function it_creates_the_appropriate_file_loader_based_on_the_extension($file, $expectedClass): void
     {
         $factory = new LoaderFactory();
@@ -26,9 +25,7 @@ class LoaderFactoryTest extends TestCase
         $this->assertInstanceOf($expectedClass, $loader);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_creates_a_closure_loader_when_source_is_a_closure(): void
     {
         $source = function (): void {

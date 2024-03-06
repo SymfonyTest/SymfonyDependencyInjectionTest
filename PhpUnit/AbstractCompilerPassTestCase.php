@@ -2,6 +2,8 @@
 
 namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 abstract class AbstractCompilerPassTestCase extends AbstractContainerBuilderTestCase
@@ -16,11 +18,9 @@ abstract class AbstractCompilerPassTestCase extends AbstractContainerBuilderTest
 
     /**
      * This test will run the compile method.
-     *
-     * @test
-     *
-     * @coversNothing
      */
+    #[Test]
+    #[CoversNothing]
     final public function compilation_should_not_fail_with_empty_container(): void
     {
         try {

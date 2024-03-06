@@ -5,6 +5,7 @@ namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\NonPrependableTestExtension;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\PrependableTestExtension;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
@@ -17,9 +18,7 @@ class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function prepend_invoked_only_if_prepend_interface_is_implemented(): void
     {
         $this->load();
@@ -27,9 +26,7 @@ class AbstractPrependExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('prepend_parameter_set', 'prepended value');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_prepend_interface_is_not_implemented_prepend_is_not_invoked(): void
     {
         $this->load();

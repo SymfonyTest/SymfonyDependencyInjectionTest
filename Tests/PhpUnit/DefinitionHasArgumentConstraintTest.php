@@ -3,6 +3,8 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasArgumentConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ChildDefinition;
@@ -10,11 +12,8 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class DefinitionHasArgumentConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider definitionProvider
-     */
+    #[Test]
+    #[DataProvider('definitionProvider')]
     public function match(Definition $definition, $argumentIndex, $expectedValue, $shouldMatch): void
     {
         $constraint = new DefinitionHasArgumentConstraint($argumentIndex, $expectedValue);
@@ -51,13 +50,11 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @dataProvider invalid_definition_indexes
-     *
      * @param mixed  $argument
      * @param string $exceptionMessage
      */
+    #[Test]
+    #[DataProvider('invalid_definition_indexes')]
     public function validates_definitionIndex($argument, $exceptionMessage): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -93,12 +90,10 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @dataProvider indexed_arguments
-     *
      * @param int $argumentIndex
      */
+    #[Test]
+    #[DataProvider('indexed_arguments')]
     public function supports_indexed_arguments($argumentIndex): void
     {
         $expectedValue = 'bar';
@@ -140,12 +135,10 @@ class DefinitionHasArgumentConstraintTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @dataProvider named_arguments
-     *
      * @param string $argument
      */
+    #[Test]
+    #[DataProvider('named_arguments')]
     public function supports_named_arguments($argument): void
     {
         $expectedValue = 'bar';

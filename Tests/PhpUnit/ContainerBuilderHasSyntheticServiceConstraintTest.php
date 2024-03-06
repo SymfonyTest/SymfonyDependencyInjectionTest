@@ -3,6 +3,7 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasSyntheticServiceConstraint;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -20,9 +21,7 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
         $this->containerBuilder = new ContainerBuilder();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_fails_if_the_service_definition_is_a_regular_definition(): void
     {
         $this->containerBuilder->setDefinition('synthetic_service', new Definition());
@@ -32,9 +31,7 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
         $this->assertConstraintFails($constraint);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_fail_if_the_synthetic_service_definition_exists(): void
     {
         $this->containerBuilder->setDefinition('synthetic_service', $this->createSyntheticDefinition());
@@ -44,9 +41,7 @@ class ContainerBuilderHasSyntheticServiceConstraintTest extends TestCase
         $this->assertConstraintPasses($constraint);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_fail_if_the_synthetic_service_has_been_provided_already(): void
     {
         $this->containerBuilder->setDefinition('synthetic_service', $this->createSyntheticDefinition());

@@ -3,17 +3,16 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
 
 class DefinitionHasTagConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider definitionProvider
-     */
+    #[Test]
+    #[DataProvider('definitionProvider')]
     public function match(Definition $definition, $tag, $attributes, $expectedToMatch): void
     {
         $constraint = new DefinitionHasTagConstraint($tag, $attributes);
@@ -21,11 +20,8 @@ class DefinitionHasTagConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($definition, '', true));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider definitionProvider
-     */
+    #[Test]
+    #[DataProvider('definitionProvider')]
     public function evaluateThrowsExceptionOnFailure(Definition $definition, $tag, $attributes, $expectedToMatch): void
     {
         $constraint = new DefinitionHasTagConstraint($tag, $attributes);
@@ -69,9 +65,7 @@ class DefinitionHasTagConstraintTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_has_a_string_representation(): void
     {
         $tag = 'tagName';

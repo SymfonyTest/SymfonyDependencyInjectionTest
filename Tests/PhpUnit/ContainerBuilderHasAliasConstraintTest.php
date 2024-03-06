@@ -3,16 +3,15 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasAliasConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ContainerBuilderHasAliasConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider containerBuilderProvider
-     */
+    #[Test]
+    #[DataProvider('containerBuilderProvider')]
     public function match(ContainerBuilder $containerBuilder, $alias, $expectedServiceId, $shouldMatch): void
     {
         $constraint = new ContainerBuilderHasAliasConstraint($alias, $expectedServiceId);
@@ -44,9 +43,7 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_has_a_string_representation(): void
     {
         $aliasId = 'alias_id';
@@ -58,9 +55,7 @@ class ContainerBuilderHasAliasConstraintTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_change_case_of_aliased_service_ids(): void
     {
         $containerBuilder = new ContainerBuilder();

@@ -4,6 +4,7 @@ namespace Matthias\DependencyInjectionTests\Test\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\MatthiasDependencyInjectionTestExtension;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
@@ -15,9 +16,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_load_is_successful_it_does_not_fail(): void
     {
         $this->load();
@@ -61,9 +60,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_service_is_undefined_it_fails(): void
     {
         $this->load();
@@ -73,9 +70,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('undefined', 'AnyClass');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_synthetic_service_is_undefined_it_fails(): void
     {
         $this->load();
@@ -86,9 +81,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasSyntheticService('undefined');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_service_is_defined_but_not_synthetic_it_fails(): void
     {
         $this->load();
@@ -99,9 +92,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasSyntheticService('loaded_service_id');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_service_is_defined_but_has_another_class_it_fails(): void
     {
         $this->load();
@@ -112,9 +103,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('manual_service_id', 'SomeOtherClass');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_alias_is_not_defined_it_fails(): void
     {
         $this->load();
@@ -124,9 +113,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasAlias('undefined', 'any_service_id');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_alias_exists_but_for_wrong_service_it_fails(): void
     {
         $this->load();
@@ -137,9 +124,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasAlias('manual_alias', 'wrong');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_parameter_does_not_exist_it_fails(): void
     {
         $this->load();
@@ -150,9 +135,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('undefined', 'any value');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_parameter_exists_but_has_wrong_value_it_fails(): void
     {
         $this->load();
@@ -163,9 +146,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('manual_parameter', 'wrong');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_parameter_exists_and_has_good_value_but_has_wrong_type_it_fails(): void
     {
         $this->load();
@@ -176,9 +157,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasExactParameter('manual_number_parameter', '123123');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_parameter_exists_but_has_wrong_order_it_fails(): void
     {
         $this->load();
@@ -189,9 +168,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasExactParameter('manual_array_parameter', ['key2' => 'value2', 'key1' => 'value1']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_does_not_have_argument_it_fails(): void
     {
         $this->load();
@@ -202,9 +179,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 10, 'any value');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_has_argument_but_with_wrong_value_it_fails(): void
     {
         $this->load();
@@ -214,9 +189,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_service_id', 1, 'wrong value');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_has_argument_but_with_wrong_value_it_fails1(): void
     {
         $this->load();
@@ -227,9 +200,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('manual_with_reference', 0, 'manual_service_id');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_is_decorated_and_argument_has_wrong_value_it_fails(): void
     {
         $this->load();
@@ -240,9 +211,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('child_service_id', 1, 'wrong value');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_is_decorated_but_by_the_wrong_parent_it_fails(): void
     {
         $this->load();
@@ -253,9 +222,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithParent('child_service_id', 'wrong_parent_service_id');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_should_be_decorated_when_it_is_not_it_fails(): void
     {
         $this->load();
@@ -266,9 +233,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithParent('parent_service_id', 'any_other_service_id');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_should_have_a_method_call_and_it_has_not_it_fails(): void
     {
         $this->load();
@@ -283,9 +248,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_definition_should_have_a_certain_arguments_for_a_method_call_and_it_has_not_it_fails(): void
     {
         $this->load();
@@ -300,9 +263,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_service_is_defined_it_fails(): void
     {
         $this->load();
@@ -312,9 +273,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('loaded_service_id');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_service_is_not_defined_it_does_not_fail(): void
     {
         $this->load();
@@ -322,9 +281,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('undefined');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_service_is_not_defined_in_service_decoration_it_fails(): void
     {
         $this->load();
@@ -335,9 +292,7 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderServiceDecoration('undefined', 'undefined');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_service_decoration_is_not_defined_in_service_decoration_it_fails(): void
     {
         $this->load();

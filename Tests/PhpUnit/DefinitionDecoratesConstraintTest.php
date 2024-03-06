@@ -3,6 +3,8 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionDecoratesConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -10,11 +12,8 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class DefinitionDecoratesConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider containerBuilderProvider
-     */
+    #[Test]
+    #[DataProvider('containerBuilderProvider')]
     public function match(ContainerBuilder $containerBuilder, bool $expectedToMatch, string $serviceId, string $decoratedServiceId, ?string $renamedId, int $priority, ?int $invalidBehavior): void
     {
         $constraint = new DefinitionDecoratesConstraint($serviceId, $decoratedServiceId, $renamedId, $priority, $invalidBehavior);
@@ -45,11 +44,8 @@ class DefinitionDecoratesConstraintTest extends TestCase
         yield [$containerBuilder, true, 'decorator5', 'decorated5', 'decorated5_0', -3, 2];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider stringRepresentationProvider
-     */
+    #[Test]
+    #[DataProvider('stringRepresentationProvider')]
     public function it_has_a_string_representation(DefinitionDecoratesConstraint $constraint, string $expectedRepresentation): void
     {
         $this->assertSame($expectedRepresentation, $constraint->toString());
