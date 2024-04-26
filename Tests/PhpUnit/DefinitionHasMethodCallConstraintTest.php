@@ -3,16 +3,15 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Definition;
 
 class DefinitionHasMethodCallConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider definitionProvider
-     */
+    #[Test]
+    #[DataProvider('definitionProvider')]
     public function match(Definition $definition, $method, $arguments, $index, $expectedToMatch): void
     {
         $constraint = new DefinitionHasMethodCallConstraint($method, $arguments, $index);
@@ -48,9 +47,7 @@ class DefinitionHasMethodCallConstraintTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_has_a_string_representation(): void
     {
         $method = 'methodName';

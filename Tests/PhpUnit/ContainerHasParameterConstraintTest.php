@@ -3,16 +3,15 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerHasParameterConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ContainerHasParameterConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider containerBuilderProvider
-     */
+    #[Test]
+    #[DataProvider('containerBuilderProvider')]
     public function match(
         array $containerParameters,
         $parameterName,
@@ -26,11 +25,8 @@ class ContainerHasParameterConstraintTest extends TestCase
         $this->assertSame($expectedToMatch, $constraint->evaluate($container, '', true));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider typeAwareContainerBuilderProvider
-     */
+    #[Test]
+    #[DataProvider('typeAwareContainerBuilderProvider')]
     public function matchWithType(
         array $containerParameters,
         $parameterName,

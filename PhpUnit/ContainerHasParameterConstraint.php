@@ -5,6 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
 use PHPUnit\Framework\Constraint\IsIdentical;
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class ContainerHasParameterConstraint extends Constraint
@@ -13,6 +14,7 @@ final class ContainerHasParameterConstraint extends Constraint
     private $expectedParameterValue;
     private $checkParameterValue;
     private $strict;
+    private $exporter;
 
     public function __construct(
         string $parameterName,
@@ -24,6 +26,7 @@ final class ContainerHasParameterConstraint extends Constraint
         $this->expectedParameterValue = $expectedParameterValue;
         $this->checkParameterValue = $checkParameterValue;
         $this->strict = $strict;
+        $this->exporter = new Exporter();
     }
 
     public function toString(): string
@@ -83,8 +86,8 @@ final class ContainerHasParameterConstraint extends Constraint
             $this->fail($container, sprintf(
                 'The value of parameter "%s" (%s) does not match the expected value (%s)',
                 $this->parameterName,
-                $this->exporter()->export($actualValue),
-                $this->exporter()->export($this->expectedParameterValue)
+                $this->exporter->export($actualValue),
+                $this->exporter->export($this->expectedParameterValue)
             ));
         }
 

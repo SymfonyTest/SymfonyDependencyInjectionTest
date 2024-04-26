@@ -4,6 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
+use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
@@ -11,6 +12,7 @@ final class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
     private $serviceId;
     private $expectedClass;
     private $checkExpectedClass;
+    private $exporter;
 
     public function __construct(
         string $serviceId,
@@ -20,6 +22,7 @@ final class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
         $this->serviceId = $serviceId;
         $this->expectedClass = $expectedClass;
         $this->checkExpectedClass = $checkExpectedClass;
+        $this->exporter = new Exporter();
     }
 
     public function toString(): string
@@ -85,8 +88,8 @@ final class ContainerBuilderHasServiceDefinitionConstraint extends Constraint
             $this->fail($containerBuilder, sprintf(
                 'The class of the service definition of "%s" (%s) does not match the expected value (%s)',
                 $this->serviceId,
-                $this->exporter()->export($actualClass),
-                $this->exporter()->export($this->expectedClass)
+                $this->exporter->export($actualClass),
+                $this->exporter->export($this->expectedClass)
             ));
         }
 
