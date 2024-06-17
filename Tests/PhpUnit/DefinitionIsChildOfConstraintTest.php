@@ -3,6 +3,8 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionIsChildOfConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Definition;
@@ -10,11 +12,8 @@ use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
 class DefinitionIsChildOfConstraintTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider definitionProvider
-     */
+    #[Test]
+    #[DataProvider('definitionProvider')]
     public function match(Definition $definition, $parentServiceId, $expectedToMatch): void
     {
         $constraint = new DefinitionIsChildOfConstraint($parentServiceId);

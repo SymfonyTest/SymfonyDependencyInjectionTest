@@ -5,6 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\SimpleConfiguration;
 use Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures\SimpleExtension;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
@@ -21,9 +22,7 @@ class AbstractExtensionConfigurationTestCaseTest extends AbstractExtensionConfig
         return new SimpleConfiguration();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_compares_expected_configuration_values_with_values_loaded_from_files(): void
     {
         $sources = [

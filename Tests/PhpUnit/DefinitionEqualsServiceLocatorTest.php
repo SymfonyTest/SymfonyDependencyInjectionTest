@@ -3,6 +3,8 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\PhpUnit;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionEqualsServiceLocatorConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
@@ -23,20 +25,15 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
         $this->containerBuilder = new ContainerBuilder();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_fails_if_the_service_definition_is_not_a_service_locator(): void
     {
         $this->assertConstraintFails(new DefinitionEqualsServiceLocatorConstraint([]), new Definition());
         $this->assertConstraintFails(new DefinitionEqualsServiceLocatorConstraint([]), new Definition(\stdClass::class));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider provideInvalidServiceLocatorReferences
-     */
+    #[Test]
+    #[DataProvider('provideInvalidServiceLocatorReferences')]
     public function if_fails_if_the_service_definition_value_is_not_a_valid_reference($arguments): void
     {
         $this->assertConstraintFails(
@@ -53,11 +50,8 @@ final class DefinitionEqualsServiceLocatorTest extends TestCase
         yield [[new Reference('foo'), null]];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider provideValidServiceLocatorDefs
-     */
+    #[Test]
+    #[DataProvider('provideValidServiceLocatorDefs')]
     public function it_does_not_fail_if_the_service_definition_is_a_service_locator(array $defArguments, array $expected): void
     {
         $this->assertConstraintPasses(
