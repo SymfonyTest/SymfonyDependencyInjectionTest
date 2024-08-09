@@ -347,10 +347,11 @@ container:
 
 ## Version Guidance
 
-| Version | Released     | PHPUnit     | Status   |
-|---------|--------------|-------------|----------|
-| 5.x     | Jan 23, 2024 | 9.x, 10.x   | Latest   |
-| 4.x     | Mar 28, 2019 | 8.x and 9.x | Bugfixes |
-| 3.x     | Mar 5, 2018  | 7.x         | Bugfixes |
-| 2.x     | May 9, 2017  | 6.x         | Bugfixes |
-| 1.x     | Jul 4, 2016  | 4.x and 5.x | EOL      |
+| Version | Released     | PHPUnit       | Status     |
+|---------|--------------|---------------|------------|
+| 6.x     | Aug 8, 2024  | 10.5 and 11.x | Latest     |
+| 5.x     | Nov 22, 2023 | 9.6 and 10.x  | Bugfixes   |
+| 4.x     | Mar 28, 2019 | 8.x and 9.x   | Bugfixes   |
+| 3.x     | Mar 5, 2018  | 7.x           | Bugfixes   |
+| 2.x     | May 9, 2017  | 6.x           | Bugfixes   |
+| 1.x     | Jul 4, 2016  | 4.x and 5.x   | EOL        |
