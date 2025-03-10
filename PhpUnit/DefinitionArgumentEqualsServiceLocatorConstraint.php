@@ -4,7 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Util\Exporter;
 use Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -20,7 +20,6 @@ final class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
     private $argumentIndex;
     private $expectedValue;
     private $serviceId;
-    private $exporter;
 
     public function __construct(string $serviceId, $argumentIndex, array $expectedValue)
     {
@@ -56,8 +55,6 @@ final class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
             },
             $expectedValue
         );
-
-        $this->exporter = new Exporter();
     }
 
     public function toString(): string
@@ -130,7 +127,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
                 sprintf(
                     'The value of argument with index %s (%s) was expected to an instance of Symfony\Component\DependencyInjection\Reference or \Symfony\Component\DependencyInjection\Definition',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue)
+                    Exporter::export($actualValue)
                 )
             );
         }
@@ -145,7 +142,7 @@ final class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
                 sprintf(
                     'The referenced service class of argument with index %s (%s) was expected to be an instance of Symfony\Component\DependencyInjection\ServiceLocator',
                     $this->argumentIndex,
-                    $this->exporter->export($serviceLocatorDef->getClass())
+                    Exporter::export($serviceLocatorDef->getClass())
                 )
             );
         }
@@ -176,8 +173,8 @@ final class DefinitionArgumentEqualsServiceLocatorConstraint extends Constraint
                 sprintf(
                     'The value of argument with index %s (%s) does not equal to the expected ServiceLocator service-map (%s)',
                     $this->argumentIndex,
-                    $this->exporter->export($actualValue),
-                    $this->exporter->export($this->expectedValue)
+                    Exporter::export($actualValue),
+                    Exporter::export($this->expectedValue)
                 )
             );
         }

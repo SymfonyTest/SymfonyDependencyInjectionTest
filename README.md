@@ -349,7 +349,7 @@ container:
 
 | Version | Released     | PHPUnit             | Status     |
 |---------|--------------|---------------------|------------|
-| 6.x     | Aug 8, 2024  | 10.5, 11.x and 12.x | Latest     |
+| 6.x     | Aug 8, 2024  | 10.5, 11.5 and 12.x | Latest     |
 | 5.x     | Nov 22, 2023 | 9.6 and 10.x        | Bugfixes   |
 | 4.x     | Mar 28, 2019 | 8.x and 9.x         | Bugfixes   |
 | 3.x     | Mar 5, 2018  | 7.x                 | Bugfixes   |
