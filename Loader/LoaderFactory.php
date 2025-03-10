@@ -48,6 +48,12 @@ final class LoaderFactory implements LoaderFactoryInterface
 
     public function createXmlFileLoader(ContainerBuilder $container): XmlFileLoader
     {
+        trigger_deprecation('matthiasnoback/symfony-dependency-injection-test', '6.2', 'Support for XML service definitions is deprecated.');
+
+        if (!class_exists(XmlFileLoader::class)) {
+            throw new \RuntimeException('Cannot create the XML loader because the installed version of "symfony/dependency-injection" does not support XML.');
+        }
+
         return new XmlFileLoader($container, new FileLocator());
     }
 

@@ -74,17 +74,15 @@ class ContainerHasParameterConstraintTest extends TestCase
 
     private function createMockContainerWithParameters(array $parameters)
     {
-        $container = $this->createMock(ContainerInterface::class);
+        $container = $this->createStub(ContainerInterface::class);
 
         $container
-            ->expects(self::any())
             ->method('hasParameter')
             ->willReturnCallback(function ($parameterName) use ($parameters) {
                 return array_key_exists($parameterName, $parameters);
             });
 
         $container
-            ->expects(self::any())
             ->method('getParameter')
             ->willReturnCallback(function ($parameterName) use ($parameters) {
                 return $parameters[$parameterName];
