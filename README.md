@@ -49,12 +49,17 @@ Basically you will be testing your extension's load method, which will look some
 ```php
 <?php
 
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+
 class MyExtension extends Extension
 {
     public function load(array $config, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__));
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__));
+        $loader->load('services.php');
 
         // maybe process the configuration values in $config, then:
 
@@ -68,11 +73,12 @@ So in the test case you should test that after loading the container, the parame
 ```php
 <?php
 
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\Test;
+
 class MyExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function after_loading_the_correct_parameter_has_been_set()
     {
         $this->load();
@@ -87,11 +93,12 @@ To test the effect of different configuration values, use the first argument of 
 ```php
 <?php
 
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\Test;
+
 class MyExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function after_loading_the_correct_parameter_has_been_set()
     {
         $this->load(['my' => ['enabled' => 'false']);
@@ -113,6 +120,7 @@ To test a compiler pass, create a test class and extend from
 <?php
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class MyCompilerPassTest extends AbstractCompilerPassTestCase
 {
@@ -132,11 +140,13 @@ instance.
 ```php
 <?php
 
+use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
+
 class MyCompilerPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function if_compiler_pass_collects_services_by_adding_method_calls_these_will_exist()
     {
         $collectingService = new Definition();
@@ -250,6 +260,16 @@ twig:
     extensions: ['twig.extension.foo']
 ```
 
+```php
+<?php // in Fixtures/config.php
+
+return App::config([
+    'twig' => [
+        'extensions' => ['twig.extension.foo']
+    ],
+]);
+```
+
 ```xml
 <!-- in Fixtures/config.xml -->
 <container>
@@ -261,15 +281,13 @@ twig:
 
 ```php
 <?php
-...
+
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
-    ...
-
-    /**
-     * @test
-     */
+    #[Test]
     public function it_converts_extension_elements_to_extensions()
     {
         $expectedConfiguration = [
