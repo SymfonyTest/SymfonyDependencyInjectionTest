@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class AbstractExtensionConfigurationTestCaseTest extends AbstractExtensionConfigurationTestCase
 {
@@ -36,10 +37,15 @@ class AbstractExtensionConfigurationTestCaseTest extends AbstractExtensionConfig
                 );
             },
             __DIR__.'/../Fixtures/simple.yml',
-            __DIR__.'/../Fixtures/simple.xml',
         ];
+        $types = ['php', 'closure', 'yml'];
 
-        $expectedConfiguration = ['types' => ['php', 'closure', 'yml', 'xml']];
+        if (class_exists(XmlFileLoader::class)) {
+            $sources[] = __DIR__.'/../Fixtures/simple.xml';
+            $types[] = 'xml';
+        }
+
+        $expectedConfiguration = ['types' => $types];
 
         $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
     }

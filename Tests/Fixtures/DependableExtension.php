@@ -3,27 +3,19 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 
-class DependableExtension implements ExtensionInterface
+class DependableExtension extends Extension
 {
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
         if ($container->hasParameter('parameter_from_non_dependable')) {
             $container->setParameter('dependable_parameter', 'dependable value');
         }
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'dependable';
-    }
-
-    public function getNamespace(): void
-    {
-    }
-
-    public function getXsdValidationBasePath(): void
-    {
     }
 }

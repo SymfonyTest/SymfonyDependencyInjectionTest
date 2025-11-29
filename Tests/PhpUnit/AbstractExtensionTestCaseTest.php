@@ -21,10 +21,10 @@ class AbstractExtensionTestCaseTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        // defined in services.xml
+        // defined in services.php
         $this->assertContainerBuilderHasService('loaded_service_id', 'stdClass');
 
-        // defined in services.xml
+        // defined in services.php
         $this->assertContainerBuilderHasSyntheticService('synthetic_service');
 
         // manually defined parameter

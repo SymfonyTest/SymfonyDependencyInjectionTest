@@ -3,29 +3,21 @@
 namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
-class NonDependablePrependableExtension implements ExtensionInterface, PrependExtensionInterface
+class NonDependablePrependableExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'non_dependable';
     }
 
-    public function getNamespace(): void
-    {
-    }
-
-    public function getXsdValidationBasePath(): void
-    {
-    }
-
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $container->setParameter('parameter_from_non_dependable', 'non-dependable value');
     }

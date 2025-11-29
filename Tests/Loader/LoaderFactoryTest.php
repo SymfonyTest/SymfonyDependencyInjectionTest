@@ -5,7 +5,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\Loader;
 use Matthias\SymfonyDependencyInjectionTest\Loader\LoaderFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
@@ -38,16 +38,17 @@ class LoaderFactoryTest extends TestCase
 
     public static function fileProvider()
     {
-        return [
-            ['file.xml', XmlFileLoader::class],
-            ['file.yml', YamlFileLoader::class],
-            ['file.yaml', YamlFileLoader::class],
-            ['file.php', PhpFileLoader::class],
-        ];
+        if (class_exists(XmlFileLoader::class)) {
+            yield ['file.xml', XmlFileLoader::class];
+        }
+
+        yield ['file.yml', YamlFileLoader::class];
+        yield ['file.yaml', YamlFileLoader::class];
+        yield ['file.php', PhpFileLoader::class];
     }
 
-    private function createMockContainerBuilder(): MockObject&ContainerBuilder
+    private function createMockContainerBuilder(): Stub&ContainerBuilder
     {
-        return $this->createMock(ContainerBuilder::class);
+        return $this->createStub(ContainerBuilder::class);
     }
 }

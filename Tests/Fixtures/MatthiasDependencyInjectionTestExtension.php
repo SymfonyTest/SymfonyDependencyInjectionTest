@@ -5,17 +5,17 @@ namespace Matthias\SymfonyDependencyInjectionTest\Tests\Fixtures;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
+class MatthiasDependencyInjectionTestExtension extends Extension
 {
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
         // load some service definitions
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__));
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__));
+        $loader->load('services.php');
 
         // set a parameter manually
         $container->setParameter('manual_parameter', 'parameter value');
@@ -41,16 +41,8 @@ class MatthiasDependencyInjectionTestExtension implements ExtensionInterface
         $container->setDefinition('manual_with_reference', $definition);
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'matthias_dependency_injection_test';
-    }
-
-    public function getNamespace(): void
-    {
-    }
-
-    public function getXsdValidationBasePath(): void
-    {
     }
 }
