@@ -4,7 +4,7 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Util\Exporter;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class DefinitionHasMethodCallConstraint extends Constraint
@@ -12,7 +12,6 @@ final class DefinitionHasMethodCallConstraint extends Constraint
     private $methodName;
     private $arguments;
     private $index;
-    private $exporter;
 
     public function __construct(string $methodName, array $arguments = [], $index = null)
     {
@@ -23,7 +22,6 @@ final class DefinitionHasMethodCallConstraint extends Constraint
         $this->methodName = $methodName;
         $this->arguments = $arguments;
         $this->index = $index;
-        $this->exporter = new Exporter();
     }
 
     public function evaluate($other, string $description = '', bool $returnResult = false): bool
@@ -58,7 +56,7 @@ final class DefinitionHasMethodCallConstraint extends Constraint
                 sprintf(
                     'None of the method calls matched the expected method "%s" with arguments %s with %s invocation order index',
                     $this->methodName,
-                    $this->exporter->export($this->arguments),
+                    Exporter::export($this->arguments),
                     (null === $this->index) ? 'any' : sprintf('"%s"', $this->index)
                 )
             );

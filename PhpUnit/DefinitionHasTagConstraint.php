@@ -4,20 +4,18 @@ namespace Matthias\SymfonyDependencyInjectionTest\PhpUnit;
 
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Util\Exporter;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class DefinitionHasTagConstraint extends Constraint
 {
     private $name;
     private $attributes;
-    private $exporter;
 
     public function __construct(string $name, array $attributes = [])
     {
         $this->name = $name;
         $this->attributes = $attributes;
-        $this->exporter = new Exporter();
     }
 
     public function evaluate($other, string $description = '', bool $returnResult = false): bool
@@ -45,7 +43,7 @@ final class DefinitionHasTagConstraint extends Constraint
                     sprintf(
                         'None of the tags matched the expected name "%s" with attributes %s',
                         $this->name,
-                        $this->exporter->export($this->attributes)
+                        Exporter::export($this->attributes)
                     )
                 );
             }
